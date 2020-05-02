@@ -6,5 +6,5 @@ package com.example.demo.common;
  */
 public class Constants {
     //session中user的key
-    public final static String SER_SESSION_KEY = "User";
+    public final static String USER_SESSION_KEY = "User";
 }

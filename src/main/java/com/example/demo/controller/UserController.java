@@ -44,7 +44,7 @@ public class UserController {
         boolean checkLogin = loginService.checkLogin(loginVo);
         if (checkLogin){
             //设置session
-            httpSession.setAttribute(Constants.SER_SESSION_KEY,loginVo);
+            httpSession.setAttribute(Constants.USER_SESSION_KEY,loginVo);
             return ResultGenerator.genSuccessResult();
         }else {
             return ResultGenerator.genFailResult("账号密码有误");
@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/logout")
     public String userLogout(HttpSession httpSession){
         //清除session
-        httpSession.removeAttribute(Constants.SER_SESSION_KEY);
+        httpSession.removeAttribute(Constants.USER_SESSION_KEY);
         //返回登陆页面
         return "login";
     }

@@ -16,7 +16,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //判断登录
-        if (null == request.getSession().getAttribute(Constants.SER_SESSION_KEY)) {
+        if (null == request.getSession().getAttribute(Constants.USER_SESSION_KEY)) {
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
         } else {
