@@ -18,22 +18,28 @@ import javax.servlet.http.HttpSession;
  * @date 2020/5/1 23:59
  */
 @Controller
-public class LoginController {
+public class UserController {
     @Autowired
     private LoginService loginService;
 
+    /**
+     * 跳转登陆页面
+     * @return
+     */
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-    @GetMapping("/index")
-    public String index(){
-        return "index";
-    }
 
-    @PostMapping("/do_login")
+    /**
+     * 登录的实现逻辑
+     * @param loginVo
+     * @param httpSession
+     * @return
+     */
+    @PostMapping("/user/login")
     @ResponseBody
-    public Result do_login(LoginVo loginVo, HttpSession httpSession) {
+    public Result userLogin(LoginVo loginVo, HttpSession httpSession) {
         System.out.println(loginVo);
         boolean checkLogin = loginService.checkLogin(loginVo);
         if (checkLogin){
@@ -43,6 +49,12 @@ public class LoginController {
         }else {
             return ResultGenerator.genFailResult("账号密码有误");
         }
-
+    }
+    @GetMapping("/logout")
+    public String userLogout(HttpSession httpSession){
+        //清除session
+        httpSession.removeAttribute(Constants.SER_SESSION_KEY);
+        //返回登陆页面
+        return "login";
     }
 }

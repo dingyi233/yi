@@ -1,322 +1,189 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Courses</title>
-	<!-- meta-tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="" />
-	<script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
+    <title>Courses</title>
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<!-- //meta-tags -->
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- font-awesome -->
-	<link href="css/font-awesome.css" rel="stylesheet">
-	<!-- fonts -->
-	<link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-	    rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //meta-tags -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- font-awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
 </head>
 
 <body>
-	<!-- header -->
-	<div class="header-top">
-		<div class="container">
-			<div class="bottom_header_left">
-				<p>
-					<span class="fa fa-map-marker" aria-hidden="true"></span>中国, 重庆
-				</p>
-			</div>
-			<div class="bottom_header_right">
-				<div class="header-top-righ">
-					<a href="login.html">
-						<span class="fa fa-sign-out" aria-hidden="true"></span>登录|</a>
-					
-					<a href="index.html">
-						<span class="fa fa-sign-out" aria-hidden="true"></span>注销</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<div class="header header-top">
-		<div class="content white">
-			<nav class="navbar navbar-default">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="index.html">
-							<h1 aria-hidden="true">
-								<img class="header-img-info" src="images/e1.png" alt="" />						
-							</h1>
-						</a>
-					</div>
-					<!--/.navbar-header-->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<nav class="link-effect-2" id="link-effect-2">
-							<ul class="nav navbar-nav">
-								<li class="active">
-									<a href="index.html" class="effect-3">主页</a>
-								</li>
-								<li>
-									<a href="about.html" class="effect-3">学院概况</a>
-								</li>
-								<li>
-									<a href="courses.html" class="effect-3">课程</a>
-								</li>
-								<li>
-									<a href="#" class="effect-3 dropdown-toggle" data-toggle="dropdown">信息查询
-										<span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-											<a href="icons.html">奖助贷</a>
-										</li>
-										<li>
-											<a href="salary.html">酬金</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">教育教学
-										<span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-											<a href="icons.html">课程安排</a>
-										</li>
-										<li>
-											<a href="codes.html">考试安排</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="Gallery.html" class="effect-3">Gallery</a>
-								</li>
-								<li>
-									<a href="contact.html" class="effect-3">Contact Us</a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-					<!--/.navbar-collapse-->
-					<!--/.navbar-->
-				</div>
-			</nav>
-		</div>
-	</div>
-	<!-- banner -->
-	<div class="inner_page_agile">
+<!--引入header-->
+<div th:insert="header::header"/>
+<!-- banner -->
+<div class="inner_page_agile">
 
-	</div>
-	<!--//banner -->
-	<!-- short-->
-	<div class="services-breadcrumb">
-		<div class="inner_breadcrumb">
-			<ul class="short_ls">
-				<li>
-					<a href="index.html">首页</a>
-					<span>| |</span>
-				</li>
-				<li>课程</li>
-				<form class="navbar-form navbar-right">
-				    <div class="form-group">
-				      <input type="text" class="form-control" placeholder="Search">
-				    </div>
-				    <button type="submit" class="btn btn-default">搜索</button>
-				</form>
-			</ul>
-		</div>
-	</div>
-	<!-- //short-->
-	<!-- blog -->
-	<div class="blog-cource">
-		<div class="container">
-			<div class="title-div">
-				<h3 class="tittle">
-					<span>P</span>opular
-					<span>C</span>ourses
-				</h3>
-				<div class="tittle-style">
+</div>
+<!--//banner -->
+<!-- short-->
+<div class="services-breadcrumb">
+    <div class="inner_breadcrumb">
+        <ul class="short_ls">
+            <li>
+                <a href="index.html">首页</a>
+                <span>| |</span>
+            </li>
+            <li>课程</li>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </ul>
+    </div>
+</div>
+<!-- //short-->
+<!-- blog -->
+<div class="blog-cource">
+    <div class="container">
+        <div class="title-div">
+            <h3 class="tittle">
+                <span>P</span>opular
+                <span>C</span>ourses
+            </h3>
+            <div class="tittle-style">
 
-				</div>
-			</div>
-			<div class="blog-info">
-				<div class="col-xs-4 blog-grid-img">
-					<img src="images/c2.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="col-xs-8 blog-grid-text">
-					<h4>Web Technology</h4>
-					<h6>Rerum Delectus</h6>
-					<p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat nisl, in auctor sapien.
-						Donec ultricies faucibus ante in mattis earum rerum delectus in auctor sapien. </p>
-					<a class="button-style" href="join.html">Apply Now</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="blog-agileinfo blog-info-mdl">
-				<div class="col-xs-8 blog-grid-text">
-					<h4>Academic English</h4>
-					<h6>Rerum Delectus</h6>
-					<p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat nisl, in auctor sapien.
-						Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>
-					<a class="button-style" href="join.html">Apply Now</a>
-				</div>
-				<div class="col-xs-4 blog-grid-img blog-img-rght">
-					<img src="images/c1.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="blog-info">
-				<div class="col-xs-4 blog-grid-img">
-					<img src="images/c3.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="col-xs-8 blog-grid-text">
-					<h4>HR Management</h4>
-					<h6>Rerum Delectus</h6>
-					<p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat nisl, in auctor sapien.
-						Donec ultricies faucibus ante rerum hic a sapiente delectus in auctor sapien. </p>
-					<a class="button-style" href="join.html">Apply Now</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="blog-agileinfo blog-info-mdl">
-				<div class="col-xs-8 blog-grid-text">
-					<h4>Process Engineering</h4>
-					<h6>Rerum Delectus</h6>
-					<p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat nisl, in auctor sapien.
-						Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>
-					<a class="button-style" href="join.html">Apply Now</a>
-				</div>
-				<div class="col-xs-4 blog-grid-img blog-img-rght">
-					<img src="images/c7.jpg" class="img-responsive" alt="" />
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!-- //blog -->
+            </div>
+        </div>
 
-	<!-- footer -->
-	<div class="mkl_footer">
-		<div class="sub-footer">
-			<div class="container">
-				<a class="navbar-brand" href="http://www.cs.cqu.edu.cn/xbwz/sy.htm">
-					<h1 aria-hidden="true">
-							<img class="footer-img-info" src="images/bg.png" alt="" />												
-					</h1>
-				</a>
-				<div class="mkls_footer_grid">
-					<div class="col-xs-4 mkls_footer_grid_left">
-						<h4>地址:</h4>
-						<p>重庆市沙坪坝区沙正街174号</p>
-					</div>
-					<div class="col-xs-4 mkls_footer_grid_left">
-						<h4>联系方式:</h4>
-						<p>
-							电话 : 023-65111210</p>
-						<!--
-						<p>
-							<span>邮箱 : </span>
-							<a href="mailto:info@example.com">mail@example.com</a>
-						</p> 
-						-->
-					</div>
-					<div class="mkls_footer_grid_left">
-						<h5 class=" col-xs-4"><i class="fa fa-tag"></i>友情链接：</h5>
-						<li><a href="http://www.cs.cqu.edu.cn/xbwz/sy.html">
-							计算机学院											
-						</a></li>
-						<li><a href="http://i.cqu.edu.cn/new/index.html">
-							服务大厅											
-						</a></li>
-						<li><a href="http://jwc.cqu.edu.cn/">
-							重庆大学教务处											
-						</a></li>
-						
-						<li><a href="http://graduate.cqu.edu.cn/">
-							重庆大学研究生院											
-						</a></li>
-						<li><a href="http://lib.cqu.edu.cn/">
-							图书馆											
-						</a></li>
-						<li><a href="http://www.cqu.edu.cn/">
-							重庆大学											
-						</a></li>
-						
-					</div>
-					<!--
-					<div class="col-xs-4 mkls_footer_grid_left">
-						<h4>Opening Hours:</h4>
-						<p>Working days : 8am-10pm</p>
-						<p>Sunday
-							<span>(closed)</span>
-						</p>
-					</div>
-					-->
-					<div class="clearfix"> </div>
-				</div>			
-			</div>
-		</div>
-		<div class="footer-copy-right">
-			<div class="container">
-				<center><div class="allah-copy"></center>
-					<p>Copyright © 2019 重庆大学计算机学院 All Rights Reserved.</p>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<!--/footer -->
+        <!--        <div class="blog-info">-->
+        <!--            <div class="col-xs-4 blog-grid-img">-->
+        <!--                <img src="images/c2.jpg" class="img-responsive" alt=""/>-->
+        <!--            </div>-->
+        <!--            <div class="col-xs-8 blog-grid-text">-->
+        <!--                <h4>Web Technology</h4>-->
+        <!--                <h6>Rerum Delectus</h6>-->
+        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
+        <!--                    nisl, in auctor sapien.-->
+        <!--                    Donec ultricies faucibus ante in mattis earum rerum delectus in auctor sapien. </p>-->
+        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
+        <!--            </div>-->
+        <!--            <div class="clearfix"></div>-->
+        <!--        </div>-->
+        <!--        <div class="blog-agileinfo blog-info-mdl">-->
+        <!--            <div class="col-xs-8 blog-grid-text">-->
+        <!--                <h4>Academic English</h4>-->
+        <!--                <h6>Rerum Delectus</h6>-->
+        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
+        <!--                    nisl, in auctor sapien.-->
+        <!--                    Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>-->
+        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
+        <!--            </div>-->
+        <!--            <div class="col-xs-4 blog-grid-img blog-img-rght">-->
+        <!--                <img src="images/c1.jpg" class="img-responsive" alt=""/>-->
+        <!--            </div>-->
+        <!--            <div class="clearfix"></div>-->
+        <!--        </div>-->
+        <!--        <div class="blog-info">-->
+        <!--            <div class="col-xs-4 blog-grid-img">-->
+        <!--                <img src="images/c3.jpg" class="img-responsive" alt=""/>-->
+        <!--            </div>-->
+        <!--            <div class="col-xs-8 blog-grid-text">-->
+        <!--                <h4>HR Management</h4>-->
+        <!--                <h6>Rerum Delectus</h6>-->
+        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
+        <!--                    nisl, in auctor sapien.-->
+        <!--                    Donec ultricies faucibus ante rerum hic a sapiente delectus in auctor sapien. </p>-->
+        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
+        <!--            </div>-->
+        <!--            <div class="clearfix"></div>-->
+        <!--        </div>-->
+        <!--        <div class="blog-agileinfo blog-info-mdl">-->
+        <!--            <div class="col-xs-8 blog-grid-text">-->
+        <!--                <h4>Process Engineering</h4>-->
+        <!--                <h6>Rerum Delectus</h6>-->
+        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
+        <!--                    nisl, in auctor sapien.-->
+        <!--                    Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>-->
+        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
+        <!--            </div>-->
+        <!--            <div class="col-xs-4 blog-grid-img blog-img-rght">-->
+        <!--                <img src="images/c7.jpg" class="img-responsive" alt=""/>-->
+        <!--            </div>-->
+        <!--            <div class="clearfix"></div>-->
+        <!--        </div>-->
+        <th:block th:each="course:${courseList}">
+            <div class="item">
+                <div class="blog-agileinfo blog-info-mdl">
+                    <div class="col-xs-8 blog-grid-text">
+                        <h4 th:text="${course.courseName}"/>
+                        <h6>Rerum Delectus</h6>
+                        <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet
+                            placerat
+                            nisl, in auctor sapien.
+                            Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>
+                        <a class="button-style" href="join.html">Apply Now</a>
+                    </div>
+                    <div class="col-xs-4 blog-grid-img blog-img-rght">
+                        <img src="images/c7.jpg" class="img-responsive" alt=""/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
 
-	<!-- js files -->
-	<!-- js -->
-	<script src="js/jquery-2.1.4.min.js"></script>
-	<!-- bootstrap -->
-	<script src="js/bootstrap.js"></script>
-	<!-- stats numscroller-js-file -->
-	<script src="js/numscroller-1.0.js"></script>
-	<!-- //stats numscroller-js-file -->
-	<!-- smooth scrolling -->
-	<script src="js/SmoothScroll.min.js"></script>
-	<script src="js/move-top.js"></script>
-	<script src="js/easing.js"></script>
-	<!-- here stars scrolling icon -->
-	<script>
-		$(document).ready(function () {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/
+            </div>
 
-			$().UItoTop({
-				easingType: 'easeOutQuart'
-			});
+        </th:block>
+    </div>
+</div>
+<!-- //blog -->
+<!--	引入footer-->
+<div th:insert="footer::footer"/>
 
-		});
-	</script>
-	<!-- //here ends scrolling icon -->
-	<!-- smooth scrolling -->
-	<!-- //js-files -->
+<!-- js files -->
+<!-- js -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- bootstrap -->
+<script src="js/bootstrap.js"></script>
+<!-- stats numscroller-js-file -->
+<script src="js/numscroller-1.0.js"></script>
+<!-- //stats numscroller-js-file -->
+<!-- smooth scrolling -->
+<script src="js/SmoothScroll.min.js"></script>
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<!-- here stars scrolling icon -->
+<script>
+    $(document).ready(function () {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!-- smooth scrolling -->
+<!-- //js-files -->
 
 </body>
 

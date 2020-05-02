@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- header -->
+<div th:fragment="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="bottom_header_left">
+                <p>
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>中国, 重庆
+                </p>
+            </div>
+            <div class="bottom_header_right">
+                <div class="header-top-righ">
+                    <a href="/user/login">
+                        <span class="fa fa-sign-out" aria-hidden="true"></span>登录|</a>
+
+                    <a href="/logout">
+                        <span class="fa fa-sign-out" aria-hidden="true"></span>注销</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="header header-top">
+        <div class="content white">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">
+                            <h1 aria-hidden="true">
+                                <img class="header-img-info" src="images/e1.png" alt=""/>
+                            </h1>
+                        </a>
+                    </div>
+                    <!--/.navbar-header-->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <nav class="link-effect-2" id="link-effect-2">
+                            <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="/index" class="effect-3">主页</a>
+                                </li>
+                                <li>
+                                    <a href="/about" class="effect-3">学院概况</a>
+                                </li>
+                                <li>
+                                    <a href="/courses" class="effect-3">课程</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="effect-3 dropdown-toggle" data-toggle="dropdown">信息查询
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="icons.html">奖助贷</a>
+                                        </li>
+                                        <li>
+                                            <a href="salary.html">酬金</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">教育教学
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="icons.html">课程安排</a>
+                                        </li>
+                                        <li>
+                                            <a href="codes.html">考试安排</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="Gallery.html" class="effect-3">Gallery</a>
+                                </li>
+                                <li>
+                                    <a href="contact.html" class="effect-3">联系我们</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--/.navbar-collapse-->
+                    <!--/.navbar-->
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+</html>
