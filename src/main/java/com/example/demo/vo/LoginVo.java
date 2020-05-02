@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 public class LoginVo {
-    private String userName;
+    private long userName;
     private String password;
     private String loginType;
     private boolean rememberMe;
