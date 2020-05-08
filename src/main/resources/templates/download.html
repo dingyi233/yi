@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Download</title>
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //meta-tags -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+</head>
+<body>
+<!--引入header-->
+<div th:insert="header::header"/>
+<!-- banner -->
+<div class="inner_page_agile">
+
+</div>
+<!--//banner -->
+<!-- short -->
+<div class="services-breadcrumb">
+    <div class="inner_breadcrumb">
+        <ul class="breadcrumb ">
+            <li>
+                <a href="index.html">首页</a>
+            </li>
+            <li><a href="about.html">学院概况</a></li>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <!-- <li class="active">学院简介</li>
+            <li class="active">学院领导</li>
+            <li class="active">机构设置</li> -->
+            <!-- <li><a href="#Leader"></a></li>
+            <li><a href="#Mechanism"></a></li> -->
+        </ul>
+
+    </div>
+</div>
+<!--Donload-Area-->
+<p>文件下载专区</p>
+<ul class="nav nav-pills nav-stacked">
+    <li class="active"><a href="#">文件下载专区</a></li>
+    <li><a href="#">奖助贷下载</a></li>
+    <li><a href="#">培养下载</a></li>
+    <li><a href="#">常用下载</a></li>
+    <li><a href="#">其他下载</a></li>
+
+</ul>
+</body>
+</html>
