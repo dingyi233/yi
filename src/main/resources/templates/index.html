@@ -98,24 +98,27 @@
 </div>
 <!--//banner -->
 <!-- about -->
-<div class="banner-bottom-w3l" id="about">
+<div class="" id="about">
     <div class="container">
         <div class="title-div">
         </div>
-        <div class="welcome-sub-wthree">
+        <div class="welcome-sub-wthree well">
+
             <div class="col-md-6 banner_bottom_left">
-                <h4>通知
-                    <span>公告</span>
+                <div class = "page-header">
+                    <h4 class=" glyphicon glyphicon-volume-up">
+                    通知<span>公告</span>
                 </h4>
-                <ur style="list-style-type:none">
+                </div>
+                <ur class = "row fa-lg" style="list-style-type:none">
                     <th:block th:each="announcement:${announcementList}">
-                        <div class="item">
-                            <li>
-                                【置顶】<a th:href="${announcement.announcementContent}"
+                        <div class="item page-header">
+                            <li >
+                                <a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
                                        th:text="${announcement.announcementTitle}"/> &nbsp;
-                                <span class="glyphicon glyphicon-time">&nbsp;
-										<div th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
-									</span>
+                                <span >&nbsp;
+										<div class="glyphicon glyphicon-time pull-right" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
+                                </span>
                             </li>
 
                         </div>
@@ -141,13 +144,7 @@
                     <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
                     <!--						</li>-->
                 </ur>
-
-
-                <p>Pellentesque convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla viverra
-                    pharetra sem, eget
-                    pulvinar neque pharetra ac.Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a
-                    ornare elit. Nulla
-                    viverra pharetra sem.</p>
+                <div class="pull-right" ><a href="gallery.html">更多>></a></div>
             </div>
             <!-- Stats-->
             <div class="col-md-6 stats-info-agile">
@@ -186,14 +183,13 @@
     </div>
 </div>
 <!-- //about -->
-<div class="tlinks">Collect from <a href="http://www.cssmoban.com/">网站建设</a></div>
-<!-- services -->
+<!-- news -->
 <div class="services">
     <div class="container">
         <div class="title-div">
             <h3 class="tittle">
-                <span>O</span>ur
-                <span>S</span>ervices
+                <span>学</span>院
+                <span>新</span>闻
             </h3>
             <div class="tittle-style">
 
@@ -202,9 +198,8 @@
         <div class="services-moksrow">
             <div class="col-xs-4 services-grids-w3l">
                 <div class="servi-shadow">
-                    <span class="fa fa-bullhorn icon" aria-hidden="true"></span>
-                    <h4>Popular Courses</h4>
-                    <p>Phasellus at placerat ante nulla adipiscing elit</p>
+                    <span class="fa fa-bullhorn icon" aria-hidden="true">新闻图片</span>
+                    <p>新闻描述</p>
                 </div>
             </div>
             <div class="col-xs-4 services-grids-w3l">
@@ -249,8 +244,8 @@
         </div>
     </div>
 </div>
-<!-- //services -->
-<!-- news -->
+<!-- //news -->
+<!-- academic conference -->
 <div class="news" id="news">
     <div class="container">
         <div class="title-div">
@@ -397,7 +392,7 @@
     </div>
 </div>
 <!-- //modal -->
-<!-- //news -->
+<!-- //academic conference -->
 
 <!-- testimonials -->
 <div class="testimonials">
