@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <!-- header -->
 <div th:fragment="header">
     <div class="header-top">
@@ -30,76 +31,83 @@
     </div>
     <div class="header header-top">
         <div class="content white">
-            <nav class="navbar navbar-default">
-                <div class="container">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                                 data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="/index">
                             <h1 aria-hidden="true">
-                                <img class="header-img-info" src="images/e1.png" alt=""/>
+                                <img class="header-img-info" style="border: none;margin-left: 40px;" src="images/e1.png" alt=""/>
                             </h1>
                         </a>
                     </div>
-                    <!--/.navbar-header-->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <nav class="link-effect-2" id="link-effect-2">
-                            <ul class="nav navbar-nav">
-                                <li class="active">
-                                    <a href="/index" class="effect-3">主页</a>
-                                </li>
-                                <li>
-                                    <a href="/about" class="effect-3">学院概况</a>
-                                </li>
-                                <li>
-                                    <a href="/courses" class="effect-3">课程</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="effect-3 dropdown-toggle" data-toggle="dropdown">信息查询
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="/scholarship">奖助贷</a>
-                                        </li>
-                                        <li>
-                                            <a href="/salary">酬金</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">教育教学
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="icons.html">课程安排</a>
-                                        </li>
-                                        <li>
-                                            <a href="codes.html">考试安排</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="/gallery" class="effect-3">公告</a>
-                                </li>
-                                <li>
-                                    <a href="/download" class="effect-3">下载专区</a>
-                                </li>
-                                <li>
-                                    <a href="/contact" class="effect-3">联系我们</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!--/.navbar-collapse-->
-                    <!--/.navbar-->
+
                 </div>
+                <!--/.navbar-header-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+
+                        <ul class="nav nav-justified " style="margin-top: 20px; background-color: #d4e9ef" role="navigation" >
+                            <li class="active">
+                                <a href="/index" >主页</a>
+                            </li>
+                            <li>
+                                <a href="/about" >学院概况</a>
+                            </li>
+                            <li>
+                                <a href="/gallery" >通知公告</a>
+                            </li>
+                            <li>
+                                <a href="/courses" class="effect-3">课程信息</a>
+                            </li>
+                            <li>
+                                <a href="#" class="effect-3 dropdown-toggle" data-toggle="dropdown">信息查询
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="/mymessage">我的信息</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/salary">酬金查询</a>
+                                    </li>
+                                    <li>
+                                        <a href="/scholarship">奖助贷查询</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">教育教学
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="icons.html">课程安排</a>
+                                    </li>
+                                    <li>
+                                        <a href="codes.html">考试安排</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="/download" class="effect-3">下载专区</a>
+                            </li>
+                            <li>
+                                <a href="/contact" class="effect-3">联系我们</a>
+                            </li>
+                        </ul>
+
+                </div>
+                <!--/.navbar-collapse-->
+                <!--/.navbar-->
             </nav>
         </div>
     </div>

@@ -142,7 +142,6 @@ label {
 
 .header {
 	padding-top: 0;
-    padding-bottom: 10px;
 }
 
 .navbar-nav {
@@ -159,7 +158,7 @@ label {
     position: relative;
     min-height: 70px;
     margin-bottom: 0!important;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
 }
 
 .navbar-default {
@@ -205,9 +204,9 @@ label {
 
 .navbar-default .navbar-nav>li>a {
     color: #282828;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: 600;
     padding: 14px 0;
 }
 
@@ -230,7 +229,7 @@ label {
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #202020;
+    background-color: #282828;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -262,7 +261,7 @@ label {
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {
-    color: #EF5861;
+    color: #040102;
     background: none;
 }
 
@@ -1651,18 +1650,18 @@ label.header {
 }
 
 .contact-lsleft {
-    background: url(../images/bg7.jpg) no-repeat center;
+    background-color: #2e6da4;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     -ms-background-size: cover;
-    margin-top: -16em;
-    margin-bottom: 5em;
+    /*margin-top: -16em;*/
+    margin-bottom: 2em;
 }
 
 .address-grid {
-    margin-top: 4em;
+    margin-top: 2em;
 }
 
 .address-grid ul {

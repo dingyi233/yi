@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Download</title>
     <!-- meta-tags -->
@@ -16,6 +16,9 @@
         }
     </script>
     <!-- //meta-tags -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- font-awesome -->
@@ -38,9 +41,9 @@
     <div class="inner_breadcrumb">
         <ul class="breadcrumb ">
             <li>
-                <a href="index.html">首页</a>
+                <a href="/index">首页</a>
             </li>
-            <li><a href="about.html">学院概况</a></li>
+            <li><a href="/download">下载专区</a></li>
             <form class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -56,15 +59,43 @@
 
     </div>
 </div>
-<!--Donload-Area-->
-<p>文件下载专区</p>
-<ul class="nav nav-pills nav-stacked">
-    <li class="active"><a href="#">文件下载专区</a></li>
-    <li><a href="#">奖助贷下载</a></li>
-    <li><a href="#">培养下载</a></li>
-    <li><a href="#">常用下载</a></li>
-    <li><a href="#">其他下载</a></li>
+<!--Download-Area-->
+<br>
+<div>
+    <div class="container">
+        <div class="title-div">
+            <div style="text-align: center" class="container col-md-3" >
+                <ul class=" title_duiqi nav nav-stacked nav-tabs ">
+                    <li class="active" ><a data-toggle="tab" href="#JZD">奖助贷下载</a></li>
+                    <li><a data-toggle="tab" href="#Train">培养下载</a></li>
+                    <li><a data-toggle="tab" href="#Common">常用下载</a></li>
+                    <li><a data-toggle="tab" href="#Other">其他下载</a></li>
+                </ul>
 
-</ul>
+            </div>
+            <div class="tab-content">
+                <div id="JZD" class="tab-pane fade in active" >
+                    <h3>菜单 1</h3>
+                    <p>这是菜单 1 显示的内容。这是菜单 1 显示的内容。这是菜单 1 显示的内容。</p>
+                </div>
+                <div id="Train" class="tab-pane fade">
+                    <h3>菜单 2</h3>
+                    <p>这是菜单 2 显示的内容。这是菜单 2 显示的内容。这是菜单 2 显示的内容。</p>
+                </div>
+                <div id="Common" class="tab-pane fade">
+                    <h3>菜单 3</h3>
+                    <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+                </div>
+                <div id="Other" class="tab-pane fade">
+                    <h3>菜单 3</h3>
+                    <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
