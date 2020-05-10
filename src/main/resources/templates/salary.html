@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="app" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>酬金管理</title>
@@ -17,17 +17,30 @@
 		}
 	</script>
 	<!-- //meta-tags -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
 	<!-- font-awesome -->
+
 	<link href="css/font-awesome.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+
 	<!-- fonts -->
 	<link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
 	    rel="stylesheet">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<style>
+		p.show{
+			 color: rgb(169, 68, 66)
+		 }
+	</style>
 </head>
 
-<body>
+<body >
 <!--引入header-->
 <div th:insert="header::header"/>
 	<!-- banner -->
@@ -62,372 +75,118 @@
 	<!-- //short-->
 	<!-- salary -->
 	<div class="about-sec" id="about">
-		<div class="container">
+		<div class="container" ng-controller="datetimeCtrl">
 			<div class="title-div">
 				<!-- <h3 class="tittle">
 					<span>学</span>院
 					<span>概</span>况
-				</h3>				
+				</h3>
 				<div class="tittle-style"> -->
 				<div id="myTabContent" class="tab-content">
 				   <div class="tab-pane fade in active" id="Introduction">
 				      <!-- Achievements -->
 				      <div class="aitsresumethree">
-				      	<div class="container" style="width: 1250px;">
-				      		<div class="title-div">
-				      			<h3 class="tittle" style="margin-top: 16px;">
-				      				<span>我</span>的
-				      				<span>酬</span>金
-				      			</h3>
-				      			<div class="tittle-style">
-				      
-				      			</div>
-				      		</div>
-				      		<div class="load_more">
-				      			<ul id="myList">
-				      				<li class="aitsaitsresumewthreeli-1">
-				      					<div class="l_g">
-				      						<div class="l_g_r g_r">
-				      							<div class="work">
-				      								<div class="work-info">
-				      									<div class="col-md-4 list-group">
-															<div class="panel panel-primary">
-															    <div class="panel-heading">
-															        <h3 class="panel-title text-center" >欢迎 XXX</h3>
-															    </div>
-															    <div class="panel-body">
-															        本月酬金为： xxx RMB.
-															    </div>
-															</div>
-				      									  <a href="#" class="text-center list-group-item disabled">
-				      									    酬金明细
-				      									  </a>
-				      									  <a href="#" class="list-group-item">参加学术会议：<p>100 RMB.</p></a>
-				      									  <a href="#" class="list-group-item">Morbi leo risus</a>
-				      									  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-				      									  <a href="#" class="list-group-item">Vestibulum at eros</a>
-				      									</div>
-				      										
-														
-				      									<div class="clearfix"> </div>
-				      								</div>
-				      							</div>
-				      						</div>
-				      					</div>
-				      				</li>
-				      			</ul>
-				      		</div>
-				      	</div>
+						  <div class="title-div">
+							  <h3 class="tittle" style="margin-top: 16px;">
+								  <span>我</span>的
+								  <span>酬</span>金
+							  </h3>
+							  <div class="tittle-style">
+
+							  </div>
+						  </div>
+						  <div class="container" style="text-align: center">
+							  <h2 >欢迎 XXX ！</h2>
+							  <br>
+
+								  <p class="text-primary">您的本月酬金为： xx元 。</p>
+
+							  <br>
+							  <br>
+							  <blockquote>
+							  <div class="container">
+								  <div class="row col-md-12">
+									  <form class="form-horizontal">
+										  <!-- 最小日期 -->
+										  <div class="form-group col-md-5" id="datetimepicker1">
+											  <label  class="col-sm-1 control-label">从</label>
+											  <div class="col-sm-11">
+												  <input type="text"  ng-model="data.minDate" class="form-control" my-datetime cur="data.minDate" dateformat="data.dateFormat" max="data.maxDate"  flag="data.minshow" text="data.minText" timetype="data.type1">
+												  <p ng-show="data.minshow" ng-bind="data.minText" class="show"></p>
+											  </div>
+										  </div>
+										  <!-- 最大日期 -->
+										  <div class="form-group col-md-5">
+											  <label  class="col-sm-1 control-label">到</label>
+											  <div class="col-sm-11">
+												  <input type="text" class="form-control" ng-model="data.maxDate" my-datetime cur="data.maxDate" dateformat="data.dateFormat" min="data.minDate" flag="data.maxshow" text="data.maxText" timetype="data.type1">
+												  <p ng-show="data.maxshow" ng-bind="data.maxText" class="show"></p>
+											  </div>
+										  </div>
+										  <button type="button" class="btn btn-primary col-md-2" data-toggle="collapse"
+												  data-target="#demo">
+											  查询明细
+
+										  </button>
+									  </form>
+								  </div>
+
+							  </div>
+							  </blockquote>
+
+							  <br>
+							  <div id="demo" class="collapse">
+								  <table class="table table-bordered">
+									  <thead>
+									  <tr>
+										  <th>摘要</th>
+										  <th>项目代码</th>
+										  <th>发放类型</th>
+										  <th>发放金额</th>
+										  <th>扣税金额</th>
+										  <th>实发金额</th>
+										  <th>发放时间</th>
+										  <th>经办人</th>
+										  <th>发放部门</th>
+									  </tr>
+									  </thead>
+									  <tbody>
+									  <tr>
+										  <td>Sachin</td>
+										  <td>Mumbai</td>
+										  <td>400003</td>
+										  <td>Mumbai</td>
+										  <td>Mumbai</td>
+										  <td>Mumbai</td>
+										  <td>Mumbai</td>
+										  <td>Mumbai</td>
+										  <td>Mumbai</td>
+									  </tr>
+									  <tr>
+										  <td>Uma</td>
+										  <td>Pune</td>
+										  <td>411027</td>
+										  <td>Uma</td>
+										  <td>Pune</td>
+										  <td>411027</td>
+										  <td>Uma</td>
+										  <td>Pune</td>
+										  <td>411027</td>
+
+									  </tr>
+									  </tbody>
+								  </table>
+<!--								  <a href="#" class="text-center list-group-item disabled">-->
+<!--									  酬金明细-->
+<!--								  </a>-->
+<!--								  <a href="#" class="list-group-item">参加学术会议：<p>100 RMB.</p></a>-->
+<!--								  <a href="#" class="list-group-item">Morbi leo risus</a>-->
+<!--								  <a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
+<!--								  <a href="#" class="list-group-item">Vestibulum at eros</a>-->
+							  </div>
 				      </div>
 				      <!-- //Achievements -->
 				   </div>
-				   <div class="tab-pane fade" id="Leader">
-				      <!-- about-team -->
-				      <div class="team">
-				      	<div class="container">
-				      		<div class="title-div">
-				      			<h3 class="tittle">
-				      				<span>现</span>任
-				      				<span>领</span>导
-				      			</h3>
-				      			<div class="tittle-style">
-				      
-				      			</div>
-				      		</div>
-				      		<div class="team-row-agileinfo">
-				      			<div class="col-md-3 col-sm-6 col-xs-6 team-grids">
-				      				<div class="thumbnail team-agileits">
-				      					<img src="images/t1.jpg" class="img-responsive" alt="" />
-				      					<div class="effectd-caption">
-				      						<h4>Vaura Tegsner</h4>
-				      						<p>Principal</p>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="col-md-3 col-sm-6 col-xs-6 team-grids">
-				      				<div class="thumbnail team-agileits">
-				      					<img src="images/t2.jpg" class="img-responsive" alt="" />
-				      					<div class="effectd-caption">
-				      						<h4>Jark Kohnson</h4>
-				      						<p>Senior Teacher</p>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="col-md-3 col-sm-6 col-xs-6 team-grids">
-				      				<div class="thumbnail team-agileits">
-				      					<img src="images/t3.jpg" class="img-responsive" alt="" />
-				      					<div class="effectd-caption">
-				      						<h4>Chunk Erson</h4>
-				      						<p>Vice Principal</p>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="col-md-3 col-sm-6 col-xs-6 team-grids">
-				      				<div class="thumbnail team-agileits">
-				      					<img src="images/t4.jpg" class="img-responsive" alt="" />
-				      					<div class="effectd-caption">
-				      						<h4>Goes Mehak</h4>
-				      						<p>Teacher Science</p>
-				      					</div>
-				      				</div>
-				      			</div>
-				      			<div class="clearfix"> </div>
-				      		</div>
-				      	</div>
-				      </div>
-				      <!-- //about-team -->
-				   </div>
-				   <div class="tab-pane fade" id="Mechanism">
-				      <!-- middle section -->
-				      <div class="middle-sec-agile">
-				      	<div container">
-				      		<div class="title-div">
-				      			<h3 class="tittle">
-				      				<span>机</span>构
-				      				<span>设</span>置
-				      			</h3>
-				      			<div class="tittle-style">
-				      						      
-				      			</div>
-				      		</div>
-							<div align="center" >
-							 <br> 
-							 <table class="text-center" cellpadding="0" cellspacing="0">
-							  <colgroup>
-							   <col width="73" style="width:73px">
-							   <col width="65" style="width:65px">
-							   <col width="113" style="width:113px">
-							   <col width="131" span="2" style="width:131px">
-							  </colgroup>
-							  <tbody>
-							   <tr height="32" class="firstRow" style="height:32px">
-							    <td height="32" width="72" style="border-width: 1px; border-style: solid;">部门名称</td>
-							    <td width="75" style="border-width: 1px; border-style: solid; border-left-color: initial;">姓&nbsp; 名</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-left-color: initial;">职&nbsp; 务</td>
-							    <td width="131" style="border-width: 1px; border-style: solid; border-left-color: initial;">办公地点</td>
-							    <td width="148" style="border-width: 1px; border-style: solid; border-left-color: initial;">联系方式</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td rowspan="5" height="215" width="74" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">学院办公室</td>
-							    <td width="71" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">刘&nbsp; 霜</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">党委组织员</td>
-							    <td width="131" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">主教1806</td>
-							    <td width="148" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65113069</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">申卫洁</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">办公室主任</td>
-							    <td rowspan="4" width="119" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">主教1816</td>
-							    <td width="131" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65111874</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">杨&nbsp; 婧</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">办公室秘书</td>
-							    <td width="138" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65102502</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">王&nbsp; 婷</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">财&nbsp; 务</td>
-							    <td rowspan="2" width="139" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">023-65112389</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">汪晓杰</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">内&nbsp; 勤</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td rowspan="3" height="129" width="74" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">研究生教务办公室</td>
-							    <td width="71" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">伍&nbsp; 玲</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">研究生教务</td>
-							    <td rowspan="3" width="131" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">主教1812</td>
-							    <td rowspan="3" width="148" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">023-65111210</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">何静媛</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">研究生教学秘书</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">黎荆妗</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">研究生教学秘书</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td rowspan="3" height="129" width="74" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">本科生教务办公室</td>
-							    <td width="71" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">傅思思</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">教务办公室主任</td>
-							    <td rowspan="3" width="131" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">主教1810</td>
-							    <td rowspan="2" width="148" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">023-65106523</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">黄&nbsp; 利</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">本科生教务</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">李&nbsp; 杰</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">本科生教学秘书</td>
-							    <td width="140" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65102485</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td rowspan="5" height="215" width="74" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">学生工作办公室</td>
-							    <td width="71" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">古&nbsp; 曦</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial; word-break: break-all;"><p>学办主任&nbsp;&nbsp;</p><p>本科生辅导员</p></td>
-							    <td rowspan="5" width="131" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">主教1806</td>
-							    <td rowspan="5" width="148" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">023-65103012</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">谢璧如</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial; word-break: break-all;"><p>团委书记</p><p>本科生辅导员</p></td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">张&nbsp; 军</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">研究生辅导员</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">李若菡</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">本科生辅导员</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">郑田青</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">本科生辅导员</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td rowspan="3" height="129" width="74" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">其他工作</td>
-							    <td width="71" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">黄宏宇</td>
-							    <td width="101" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">科研秘书</td>
-							    <td rowspan="2" width="131" style="border-width: 1px; border-bottom-color: black; border-style: solid; border-top-color: initial;">主教1816</td>
-							    <td width="148" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65102502</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">杨广超</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">外事秘书</td>
-							    <td width="141" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65102502</td>
-							   </tr>
-							   <tr height="43" style="height:43px">
-							    <td height="43" width="66" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">袁金凤</td>
-							    <td width="120" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">双创教育秘书</td>
-							    <td width="119" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">主教1810</td>
-							    <td width="131" style="border-width: 1px; border-style: solid; border-top-color: initial; border-left-color: initial;">023-65102485</td>
-							   </tr>
-							  </tbody>
-							 </table>
-							 <p><br></p>
-							 <p  style="margin: 5px 0px; text-align: center;"><span style="font-family: 黑体; font-size: 19px;">二、教学单位</span></p>
-							 <div align="center">
-							  <table width="576" cellspacing="0" cellpadding="0">
-							   <tbody>
-							    <tr class="firstRow" style="height: 34px; page-break-inside: avoid;">
-							     <td width="208" height="34" nowrap="" style="padding: 0px 7px; border: 1px solid windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">名称</span></strong></p></td>
-							     <td width="75" height="34" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">负责人</span></strong></p></td>
-							     <td width="255" height="34" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">联系方式</span></strong></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="208" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">计算机科学系</span></p></td>
-							     <td width="75" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">葛亮</span></p></td>
-							     <td width="255" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">geliang@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="208" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">计算机工程系</span></p></td>
-							     <td width="75" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">冯永</span></p></td>
-							     <td width="255" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">fengyong@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="208" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">计算机信息技术系</span></p></td>
-							     <td width="75" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">杨吉云</span></p></td>
-							     <td width="255" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">yangjy@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="208" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">计算机基础教育系</span></p></td>
-							     <td width="75" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">陈恒鑫</span></p></td>
-							     <td width="255" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">chenhengxin@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="208" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">实验与实践创新中心</span></p></td>
-							     <td width="75" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">孙天昊</span></p></td>
-							     <td width="255" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">sthing@cqu.edu.cn</span></p></td>
-							    </tr>
-							   </tbody>
-							  </table>
-							 </div>
-							 
-							 <p style="margin: 5px 0px; text-align: left;"><span lang="EN-US">&nbsp;</span></p>
-							 <p style="margin: 5px 0px; text-align: center;"><span style="font-family: 黑体; font-size: 19px;">三、研究机构</span></p>
-							 <div align="center">
-							  <table width="400" cellspacing="0" cellpadding="0">
-							   <tbody>
-							    <tr class="firstRow" style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="padding: 0px 7px; border: 1px solid windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">机构名称</span></strong></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">负责人</span></strong></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><strong><span style="font-family: 黑体; font-size: 16px;">联系方式</span></strong></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">信息物理社会可信服务计算教育部重点实验室</span></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">刘卫宁</span></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">lwn@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">软件理论与技术重庆市重点实验室</span></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">朱庆生</span></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">qszhu@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">网络与网格关键技术及应用研究所</span></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">吴开贵</span></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">kaiguiwu@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">计算智能与信息安全研究所</span></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">肖迪</span></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">dixiao@cqu.edu.cn</span></p></td>
-							    </tr>
-							    <tr style="height: 30px; page-break-inside: avoid;">
-							     <td width="225" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">模式识别与信息处理研究所</span></p></td>
-							     <td width="95" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span style="font-size: 16px;">房斌</span></p></td>
-							     <td width="170" height="30" nowrap="" style="border-width: 1px; border-style: solid; padding: 0px 7px; border-right-color: windowtext; border-bottom-color: windowtext;"><p style="text-align: center;"><span lang="EN-US" style="font-size: 16px;">fb@cqu.edu.cn</span></p></td>
-							    </tr>
-							   </tbody>
-							  </table>
-							 </div>
-							 <p style="margin: 5px 0px; text-align: left;"><span lang="EN-US">&nbsp;</span></p>
-							 <p><span lang="EN-US">&nbsp;</span></p>
-							 <p><br></p>
-							</div>
-				      		<!-- <ul> -->
-				      			<!-- <li>
-				      				<div class="midle-left-w3l">
-				      					<span class="fa fa-check" aria-hidden="true"></span>
-				      				</div>
-				      				<div class="middle-right">
-				      					<h5>Select A Course You Like And Explore It!</h5>
-				      					<p>Integer eu facilisis nunc, a iaculis felis.</p>
-				      				</div>
-				      				<div class="clearfix"></div>
-				      			</li> -->
-				      			<!-- <li>
-				      				<div class="midle-left-w3l">
-				      					<span class="fa fa-check" aria-hidden="true"></span>
-				      				</div>
-				      				<div class="middle-right">
-				      					<h5>Join A Seminar To Know More About It!</h5>
-				      					<p>Integer eu facilisis nunc, a iaculis felis.</p>
-				      				</div>
-				      				<div class="clearfix"></div>
-				      			</li>
-				      			<li>
-				      				<div class="midle-left-w3l">
-				      					<span class="fa fa-check" aria-hidden="true"></span>
-				      				</div>
-				      				<div class="middle-right">
-				      					<h5>Get Enrolled And Start Better Future With Us!</h5>
-				      					<p>Integer eu facilisis nunc, a iaculis felis.</p>
-				      				</div>
-				      				<div class="clearfix"></div>
-				      			</li> -->
-				      		<!-- </ul> -->
-				      	</div>
-				      	
-				      </div>
-				      <!-- //middle section -->
-				   </div>
-				   
-				</div>
 				</div>
 			</div>
 			<!-- <div class="about-sub">
@@ -458,6 +217,12 @@
 
 	<!-- js files -->
 	<!-- js -->
+
+	<script src="js/jquery.js"></script>
+	<script src="js/datetimepicker.js"></script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="app/app.js"></script>
 	<script src="js/jquery-2.1.4.min.js"></script>
 	<!-- bootstrap -->
 	<script src="js/bootstrap.js"></script>
@@ -469,6 +234,11 @@
 	<script src="js/move-top.js"></script>
 	<script src="js/easing.js"></script>
 	<!-- here stars scrolling icon -->
+	<script>
+		$('#datetimepicker1').datetimepicker({
+			locale : moment().locale('zh-cn')
+		});
+	</script>
 	<script>
 		$(document).ready(function () {
 			/*

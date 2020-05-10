@@ -759,19 +759,19 @@ h3.tittle span {
 }
 
 .news-grid-info-bottom-w3ls-text p {
-    font-size: .9em;
+    font-size: .8em;
 }
 .news-left-img {
     background: #FC9928 no-repeat 0px 0px !important;
     background-size: cover!important;
-    min-height: 190px;
+    min-height: 200px;
 }
 
 
 .news-left-img1 {
     background: #5bc0de no-repeat 0px 0px !important;
     background-size: cover!important;
-    min-height: 190px;
+    min-height: 200px;
 }
 
 .yaallahaa-news-grid:nth-child(2) {
@@ -781,13 +781,13 @@ h3.tittle span {
 .news-left-img2 {
     background: #e95a58 no-repeat 0px 0px !important;
     background-size: cover!important;
-    min-height: 190px;
+    min-height: 200px;
 }
 
 .news-left-img3 {
     background: #00d19b no-repeat 0px 0px !important;
     background-size: cover!important;
-    min-height: 190px;
+    min-height: 200px;
 }
 
 .news-left-top-text a:focus {

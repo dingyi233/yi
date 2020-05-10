@@ -2,7 +2,7 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Courses</title>
+    <title>研究生教育</title>
     <!-- meta-tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -17,6 +17,9 @@
         }
     </script>
     <!-- //meta-tags -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- font-awesome -->
@@ -37,117 +40,401 @@
 </div>
 <!--//banner -->
 <!-- short-->
-<div class="services-breadcrumb">
-    <div class="inner_breadcrumb">
-        <ul class="short_ls">
-            <li>
-                <a href="index.html">首页</a>
-                <span>| |</span>
-            </li>
-            <li>课程</li>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-        </ul>
-    </div>
-</div>
-<!-- //short-->
-<!-- blog -->
-<div class="blog-cource">
+<div class="about-sec" id="about">
     <div class="container">
         <div class="title-div">
-            <h3 class="tittle">
-                <span>P</span>opular
-                <span>C</span>ourses
+            <!-- <h3 class="tittle">
+                <span>学</span>院
+                <span>概</span>况
             </h3>
-            <div class="tittle-style">
+            <div class="tittle-style"> -->
+            <div class="col-md-3">
+                <ul class="title_duiqi nav nav-tabs nav-stacked">
+                    <li class="text-center "><a class="effect-3" href="#Annoucements" data-toggle="tab">公示公告</a>
+                    </li>
+                    <li class="text-center "><a class="effect-3" href="#Acdedemic_report" data-toggle="tab">学习动态</a></li>
+                    <li class="text-center"><a class="effect-3" href="#News" data-toggle="tab">工作动态</a></li>
+                </ul>
+            </div>
+
+            <div id="myTabContent" class="tab-content col-md-9">
+                <div class="tab-pane fade in active" id="Annoucements">
+                    <!-- Academic_Message -->
+                    <div class="aitsresumethree ">
+                        <div class="container" style="width: 100%;">
+                            <div class="title-div col-md-12">
+                                <h3 class="tittle" style="margin-top: 16px;">
+                                    <span>通</span>知
+                                    <span>公</span>告
+                                </h3>
+                                <div class="tittle-style">
+
+                                </div>
+                            </div>
+                            <div>
+                                <ur class = "row fa-lg" style="list-style-type:none">
+                                    <th:block th:each="announcement:${announcementList}">
+                                        <div class="item page-header">
+                                            <li >
+                                                <a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
+                                                   th:text="${announcement.announcementTitle}"/> &nbsp;
+                                                <span >&nbsp;
+										<div class="glyphicon glyphicon-time pull-right" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
+                                </span>
+                                            </li>
+
+                                        </div>
+
+
+                                    </th:block>
+
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<br>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                </ur>
+                            </div>
+                            <nav style="text-align: center">
+                                <ul class="pagination">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul><br>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //Academic_Message -->
+                </div>
+                <div class="tab-pane fade" id="Acdedemic_report">
+                    <!-- about-acedemic-->
+                    <div>
+                        <div class="container col-md-12" >
+                            <div class="title-div">
+                                <h3 class="tittle" style="margin-top: 16px;">
+                                    <span>学</span>术
+                                    <span>报</span>告
+                                </h3>
+                                <div class="tittle-style">
+
+                                </div>
+                            </div>
+                            <div class="effectd-caption team-row-agileinfo">
+                                <div class="yaallahaa-news-grids-agile">
+                                    <div class="yaallahaa-news-grid">
+                                        <div class="col-md-6 yaallahaa-news-left" style="border-style:1px ridge #ddd;">
+                                            <div class="col-xs-6 news-left-img">
+                                                <div class="news-left-text color-event1 " >
+                                                    <h5>学术讲座</h5>
+                                                </div>
+                                                <p>Integer viverra eleifend neque</p>
+                                            </div>
+                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                <div class="news-left-top-text text-color1">
+                                                    <a href="#" data-toggle="modal" data-target="#myModal">year-month-day</a>
+                                                </div>
+                                                <div class="date-grid">
+                                                    <div class="admin">
+                                                        <a href="#">
+                                                            <span class="fa fa-clock-o" aria-hidden="true"></span> 7:00 pm - 9:00 pm</a>
+                                                    </div>
+                                                    <div class="time">
+                                                        <p>
+                                                            <span class="fa fa-map-marker" aria-hidden="true"></span> 重庆大学, 民主湖报告厅</p>
+                                                    </div>
+                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                        <p>主讲人：黄廷文，美国德州农工大学卡塔尔分校教授</p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-md-6 yaallahaa-news-left">
+                                            <div class="col-xs-6  news-left-img1">
+                                                <div class="news-left-text color-event2">
+                                                    <h5>学术讲座</h5>
+
+                                                </div>
+                                                <p>Integer viverra eleifend neque</p>
+                                            </div>
+                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                <div class="news-left-top-text text-color2">
+                                                    <a href="#" data-toggle="modal" data-target="#myModal">year-montn-day</a>
+                                                </div>
+                                                <div class="date-grid">
+                                                    <div class="admin">
+                                                        <a href="#">
+                                                            <span class="fa fa-clock-o" aria-hidden="true"></span> 6:00 am - 8:00 am</a>
+                                                    </div>
+                                                    <div class="time">
+                                                        <p>
+                                                            <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 1452</p>
+                                                    </div>
+                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                        <p>主讲人：Song Guo，The Hong Kong Polytechnic University</p>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="yaallahaa-news-grid">
+                                        <div class="col-md-6 yaallahaa-news-left">
+                                            <div class="col-xs-6 news-left-img news-left-img2">
+                                                <div class="news-left-text color-event3">
+                                                    <h5>学术讲座</h5>
+                                                </div>
+                                                <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>
+                                            </div>
+                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                <div class="news-left-top-text text-color3">
+                                                    <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
+                                                </div>
+                                                <div class="date-grid">
+                                                    <div class="admin">
+                                                        <a href="#">
+                                                            <span class="fa fa-clock-o" aria-hidden="true"></span> 10:00 am - 1:00 pm</a>
+                                                    </div>
+                                                    <div class="time">
+                                                        <p>
+                                                            <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 7458</p>
+                                                    </div>
+                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                        <p>Aliquam erat volutpat.</p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-md-6 yaallahaa-news-left">
+                                            <div class="col-xs-6 news-left-img news-left-img3">
+                                                <div class="news-left-text color-event4">
+                                                    <h5>30 Dec</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                <div class="news-left-top-text text-color4">
+                                                    <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
+                                                </div>
+                                                <div class="date-grid">
+                                                    <div class="admin">
+                                                        <a href="#">
+                                                            <span class="fa fa-clock-o" aria-hidden="true"></span> 7:00 pm - 9:00 pm</a>
+                                                    </div>
+                                                    <div class="time">
+                                                        <p>
+                                                            <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 786.</p>
+                                                    </div>
+                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                        <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <nav style="text-align: center">
+                                <ul class="pagination">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul><br>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //about-acedemic -->
+                    <!--					<div class="middle-sec-agile aitsresumethree">-->
+                    <!--						<div class="container" style="width: 100%;">-->
+                    <!--							<div class="title-div  col-md-12">-->
+                    <!--								<h3 class="tittle">-->
+                    <!--									<span>学</span>术-->
+                    <!--									<span>报</span>告-->
+                    <!--								</h3>-->
+                    <!--								<div class="tittle-style">-->
+
+                    <!--								</div>-->
+                    <!--							</div>-->
+                    <!--							<div>-->
+                    <!--								<ur class = "row fa-lg" style="list-style-type:none">-->
+                    <!--									<th:block th:each="announcement:${announcementList}">-->
+                    <!--										<div class="item page-header">-->
+                    <!--											<li >-->
+                    <!--												<a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"-->
+                    <!--												   th:text="${announcement.announcementTitle}"/> &nbsp;-->
+                    <!--												<span >&nbsp;-->
+                    <!--										<div class="glyphicon glyphicon-time pull-right" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>-->
+                    <!--                                </span>-->
+                    <!--											</li>-->
+
+                    <!--										</div>-->
+
+
+                    <!--									</th:block>-->
+
+                    <!--									&lt;!&ndash;						<li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						</li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						<br>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						<li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						</li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						<li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						</li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						<li>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;&ndash;&gt;-->
+                    <!--									&lt;!&ndash;							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>&ndash;&gt;-->
+                    <!--									&lt;!&ndash;						</li>&ndash;&gt;-->
+                    <!--								</ur>-->
+
+                    <!--							</div>-->
+                    <!--							<nav style="text-align: center">-->
+                    <!--								<ul class="pagination">-->
+                    <!--									<li><a href="#">&laquo;</a></li>-->
+                    <!--									<li><a href="#">1</a></li>-->
+                    <!--									<li><a href="#">2</a></li>-->
+                    <!--									<li><a href="#">3</a></li>-->
+                    <!--									<li><a href="#">4</a></li>-->
+                    <!--									<li><a href="#">5</a></li>-->
+                    <!--									<li><a href="#">&raquo;</a></li>-->
+                    <!--								</ul><br>-->
+                    <!--							</nav>-->
+
+                    <!--						</div>-->
+
+                    <!--					</div>-->
+                </div>
+
+                <div class="tab-pane fade" id="News">
+                    <!-- News -->
+                    <div class="middle-sec-agile aitsresumethree">
+                        <div class="container" style="width: 100%;">
+                            <div class="title-div  col-md-12">
+                                <h3 class="tittle">
+                                    <span>学</span>院
+                                    <span>新</span>闻
+                                </h3>
+                                <div class="tittle-style">
+
+                                </div>
+                            </div>
+                            <div>
+                                <ur class = "row fa-lg" style="list-style-type:none">
+                                    <th:block th:each="announcement:${announcementList}">
+                                        <div class="item page-header">
+                                            <li >
+                                                <a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
+                                                   th:text="${announcement.announcementTitle}"/> &nbsp;
+                                                <span >&nbsp;
+										<div class="glyphicon glyphicon-time pull-right" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
+                                </span>
+                                            </li>
+
+                                        </div>
+
+
+                                    </th:block>
+
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<br>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                    <!--						<li>-->
+                                    <!--							【置顶】<a href="http://www.cs.cqu.edu.cn/info/1268/4507.htm">重庆大学计算机学院诚邀海内外英才加盟.</a> &nbsp;-->
+                                    <!--							<span class="glyphicon glyphicon-time">&nbsp;2019-10-29</span>-->
+                                    <!--						</li>-->
+                                </ur>
+
+                            </div>
+                            <nav style="text-align: center">
+                                <ul class="pagination">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul><br>
+                            </nav>
+
+                        </div>
+
+                    </div>
+                    <!-- //News -->
+                </div>
 
             </div>
         </div>
-
-        <!--        <div class="blog-info">-->
-        <!--            <div class="col-xs-4 blog-grid-img">-->
-        <!--                <img src="images/c2.jpg" class="img-responsive" alt=""/>-->
-        <!--            </div>-->
-        <!--            <div class="col-xs-8 blog-grid-text">-->
-        <!--                <h4>Web Technology</h4>-->
-        <!--                <h6>Rerum Delectus</h6>-->
-        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
-        <!--                    nisl, in auctor sapien.-->
-        <!--                    Donec ultricies faucibus ante in mattis earum rerum delectus in auctor sapien. </p>-->
-        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
-        <!--            </div>-->
-        <!--            <div class="clearfix"></div>-->
-        <!--        </div>-->
-        <!--        <div class="blog-agileinfo blog-info-mdl">-->
-        <!--            <div class="col-xs-8 blog-grid-text">-->
-        <!--                <h4>Academic English</h4>-->
-        <!--                <h6>Rerum Delectus</h6>-->
-        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
-        <!--                    nisl, in auctor sapien.-->
-        <!--                    Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>-->
-        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
-        <!--            </div>-->
-        <!--            <div class="col-xs-4 blog-grid-img blog-img-rght">-->
-        <!--                <img src="images/c1.jpg" class="img-responsive" alt=""/>-->
-        <!--            </div>-->
-        <!--            <div class="clearfix"></div>-->
-        <!--        </div>-->
-        <!--        <div class="blog-info">-->
-        <!--            <div class="col-xs-4 blog-grid-img">-->
-        <!--                <img src="images/c3.jpg" class="img-responsive" alt=""/>-->
-        <!--            </div>-->
-        <!--            <div class="col-xs-8 blog-grid-text">-->
-        <!--                <h4>HR Management</h4>-->
-        <!--                <h6>Rerum Delectus</h6>-->
-        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
-        <!--                    nisl, in auctor sapien.-->
-        <!--                    Donec ultricies faucibus ante rerum hic a sapiente delectus in auctor sapien. </p>-->
-        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
-        <!--            </div>-->
-        <!--            <div class="clearfix"></div>-->
-        <!--        </div>-->
-        <!--        <div class="blog-agileinfo blog-info-mdl">-->
-        <!--            <div class="col-xs-8 blog-grid-text">-->
-        <!--                <h4>Process Engineering</h4>-->
-        <!--                <h6>Rerum Delectus</h6>-->
-        <!--                <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet placerat-->
-        <!--                    nisl, in auctor sapien.-->
-        <!--                    Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>-->
-        <!--                <a class="button-style" href="join.html">Apply Now</a>-->
-        <!--            </div>-->
-        <!--            <div class="col-xs-4 blog-grid-img blog-img-rght">-->
-        <!--                <img src="images/c7.jpg" class="img-responsive" alt=""/>-->
-        <!--            </div>-->
-        <!--            <div class="clearfix"></div>-->
-        <!--        </div>-->
-        <th:block th:each="course:${courseList}">
-            <div class="item">
-                <div class="blog-agileinfo blog-info-mdl">
-                    <div class="col-xs-8 blog-grid-text">
-                        <h4 th:text="${course.courseName}"/>
-                        <h6>Rerum Delectus</h6>
-                        <p>Sed interdum interdum accumsan. Aenean nec purus ac orci finibus facilisis. In sit amet
-                            placerat
-                            nisl, in auctor sapien.
-                            Donec ultricies faucibus ante in mattis earum rerum hic a sapiente delectus. </p>
-                        <a class="button-style" href="join.html">Apply Now</a>
-                    </div>
-                    <div class="col-xs-4 blog-grid-img blog-img-rght">
-                        <img src="images/c7.jpg" class="img-responsive" alt=""/>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-            </div>
-
-        </th:block>
     </div>
+    <!-- <div class="about-sub">
+        <div class="col-md-6 about_bottom_left">
+            <h4>Welcome to
+                <span>Best Study</span>
+            </h4>
+            <p>Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a ornare elit, Nulla viverra pharetra sem eget.</p>
+            <p>Pellentesque convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla viverra pharetra sem, eget
+                pulvinar neque pharetra ac.Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla
+                viverra pharetra sem.</p>
+            <a class="button-style" href="join.html">Join Now</a>
+        </div>
+        <!-- Stats-->
+    <!-- <div class="col-md-6 about2-info">
+        <img src="images/graduate.png" alt="" />
+    </div>
+    <!-- //Stats -->
+    <!-- <div class="clearfix"> </div> -->
+    <!-- </div> -->
+
 </div>
-<!-- //blog -->
+<!-- //short-->
+
 <!--	引入footer-->
 <div th:insert="footer::footer"/>
 
