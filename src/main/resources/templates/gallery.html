@@ -579,7 +579,7 @@
 							<div>
 								<ur class = "row fa-lg" style="list-style-type:none">
 								<th:block th:each="announcement:${announcementList}">
-									<div class="item page-header">
+									<div class="item">
 										<li >
 											<a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
 											   th:text="${announcement.announcementTitle}"/> &nbsp;
@@ -589,8 +589,6 @@
 										</li>
 
 									</div>
-
-
 								</th:block>
 
 								<!--						<li>-->
