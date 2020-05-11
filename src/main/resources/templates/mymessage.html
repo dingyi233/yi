@@ -42,12 +42,13 @@
 	<!-- short-->
 	<div class="services-breadcrumb">
 		<div class="inner_breadcrumb">
-			<ul class="breadcrumb">
+			<ul class="breadcrumb" style="background-color: #eeeeee;">
 				<li>
 					<a href="/index">首页</a>
-					<span>| |</span>
+<!--					<span>| |</span>-->
 				</li>
-				<li>信息查询</li>
+				<li><a href="/mymessage">信息查询</a></li>
+				<li><a href="/mymessage">个人信息</a></li>
 				<form class="navbar-form navbar-right">
 				    <div class="form-group">
 				      <input type="text" class="form-control" placeholder="Search">
@@ -78,13 +79,14 @@
 						<div class="styled-input">
 							<input id="datepicker" placeholder="Birth Date" name="Text" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
 							    required="">
+							<input type="text"placeholder="****" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');">
 						</div>
+
 						<div class="styled-input agile-styled-input-top">
 							<select class="category2" required="">
 								<option value="">Gender</option>
 								<option value="">Female</option>
 								<option value="">Male</option>
-								<option value="">Other</option>
 							</select>
 						</div>
 						<div class="styled-input">
@@ -118,24 +120,10 @@
 								</select>
 							</div>
 						</div>
-						<div class="styled-input">
-							<label class="header">Your Address</label>
-							<div class="">
-								<input type="text" name="name" placeholder="Address" title="Please enter your Address" required="">
-							</div>
-							<div class="">
-								<input type="text" name="name" placeholder="Line" title="Please enter your Line" required="">
-							</div>
-							<div class="">
-								<input type="text" name="name" placeholder="City" title="Please enter your City" required="">
-							</div>
-							<div class="">
-								<input type="text" name="name" placeholder="Zip Code" title="Please enter your Zip code" required="">
-							</div>
-						</div>
+
 						<div class="clearfix"> </div>
 					</div>
-					<input type="submit" value="Submit">
+					<input type="submit" value="保存">
 				</form>
 			</div>
 		</div>

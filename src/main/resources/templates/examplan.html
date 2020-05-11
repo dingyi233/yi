@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>研究生教育</title>
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //meta-tags -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- font-awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+</head>
+
+<body>
+<!--引入header-->
+<div th:insert="header::header"/>
+<!-- banner -->
+<div class="inner_page_agile">
+
+</div>
+<!--//banner -->
+<!-- short-->
+<div class="services-breadcrumb">
+    <div class="inner_breadcrumb">
+        <ul class="breadcrumb " style="background-color: #eeeeee;">
+            <li>
+                <a href="/index">首页</a>
+            </li>
+            <li><a href="/coursemessage">教育教学</a></li>
+            <li><a href="/coursemessage">考试安排</a></li>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <!-- <li class="active">学院简介</li>
+            <li class="active">学院领导</li>
+            <li class="active">机构设置</li> -->
+            <!-- <li><a href="#Leader"></a></li>
+            <li><a href="#Mechanism"></a></li> -->
+        </ul>
+
+    </div>
+</div>
+<!-- //short-->
+<div class="container">
+    <div class="title-div col-md-12">
+        <h3 class="tittle" style="margin-top: 16px;">
+            <span>考</span>试
+            <span>安</span>排
+        </h3>
+        <div class="tittle-style">
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr class="text-center">
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>考试科目</th>
+                    <th>任课教师</th>
+                    <th>教室</th>
+                    <th>座位号</th>
+                    <th>考试时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>20164308</td>
+                    <td>张三</td>
+                    <td>[CST]1233人工智能</td>
+                    <th>李思</th>
+                    <th>A8304</th>
+                    <th>23</th>
+                    <th>2020-01-09(第x周 星期x) 14:00-16:00</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--	引入footer-->
+<div th:insert="footer::footer"/>
+
+<!-- js files -->
+<!-- js -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- bootstrap -->
+<script src="js/bootstrap.js"></script>
+<!-- stats numscroller-js-file -->
+<script src="js/numscroller-1.0.js"></script>
+<!-- //stats numscroller-js-file -->
+<!-- smooth scrolling -->
+<script src="js/SmoothScroll.min.js"></script>
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<!-- here stars scrolling icon -->
+<script>
+    $(document).ready(function () {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!-- smooth scrolling -->
+<!-- //js-files -->
+
+</body>
+
+</html>

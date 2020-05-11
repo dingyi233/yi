@@ -4,14 +4,14 @@
 <!-- header -->
 <div th:fragment="header">
     <div class="header-top">
-        <div class="container">
+        <div class="container" style="margin-left: 85.667; width: 1330px;">
             <div class="bottom_header_left">
                 <p>
                     <span class="fa fa-map-marker" aria-hidden="true"></span>中国, 重庆
                 </p>
             </div>
             <div class="bottom_header_right">
-                <div class="header-top-righ">
+                <div class="header-top-righ"style="width: 85px;">
 
                     <th:block th:unless="${session.User==null}">
                         <!--                        可以设置为个人中心的入口-->
@@ -69,7 +69,7 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="/mymessage">我的信息</a>
+                                        <a href="/mymessage">个人信息</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
@@ -91,7 +91,7 @@
                                         <a href="/coursemessage">课程安排</a>
                                     </li>
                                     <li>
-                                        <a href="codes.html">考试安排</a>
+                                        <a href="/examplan">考试安排</a>
                                     </li>
                                 </ul>
                             </li>
