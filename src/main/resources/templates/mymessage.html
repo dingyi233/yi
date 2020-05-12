@@ -29,6 +29,112 @@
 	<link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
 	    rel="stylesheet">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var error = false;
+
+			$("#username").blur(function(){
+				var username = $("#username").val();
+				if(username == '') {
+					showError('username', '账户不能为空');
+					error = true;
+					return;
+				}
+
+				$.post("modifyPassProcess.php", {flag:1, username:username}, function(data){
+					if(data) {
+						$("#username").css({"border-color":"green"});
+						$("#usernameTip").css({"display":"none"});
+					} else {
+						showError('username', '账户不存在');
+						error = true;
+					}
+				});
+			});
+
+			$("#oldpass").blur(function(){
+				var username = $("#username").val();
+				if(username=='') {
+					showError('username', '账户不能为空');
+					error = true;
+					return;
+				}
+
+				var oldpass = $("#oldpass").val();
+				if(oldpass =='') {
+					showError('oldpass', '密码不能为空');
+					error = true;
+					return;
+				}
+
+				$.post("modifyPassProcess.php", {flag:2, username:username, oldpass:oldpass}, function(data){
+					if(data) {
+						$("#oldpass").css({"border-color":"green"});
+						$("#oldpassTip").css({"display":"none"});
+					} else {
+						showError('oldpass', '密码错误');
+						error = true;
+					}
+				});
+			});
+
+			$("#newpass").blur(function(){
+				var newpass = $("#newpass").val();
+				if(newpass == '') {
+					showError('newpass', '新密码不能为空');
+					error = true;
+				}
+				else {
+					$("#newpass").css({"border-color":"green"});
+					$("#newpassTip").css({"display":"none"});
+				}
+			});
+
+			$("#newpassAgain").blur(function(){
+				var newpass = $("#newpass").val();
+				if(newpass == '') {
+					showError('newpass', '新密码不能为空');
+					error = true;
+					return;
+				}
+
+				var newpassAgain = $("#newpassAgain").val();
+				if(newpassAgain != newpass) {
+					showError('newpassAgain', '与输入的新密码不一致');
+					error = true;
+				}
+				else {
+					$("#newpassAgain").css({"border-color":"green"});
+					$("#newpassAgainTip").css({"display":"none"});
+				}
+			});
+
+			$("#submit").click(function(event){
+				$("#username").blur();
+				$("#oldpass").blur();
+				$("#newpass").blur();
+				$("#newpassAgain").blur();
+
+				if(!error) {
+					var username = $("#username").val();
+					var newpass = $("#newpass").val();
+					$.post('modifyPassProcess.php', {flag:3, username:username, newpass:newpass}, function(data) {
+						$("#modifySuccess").css({'display':'inline'});
+					});
+				}
+
+				event.preventDefault();
+				return false;
+			});
+		});
+
+		function showError(formSpan, errorText) {
+			$("#" + formSpan).css({"border-color":"red"});
+			$("#" + formSpan + "Tip").empty();
+			$("#" + formSpan + "Tip").append(errorText);;
+			$("#" + formSpan + "Tip").css({"display":"inline"});
+		}
+	</script>
 </head>
 
 <body>
@@ -48,7 +154,7 @@
 <!--					<span>| |</span>-->
 				</li>
 				<li><a href="/mymessage">信息查询</a></li>
-				<li><a href="/mymessage">个人信息</a></li>
+				<li><a href="/mymessage">个人中心</a></li>
 				<form class="navbar-form navbar-right">
 				    <div class="form-group">
 				      <input type="text" class="form-control" placeholder="Search">
@@ -61,69 +167,116 @@
 	<!-- //short-->
 	<div class="register-form-main">
 		<div class="container">
-			<div class="title-div">
-				<h3 class="tittle">
-					<span>个</span>人
-					<span>信</span>息
-				</h3>
-				<div class="tittle-style">
 
-				</div>
-			</div>
 			<div class="register-form">
-				<form action="#" method="post">
+				<div class="title-div">
+					<h3 class="tittle">
+						<span>密</span>码
+						<span>修</span>改
+					</h3>
+					<div class="tittle-style">
+
+					</div>
+				</div>
+				<form class="form-horizonta" action="#" method="post" role="form">
+<!--					<div class="form-group">-->
+<!--						<label for="" class="col-sm-12 control-label">名字： xxx</label>-->
+<!--&lt;!&ndash;						<div class="col-sm-10 ">&ndash;&gt;-->
+<!--&lt;!&ndash;							<input style="border: 0px solid transparent" type="text" class="form-control col-sm-10" id="exampleInputReadonly" readonly="" value="丁一">&ndash;&gt;-->
+<!--&lt;!&ndash;						</div>&ndash;&gt;-->
+<!--					</div>-->
 					<div class="fields-grid">
-						<div class="styled-input">
-							<input type="text" placeholder="Your Name" name="Your name" required="">
-						</div>
-						<div class="styled-input">
-							<input id="datepicker" placeholder="Birth Date" name="Text" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
-							    required="">
-							<input type="text"placeholder="****" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');">
-						</div>
 
-						<div class="styled-input agile-styled-input-top">
-							<select class="category2" required="">
-								<option value="">Gender</option>
-								<option value="">Female</option>
-								<option value="">Male</option>
-							</select>
-						</div>
-						<div class="styled-input">
-							<input type="email" placeholder="Your E-mail" name="Email" required="">
-						</div>
-						<div class="styled-input">
-							<input type="text" placeholder="Phone Number" name="Phone" required="">
-						</div>
-						<div class="styled-input agile-styled-input-top">
-							<select class="category2" required="">
-								<option value="">Select Course</option>
-								<option value="">Web Designing</option>
-								<option value="">Web Technology </option>
-								<option value="">PC Systems </option>
-								<option value="">IT Foundations </option>
-								<option value="">HR Management </option>
-								<option value="">Modeling </option>
-								<option value="">Basic Marketing</option>
-							</select>
-							<span></span>
-						</div>
-						<div class="styled-input">
-							<div class="agileits_w3layouts_grid">
-								<select class="category2" name="category1" required="">
-									<option value="">Select Course Time</option>
-									<option value="">Hours: 8am - 10am</option>
-									<option value="">Hours: 10am - 12pm</option>
-									<option value="">Hours: 12pm - 4pm</option>
-									<option value="">Hours: 4pm - 7pm</option>
-									<option value="">Hours: 7pm - 9pm</option>
-								</select>
-							</div>
-						</div>
+<!--						<div class="styled-input form-group">-->
+<!--							<label for="firstname" class="col-sm-2 control-label">名字</label>-->
+<!--							<input type="text" class="form-control col-sm-10" id="firstname exampleInputReadonly" readonly="" value="丁一">-->
+<!--&lt;!&ndash;							<input type="text" placeholder="Your Name" name="Your name" required="">&ndash;&gt;-->
+<!--						</div>-->
+<!--						<div class="styled-input">-->
+<!--							<input id="datepicker" placeholder="Birth Date" name="Text" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"-->
+<!--							    required="">-->
 
+<!--							<input type="text"placeholder="****" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');">-->
+<!--						</div>-->
+
+<!--						<div class="styled-input agile-styled-input-top">-->
+<!--							<select class="category2" required="">-->
+<!--								<option value="">Gender</option>-->
+<!--								<option value="">Female</option>-->
+<!--								<option value="">Male</option>-->
+<!--							</select>-->
+<!--						</div>-->
+<!--						<div class="styled-input">-->
+<!--							<input type="email" placeholder="Your E-mail" name="Email" required="">-->
+<!--						</div>-->
+<!--						<div class="styled-input">-->
+<!--							<input type="text" placeholder="Phone Number" name="Phone" required="">-->
+<!--						</div>-->
+<!--						<div class="styled-input agile-styled-input-top">-->
+<!--							<select class="category2" required="">-->
+<!--								<option value="">Select Course</option>-->
+<!--								<option value="">Web Designing</option>-->
+<!--								<option value="">Web Technology </option>-->
+<!--								<option value="">PC Systems </option>-->
+<!--								<option value="">IT Foundations </option>-->
+<!--								<option value="">HR Management </option>-->
+<!--								<option value="">Modeling </option>-->
+<!--								<option value="">Basic Marketing</option>-->
+<!--							</select>-->
+<!--							<span></span>-->
+<!--						</div>-->
+<!--						<div class="styled-input">-->
+<!--							<div class="agileits_w3layouts_grid">-->
+<!--								<select class="category2" name="category1" required="">-->
+<!--									<option value="">Select Course Time</option>-->
+<!--									<option value="">Hours: 8am - 10am</option>-->
+<!--									<option value="">Hours: 10am - 12pm</option>-->
+<!--									<option value="">Hours: 12pm - 4pm</option>-->
+<!--									<option value="">Hours: 4pm - 7pm</option>-->
+<!--									<option value="">Hours: 7pm - 9pm</option>-->
+<!--								</select>-->
+<!--							</div>-->
+<!--						</div>-->
+
+						<div class=".container" style="margin-top:100px;width:250%;">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label for="username" class="col-sm-2 control-label">账户</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" style="width:250px;" id="username" placeholder="Username"><span id="usernameTip" style="display:none;color:red;"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="oldpass" class="col-sm-2 control-label">旧密码</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" style="width:250px;" id="oldpass" placeholder="Old Password"><span id="oldpassTip" style="display:none;color:red;"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="newpass" class="col-sm-2 control-label">新密码</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" style="width:250px;" id="newpass" placeholder="New Password"><span id="newpassTip" style="display:none;color:red;"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="newpassAgain" class="col-sm-2 control-label">再次确认新密码</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" style="width:250px;" id="newpassAgain" placeholder="Again New Password"><span id="newpassAgainTip" style="display:none;color:red;"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">  </label>
+									<input type="submit"  id="submit" style="text-align:center;"></input>
+<!--									<input type="submit" value="保存">-->
+								</div>
+							</form>
+						</div>
+						<div id="modifySuccess" class="alert alert-success alert-dismissable" style="width:50%;margin-left:40%;display:none;">
+							<strong>Success!</strong> 你已成功修改密码！
+						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<input type="submit" value="保存">
+
 				</form>
 			</div>
 		</div>
