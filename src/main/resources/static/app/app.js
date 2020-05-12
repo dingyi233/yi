@@ -73,7 +73,7 @@ angular.module('app', [])
 
                      // 最小值
                      if(!attr.min) {
-                       console.log('最小值进来了')
+                       console.log('初始日期进来了')
                        if(scope.max) {
                          var flag = moment(maxDate).isBefore(scope.max);
                          if(momentFormat === 'YYYY年MM月DD日'){
@@ -82,7 +82,7 @@ angular.module('app', [])
                          console.log(flag)
                          if(flag){
                            scope.flag = true;
-                           scope.text = '最小值比最大值小，请重新设置！';
+                           scope.text = '起始日期比结束日期晚，请重新设置！';
                          }else {
                            scope.flag = false;
                            scope.text = '';
@@ -90,7 +90,7 @@ angular.module('app', [])
                        }
                      }else if(!attr.max){
                        // 最大值设置
-                       console.log('最大值进来了')
+                       console.log('结束日期进来了')
                        if(scope.min){
                           var flag = moment(scope.min).isBefore(result);
                           if(momentFormat === 'YYYY年MM月DD日'){
@@ -102,7 +102,7 @@ angular.module('app', [])
                           console.log(flag);
                          if(!flag){
                            scope.flag = true;
-                           scope.text = '最小值比最大值大，请重新设置!';
+                           scope.text = '起始日期比结束日期晚，请重新设置！!';
                          }else {
                            scope.flag = false;
                            scope.text = '';
@@ -156,7 +156,7 @@ angular.module('app', [])
                        console.log(scope.cur)
                        // 最小值
                        if(!attr.min) {
-                         console.log('最小值进来了')
+                         console.log('起始日期进来了')
                          if(scope.max) {
                            var flag = moment(scope.max).isBefore(result);
                            if(momentFormat.indexOf('YYYY年MM月DD日') !== -1){
@@ -165,7 +165,7 @@ angular.module('app', [])
                            console.log(flag)
                            if(flag){
                              scope.flag = true;
-                             scope.text = '最小值比最大值小，请重新设置！';
+                             scope.text = '起始日期比结束日期晚，请重新设置！';
                            }else {
                              scope.flag = false;
                              scope.text = '';
@@ -173,7 +173,7 @@ angular.module('app', [])
                          }
                        }else if(!attr.max){
                          // 最大值设置
-                         console.log('最大值进来了')
+                         console.log('结束日期进来了')
                          if(scope.min){
                            var flag = moment(scope.min).isBefore(result);
                            if(momentFormat.indexOf('YYYY年MM月DD日') !== -1){
@@ -182,7 +182,7 @@ angular.module('app', [])
                            console.log(flag);
                            if(!flag){
                              scope.flag = true;
-                             scope.text = '最小值比最大值大，请重新设置!';
+                             scope.text = '起始日期比结束日期晚，请重新设置！';
                            }else {
                              scope.flag = false;
                              scope.text = '';
@@ -237,13 +237,13 @@ angular.module('app', [])
                      var compareCurSecond = getSecondsByTime(scope.cur);
                      // 最小值
                      if(!attr.min) {
-                       console.log('最小值进来了')
+                       console.log('起始日期进来了')
                        if(scope.max) {
                          var compareMaxSecond = getSecondsByTime(scope.max)
                         var flag = compareMaxSecond - compareCurSecond;
                          if(flag < 0){
                            scope.flag = true;
-                           scope.text = '最小值比最大值小，请重新设置！';
+                           scope.text = '起始日期比结束日期晚，请重新设置！';
                          }else {
                            scope.flag = false;
                            scope.text = '';
@@ -251,13 +251,13 @@ angular.module('app', [])
                        }
                      }else if(!attr.max){
                        // 最大值设置
-                       console.log('最大值进来了')
+                       console.log('结束日期进来了')
                        if(scope.min){
                          var compareMinSecond = getSecondsByTime(scope.min)
                          var flag = compareCurSecond - compareMinSecond;
                          if(flag < 0){
                            scope.flag = true;
-                           scope.text = '最小值比最大值大，请重新设置!';
+                           scope.text = '起始日期比结束日期晚，请重新设置！';
                          }else {
                            scope.flag = false;
                            scope.text = '';
