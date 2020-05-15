@@ -1,7 +1,7 @@
 package com.example.demo.common;
 
 /**
- * @author 曾伟 zengwei233@126.com
+ * @author yi
  * @date 2020/5/2 11:12
  */
 public class Constants {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * 前后端交互类
- * @author GODV
+ * @author yi
  */
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
