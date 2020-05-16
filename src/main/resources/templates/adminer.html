@@ -580,7 +580,8 @@
                                 <div class="row">
                                     <div class="col-xs-12 m">
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <div class="summernote">编辑文本</div>
+                                        <div class="summernote form-control" id = "summernote">编辑文本</div>
+                                        <input type="button" value="提交" class="btn btn-default pull-right" onclick="submit()" />
                                         <!-- <div class="widget-body">
                                             <div class="widget-main no-padding">
                                                 <div class="wysiwyg-editor" style=" box-sizing: unset; margin-left: auto; margin-right: auto;" id="editor1"></div>
@@ -762,6 +763,10 @@
             lang: 'zh-CN'
         });
     });
+    function submit() {
+        var markstr = $('#summernote').summernote('code');
+        console.log(markstr)
+    }
     jQuery(function($){
         $(document).ready(function(){$("div img").addClass('img-responsive');});
         $(window).resize(function () {
