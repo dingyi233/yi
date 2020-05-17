@@ -230,54 +230,36 @@
                                     <span>现</span>任
                                     <span>领</span>导
                                 </h3>
-                                <div class="tittle-style">
-                                </div>
-                            </div>
-                            <div class="effectd-caption team-row-agileinfo">
-                                <!--  领导    -->
-                                <div class="col-md-3 col-sm-6  team-grids">
-                                    <div class="thumbnail team-agileits">
-                                        <img src="images/t1.jpg" class="img-responsive" alt=""/>
-                                    </div>
-                                </div>
-                                <div class=" col-xs-6">
-                                    <h4>职务：名字</h4>
-                                    <p>性别：男</p>
-                                    <p>主持学院党委全面工作；负责政治思想、综合治理、人才培养、离退休工作；分管学院分工会、教代会工作。</p>
-                                    <p>工作邮箱：cquysh@cqu.edu.cn</p>
-                                    <p>联系电话：023-65104570</p>
-                                </div>
-                                <br>
-
-                                <div class="clearfix"></div>
+                                <div class="tittle-style"/>
                             </div>
                         </div>
                     </div>
-                    <div class="team">
-                        <div class="container col-md-11" >
-                            <div class="title-div">
-                            </div>
-                            <div class="effectd-caption team-row-agileinfo">
-                                <!--  领导    -->
-                                <div class="col-md-3 col-sm-6  team-grids">
-                                    <div class="thumbnail team-agileits">
-                                        <img src="images/t1.jpg" class="img-responsive" alt=""/>
+                    <th:block th:each="leader:${leaderList}">
+                        <div class="team">
+                            <div class="container col-md-11" >
+                                <div class="title-div">
+                                </div>
+                                <div class="effectd-caption team-row-agileinfo">
+                                    <!--  领导    -->
+                                    <div class="col-md-3 col-sm-6  team-grids">
+                                        <div class="thumbnail team-agileits">
+                                            <img th:src="${leader.leaderImgName}" class="img-responsive" alt=""/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class=" col-xs-8">
-                                    <h4>职务：名字</h4>
-                                    <p>性别：男</p>
-                                    <p>主持学院党委全面工作；负责政治思想、综合治理、人才培养、离退休工作；分管学院分工会、教代会工作。</p>
-                                    <p>工作邮箱：cquysh@cqu.edu.cn</p>
-                                    <p>联系电话：023-65104570</p>
-                                </div>
-                                <br>
+                                    <div class=" col-xs-8">
+                                        <h4>职务：<span th:text="${leader.leaderName}"/> </h4>
+                                        <p>性别：<span th:text="${leader.leaderGender}"/></p>
+                                        <p th:text="${leader.leaderDescription}"/>
+                                        <p>工作邮箱：<span th:text="${leader.leaderMail}"/></p>
+                                        <p>联系电话：<span th:text="${leader.leaderTel}"/></p>
+                                    </div>
+                                    <br>
 
-                                <div class="clearfix"></div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- //about-team -->
+                    </th:block>
                 </div>
                 <div class="tab-pane fade" id="Mechanism">
                     <!-- middle section -->
