@@ -28,8 +28,8 @@ public class ContactController {
         //插入
         int result = contactMapper.insertContact(contact);
         if (result==1){
-            return ResultGenerator.genFailResult("插入成功");
+            return ResultGenerator.genSuccessResult("插入成功");
         }
-        return ResultGenerator.genSuccessResult("插入失败");
+        return ResultGenerator.genFailResult("插入失败");
     }
 }
