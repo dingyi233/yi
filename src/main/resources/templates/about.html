@@ -8,14 +8,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
     <script>
-    addEventListener("load", function () {
-        setTimeout(hideURLbar, 0);
-    }, false);
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    }
-</script>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
     <!-- //meta-tags -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -230,13 +230,10 @@
                                     <span>现</span>任
                                     <span>领</span>导
                                 </h3>
-                                <div class="tittle-style"/>
+                                <div class="tittle-style">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <th:block th:each="leader:${leaderList}">
-                        <div class="team">
-                            <div class="container col-md-11" >
+                            <th:block th:each="leader:${leaderList}">
                                 <div class="title-div">
                                 </div>
                                 <div class="effectd-caption team-row-agileinfo">
@@ -254,12 +251,11 @@
                                         <p>联系电话：<span th:text="${leader.leaderTel}"/></p>
                                     </div>
                                     <br>
-
                                     <div class="clearfix"></div>
                                 </div>
-                            </div>
+                            </th:block>
                         </div>
-                    </th:block>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="Mechanism">
                     <!-- middle section -->
