@@ -4,7 +4,7 @@
 <!-- header -->
 <div th:fragment="header">
     <div class="header-top">
-        <div class="container" style="margin-left: 85.667; width: 1330px;">
+        <div class="container" style="margin-left: 85.667; width: 100%;">
             <div class="bottom_header_left">
                 <p>
                     <span class="fa fa-map-marker" aria-hidden="true"></span>中国, 重庆
@@ -60,7 +60,23 @@
                                 <a href="/about" >学院概况</a>
                             </li>
                             <li>
-                                <a href="/gallery" >通知公告</a>
+                                <a href="#" class="effect-3 dropdown-toggle" data-toggle="dropdown">通知公告
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="/gallery">通知公告</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="/acedemic">学术讲座</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="/news">学院新闻</a>
+                                    </li>
+
+                                </ul>
                             </li>
 
                             <li>
@@ -96,8 +112,18 @@
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="/download" class="effect-3">下载专区</a>
+                            <li class="dropdown">
+<!--                                <a href="/download" class="effect-3">下载专区</a>-->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">下载专区
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li  ><a href="/download">奖助贷下载</a></li>
+                                    <li><a data-toggle="tab" href="#Train">培养下载</a></li>
+                                    <li><a data-toggle="tab" href="#Common">常用下载</a></li>
+                                    <li><a data-toggle="tab" href="#Other">其他下载</a></li>
+
+                                </ul>
                             </li>
                             <li>
                                 <a href="/contact" class="effect-3">联系我们</a>

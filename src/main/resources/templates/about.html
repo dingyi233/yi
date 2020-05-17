@@ -230,10 +230,13 @@
                                     <span>现</span>任
                                     <span>领</span>导
                                 </h3>
-                                <div class="tittle-style">
-                                </div>
+                                <div class="tittle-style"/>
                             </div>
-                            <th:block th:each="leader:${leaderList}">
+                        </div>
+                    </div>
+                    <th:block th:each="leader:${leaderList}">
+                        <div class="team">
+                            <div class="container col-md-11" >
                                 <div class="title-div">
                                 </div>
                                 <div class="effectd-caption team-row-agileinfo">
@@ -251,11 +254,12 @@
                                         <p>联系电话：<span th:text="${leader.leaderTel}"/></p>
                                     </div>
                                     <br>
+
                                     <div class="clearfix"></div>
                                 </div>
-                            </th:block>
+                            </div>
                         </div>
-                    </div>
+                    </th:block>
                 </div>
                 <div class="tab-pane fade" id="Mechanism">
                     <!-- middle section -->
