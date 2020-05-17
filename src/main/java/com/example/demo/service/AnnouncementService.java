@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.IndexMapper;
+import com.example.demo.dao.AnnouncementMapper;
 import com.example.demo.entity.Announcement;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,11 @@ import java.util.List;
  * @date 2020/5/2 12:21
  */
 @Service
-public class IndexService {
+public class AnnouncementService {
     @Autowired
-    private IndexMapper indexMapper;
+    private AnnouncementMapper announcementMapper;
     public List<Announcement> getAnnouncementList(){
-        return indexMapper.selectAnnouncementList();
+        PageHelper.startPage(1,5);
+        return announcementMapper.selectAnnouncementList();
     }
 }

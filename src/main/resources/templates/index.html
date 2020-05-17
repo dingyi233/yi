@@ -200,58 +200,29 @@
             </div>
         </div>
         <div class="services-moksrow">
-            <div class="col-xs-4 services-grids-w3l" >
+            <th:block th:each="News,userStat:${newsList}" th:if="${userStat.index} lt 3" th:object="${News}">
+                <div class="col-xs-4 services-grids-w3l">
 
-                <div class="servi-shadow" style="height: 280px;">
+                    <div class="servi-shadow" style="height: 280px;">
 
-                        <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
+                        <img  style="max-width: 200px; max-height: 200px;" th:src="${News.newsImg}" alt="" />
+                        <p th:text="${News.newsTitle}"/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-4 services-grids-w3l" >
-
-                <div class="servi-shadow" style="height: 280px;">
-
-                    <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
-                </div>
-            </div>
-            <div class="col-xs-4 services-grids-w3l" >
-
-                <div class="servi-shadow" style="height: 280px;">
-
-                    <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
-                </div>
-            </div>
+            </th:block>
             <div class="clearfix"></div>
         </div>
         <div class="services-moksrow">
-            <div class="col-xs-4 services-grids-w3l" >
+            <th:block th:each="News,userStat:${newsList}" th:if="${userStat.index} gt 2" th:object="${News}">
+                <div class="col-xs-4 services-grids-w3l">
 
-                <div class="servi-shadow" style="height: 280px;">
+                    <div class="servi-shadow" style="height: 280px;">
 
-                    <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
+                        <img  style="max-width: 200px; max-height: 200px;" th:src="${News.newsImg}" alt="" />
+                        <p th:text="${News.newsTitle}"/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-4 services-grids-w3l" >
-
-                <div class="servi-shadow" style="height: 280px;">
-
-                    <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
-                </div>
-            </div>
-            <div class="col-xs-4 services-grids-w3l" >
-
-                <div class="servi-shadow" style="height: 280px;">
-
-                    <img  style="max-width: 200px; max-height: 200px;" src="images/c3.jpg" alt="" />
-                    <p>新闻title</p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
+            </th:block>
         </div>
     </div>
 </div>
