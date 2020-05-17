@@ -221,46 +221,6 @@
                     </div>
                     <!-- //Achievements -->
                 </div>
-                <div class="tab-pane fade" id="Leader">
-                    <!-- about-team -->
-                    <div class="team ">
-                        <div class="container col-md-11">
-                            <div class="title-div">
-                                <h3 class="tittle">
-                                    <span>现</span>任
-                                    <span>领</span>导
-                                </h3>
-                                <div class="tittle-style"/>
-                            </div>
-                        </div>
-                    </div>
-                    <th:block th:each="leader:${leaderList}">
-                        <div class="team">
-                            <div class="container col-md-11" >
-                                <div class="title-div">
-                                </div>
-                                <div class="effectd-caption team-row-agileinfo">
-                                    <!--  领导    -->
-                                    <div class="col-md-3 col-sm-6  team-grids">
-                                        <div class="thumbnail team-agileits">
-                                            <img th:src="${leader.leaderImgName}" class="img-responsive" alt=""/>
-                                        </div>
-                                    </div>
-                                    <div class=" col-xs-8">
-                                        <h4>职务：<span th:text="${leader.leaderName}"/> </h4>
-                                        <p>性别：<span th:text="${leader.leaderGender}"/></p>
-                                        <p th:text="${leader.leaderDescription}"/>
-                                        <p>工作邮箱：<span th:text="${leader.leaderMail}"/></p>
-                                        <p>联系电话：<span th:text="${leader.leaderTel}"/></p>
-                                    </div>
-                                    <br>
-
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </th:block>
-                </div>
                 <div class="tab-pane fade" id="Mechanism">
                     <!-- middle section -->
                     <div class="middle-sec-agile">
@@ -796,66 +756,55 @@
                                 <p><span lang="EN-US">&nbsp;</span></p>
                                 <p><br></p>
                             </div>
-                            <!-- <ul> -->
-                            <!-- <li>
-                                <div class="midle-left-w3l">
-                                    <span class="fa fa-check" aria-hidden="true"></span>
-                                </div>
-                                <div class="middle-right">
-                                    <h5>Select A Course You Like And Explore It!</h5>
-                                    <p>Integer eu facilisis nunc, a iaculis felis.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li> -->
-                            <!-- <li>
-                                <div class="midle-left-w3l">
-                                    <span class="fa fa-check" aria-hidden="true"></span>
-                                </div>
-                                <div class="middle-right">
-                                    <h5>Join A Seminar To Know More About It!</h5>
-                                    <p>Integer eu facilisis nunc, a iaculis felis.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <div class="midle-left-w3l">
-                                    <span class="fa fa-check" aria-hidden="true"></span>
-                                </div>
-                                <div class="middle-right">
-                                    <h5>Get Enrolled And Start Better Future With Us!</h5>
-                                    <p>Integer eu facilisis nunc, a iaculis felis.</p>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li> -->
-                            <!-- </ul> -->
                         </div>
 
                     </div>
                     <!-- //middle section -->
                 </div>
+                <div class="tab-pane fade" id="Leader">
+                    <!-- about-team -->
+                    <div class="team ">
+                        <div class="container col-md-11">
+                            <div class="title-div">
+                                <h3 class="tittle">
+                                    <span>现</span>任
+                                    <span>领</span>导
+                                </h3>
+                                <div class="tittle-style"/>
+                            </div>
+                        </div>
+                    </div>
+                    <th:block th:each="leader:${leaderList}">
+                        <div class="team">
+                            <div class="container col-md-11" >
+                                <div class="title-div">
+                                </div>
+                                <div class="effectd-caption team-row-agileinfo">
+                                    <!--  领导    -->
+                                    <div class="col-md-3 col-sm-6  team-grids">
+                                        <div class="thumbnail team-agileits">
+                                            <img th:src="${leader.leaderImgName}" class="img-responsive" alt=""/>
+                                        </div>
+                                    </div>
+                                    <div class=" col-xs-8">
+                                        <h4>职务：<span th:text="${leader.leaderName}"/> </h4>
+                                        <p>性别：<span th:text="${leader.leaderGender}"/></p>
+                                        <p th:text="${leader.leaderDescription}"/>
+                                        <p>工作邮箱：<span th:text="${leader.leaderMail}"/></p>
+                                        <p>联系电话：<span th:text="${leader.leaderTel}"/></p>
+                                    </div>
+                                    <br>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
 
             </div>
         </div>
     </div>
-    <!-- <div class="about-sub">
-        <div class="col-md-6 about_bottom_left">
-            <h4>Welcome to
-                <span>Best Study</span>
-            </h4>
-            <p>Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a ornare elit, Nulla viverra pharetra sem eget.</p>
-            <p>Pellentesque convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla viverra pharetra sem, eget
-                pulvinar neque pharetra ac.Lorem Ipsum convallis diam consequat magna vulputate malesuada. Cras a ornare elit. Nulla
-                viverra pharetra sem.</p>
-            <a class="button-style" href="join.html">Join Now</a>
-        </div>
-        <!-- Stats-->
-    <!-- <div class="col-md-6 about2-info">
-        <img src="images/graduate.png" alt="" />
-    </div>
-    <!-- //Stats -->
-    <!-- <div class="clearfix"> </div> -->
-    <!-- </div> -->
-
 </div>
 </div>
 
@@ -866,7 +815,7 @@
 <!-- js -->
 <script src="js/jquery-2.1.4.min.js"></script>
 <!-- bootstrap -->
-<script src="js/bootstrap.js"></script>
+<!--<script src="js/bootstrap.js"></script>-->
 <!-- stats numscroller-js-file -->
 <script src="js/numscroller-1.0.js"></script>
 <!-- //stats numscroller-js-file -->
