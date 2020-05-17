@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.AcademicReport;
 import com.example.demo.entity.Announcement;
 import com.example.demo.entity.News;
+import com.example.demo.service.AcademicReportService;
 import com.example.demo.service.AnnouncementService;
 import com.example.demo.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,19 @@ public class IndexController {
     private AnnouncementService announcementService;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private AcademicReportService academicReportService;
     @GetMapping("/index")
     public String index(HttpServletRequest request){
         //通知公告
-        List<Announcement> announcementList = announcementService.getAnnouncementList();
+        List<Announcement> announcementList = announcementService.getAnnouncementList(5);
         //学院新闻
-        List<News> newsList = newsService.getNewsList();
+        List<News> newsList = newsService.getNewsList(6);
         //学术讲座
+        List<AcademicReport> academicReportList = academicReportService.getAcademicReportList(4);
         request.setAttribute("announcementList",announcementList);
         request.setAttribute("newsList",newsList);
+        request.setAttribute("academicReportList",academicReportList);
         return "index";
     }
 

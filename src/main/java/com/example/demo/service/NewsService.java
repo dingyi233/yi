@@ -16,9 +16,9 @@ import java.util.List;
 public class NewsService {
     @Autowired
     private NewsMapper newsMapper;
-    public List<News> getNewsList(){
+    public List<News> getNewsList(int pageSize){
         //首页只显示6条数据
-        PageHelper.startPage(1,6);
+        PageHelper.startPage(1,pageSize);
         return newsMapper.selectNewsList();
     }
 }

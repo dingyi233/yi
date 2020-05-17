@@ -16,8 +16,8 @@ import java.util.List;
 public class AnnouncementService {
     @Autowired
     private AnnouncementMapper announcementMapper;
-    public List<Announcement> getAnnouncementList(){
-        PageHelper.startPage(1,5);
+    public List<Announcement> getAnnouncementList(int pageSize){
+        PageHelper.startPage(1,pageSize);
         return announcementMapper.selectAnnouncementList();
     }
 }

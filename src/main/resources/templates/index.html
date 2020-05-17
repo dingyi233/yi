@@ -241,119 +241,132 @@
         </div>
         <div class="yaallahaa-news-grids-agile">
             <div class="yaallahaa-news-grid">
+                <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} lt 2" th:object="${AcademicReport}">
                 <div class="col-md-6 yaallahaa-news-left">
                     <div class="col-xs-6 news-left-img">
                         <div class="news-left-text color-event1">
-                            <h5>year-month-day</h5>
+                            <h5 th:text="${#dates.format(AcademicReport.reportDate,'yyyy-MM-dd')}"/>
                         </div>
                     </div>
                     <div class="col-xs-6 news-grid-info-bottom-w3ls">
                         <div class="news-left-top-text text-color1">
-                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
+                            <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.academicdtTitle}"/>
                         </div>
                         <div class="date-grid">
                             <div class="admin">
                                 <a href="#">
-                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 7:00 pm - 9:00 pm</a>
+                                    <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                    <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                    <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                </a>
                             </div>
                             <div class="time">
-                                <p>
-                                    <span class="fa fa-map-marker" aria-hidden="true"></span> 重庆大学, 民主湖报告厅</p>
+                                <p th:text="${AcademicReport.reportAddr}">
+                                    <span class="fa fa-map-marker" aria-hidden="true"></span></p>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="news-grid-info-bottom-w3ls-text">
-                            <p>XXX教授关于XXX的讲座.</p>
+                            <p th:text="${AcademicReport.reportDes}"/>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="col-md-6 yaallahaa-news-left">
-                    <div class="col-xs-6 news-left-img news-left-img1">
-                        <div class="news-left-text color-event2">
-                            <h5>27 Dec</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 news-grid-info-bottom-w3ls">
-                        <div class="news-left-top-text text-color2">
-                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
-                        </div>
-                        <div class="date-grid">
-                            <div class="admin">
-                                <a href="#">
-                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 6:00 am - 8:00 am</a>
-                            </div>
-                            <div class="time">
-                                <p>
-                                    <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 1452</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="news-grid-info-bottom-w3ls-text">
-                            <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                </th:block>
                 <div class="clearfix"></div>
             </div>
             <div class="yaallahaa-news-grid">
-                <div class="col-md-6 yaallahaa-news-left">
-                    <div class="col-xs-6 news-left-img news-left-img2">
-                        <div class="news-left-text color-event3">
-                            <h5>28 Dec</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 news-grid-info-bottom-w3ls">
-                        <div class="news-left-top-text text-color3">
-                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
-                        </div>
-                        <div class="date-grid">
-                            <div class="admin">
-                                <a href="#">
-                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 10:00 am - 1:00 pm</a>
+                <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} gt 1" th:object="${AcademicReport}">
+                    <div class="col-md-6 yaallahaa-news-left">
+                        <div class="col-xs-6 news-left-img">
+                            <div class="news-left-text color-event1">
+                                <h5 th:text="${#dates.format(AcademicReport.reportDate,'yyyy-MM-dd')}"/>
                             </div>
-                            <div class="time">
-                                <p>
-                                    <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 7458</p>
+                        </div>
+                        <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                            <div class="news-left-top-text text-color1">
+                                <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.academicdtTitle}"/>
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="news-grid-info-bottom-w3ls-text">
-                            <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="col-md-6 yaallahaa-news-left">
-                    <div class="col-xs-6 news-left-img news-left-img3">
-                        <div class="news-left-text color-event4">
-                            <h5>30 Dec</h5>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 news-grid-info-bottom-w3ls">
-                        <div class="news-left-top-text text-color4">
-                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>
-                        </div>
-                        <div class="date-grid">
-                            <div class="admin">
-                                <a href="#">
-                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 7:00 pm - 9:00 pm</a>
+                            <div class="date-grid">
+                                <div class="admin">
+                                    <a href="#">
+                                        <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                        <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                        <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                    </a>
+                                </div>
+                                <div class="time">
+                                    <p th:text="${AcademicReport.reportAddr}">
+                                        <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="time">
-                                <p>
-                                    <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 786.</p>
+                            <div class="news-grid-info-bottom-w3ls-text">
+                                <p th:text="${AcademicReport.reportDes}"/>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                        <div class="news-grid-info-bottom-w3ls-text">
-                            <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>
-                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+                </th:block>
                 <div class="clearfix"></div>
             </div>
+<!--            <div class="yaallahaa-news-grid">-->
+<!--                <div class="col-md-6 yaallahaa-news-left">-->
+<!--                    <div class="col-xs-6 news-left-img news-left-img2">-->
+<!--                        <div class="news-left-text color-event3">-->
+<!--                            <h5>28 Dec</h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xs-6 news-grid-info-bottom-w3ls">-->
+<!--                        <div class="news-left-top-text text-color3">-->
+<!--                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>-->
+<!--                        </div>-->
+<!--                        <div class="date-grid">-->
+<!--                            <div class="admin">-->
+<!--                                <a href="#">-->
+<!--                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 10:00 am - 1:00 pm</a>-->
+<!--                            </div>-->
+<!--                            <div class="time">-->
+<!--                                <p>-->
+<!--                                    <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 7458</p>-->
+<!--                            </div>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                        <div class="news-grid-info-bottom-w3ls-text">-->
+<!--                            <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="clearfix"></div>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 yaallahaa-news-left">-->
+<!--                    <div class="col-xs-6 news-left-img news-left-img3">-->
+<!--                        <div class="news-left-text color-event4">-->
+<!--                            <h5>30 Dec</h5>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xs-6 news-grid-info-bottom-w3ls">-->
+<!--                        <div class="news-left-top-text text-color4">-->
+<!--                            <a href="#" data-toggle="modal" data-target="#myModal">Integer viverra eleifend neque</a>-->
+<!--                        </div>-->
+<!--                        <div class="date-grid">-->
+<!--                            <div class="admin">-->
+<!--                                <a href="#">-->
+<!--                                    <span class="fa fa-clock-o" aria-hidden="true"></span> 7:00 pm - 9:00 pm</a>-->
+<!--                            </div>-->
+<!--                            <div class="time">-->
+<!--                                <p>-->
+<!--                                    <span class="fa fa-map-marker" aria-hidden="true"></span> Newyork City, 786.</p>-->
+<!--                            </div>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                        <div class="news-grid-info-bottom-w3ls-text">-->
+<!--                            <p>Aliquam erat volutpat. Duis vulputate tempus laoreet.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="clearfix"></div>-->
+<!--                </div>-->
+<!--                <div class="clearfix"></div>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
