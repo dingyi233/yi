@@ -77,20 +77,21 @@
 
 			<div class="contact-grid agileits col-md-8">
 				<h4>Get In Touch</h4>
-				<form action="#" method="post">
+				<form id="contactForm" action="##" onsubmit="return false;" method="post">
 					<div class="">
-						<input type="text" name="Name" placeholder="Name" required="">
+						<input type="text" name="name" placeholder="Name" required="">
 					</div>
 					<div class="">
-						<input type="email" name="Email" placeholder="Email" required="">
+						<input type="email" name="email" placeholder="Email" required="">
 					</div>
 					<div class="">
-						<input type="text" name="Phone Number" placeholder="Phone Number" required="">
+						<input type="text" name="phone" placeholder="Phone Number" required="">
 					</div>
 					<div class="">
-						<textarea name="Message" placeholder="Message..." required=""></textarea>
+						<textarea name="message" placeholder="Message..." required=""></textarea>
 					</div>
-					<input type="submit" value="Submit">
+					<input name="studentId" type="hidden" th:value="${session.User.getUserId()}">
+					<input type="submit" onclick="submitContact()">
 				</form>
 			</div>
 			<div class="address-grid col-md-4 "  style="margin-top: 320px; margin-left: 60px;">
@@ -125,6 +126,26 @@
 	<script src="js/easing.js"></script>
 	<!-- here stars scrolling icon -->
 	<script>
+		function submitContact(){
+			var params=$("#contactForm").serialize();
+			var url="/contact/submit";
+			$.ajax({
+				type: 'POST',//方法类型
+				url: url,
+				data: params,
+				success: function (result) {
+					if (result.resultCode == 200) {
+						alert(result.message)
+						// window.location.href = '/index';
+					} else {
+						alert(result.message)
+					}
+				},
+				error: function () {
+					alert("操作失败")
+				}
+			});
+		}
 		$(document).ready(function () {
 			/*
 				var defaults = {

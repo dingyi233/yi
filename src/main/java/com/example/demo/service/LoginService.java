@@ -14,7 +14,7 @@ public class LoginService {
     @Autowired
     private LoginMapper loginMapper;
     public boolean checkLogin(LoginVo loginVo){
-        String dbPassword =loginMapper.getPasswordByName(loginVo.getUserName());
+        String dbPassword =loginMapper.getPasswordByName(loginVo.getUserId());
         if (loginVo.getPassword().equals(dbPassword)){
             return true;
         }

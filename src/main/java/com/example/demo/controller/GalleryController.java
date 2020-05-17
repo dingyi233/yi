@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Announcement;
+import com.example.demo.service.AnnouncementService;
 import com.example.demo.service.GallaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,11 @@ import java.util.List;
 @Controller
 public class GalleryController {
     @Autowired
-    private GallaryService galleryService;
+    private AnnouncementService announcementService;
+
     @GetMapping ("/gallery")
     public String gallery(HttpServletRequest request){
-        List<Announcement> announcementList = galleryService.getAnnouncementList();
+        List<Announcement> announcementList = announcementService.getAnnouncementList(5);
         request.setAttribute("announcementList",announcementList);
         return "gallery";
     }
