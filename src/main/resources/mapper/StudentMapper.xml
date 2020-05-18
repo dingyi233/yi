@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.LoginMapper">
+<mapper namespace="com.example.demo.dao.StudentMapper">
     <select id="getPasswordByName" resultType="java.lang.String">
     SELECT student_password from student where student_id=#{name}
 </select>
+    <update id="updatePassword">
+        update student set student_password=#{updatePasswordVo.newPassword}
+        where student_id=#{updatePasswordVo.studentId} and student_password=#{updatePasswordVo.oldPassword}
+    </update>
 </mapper>

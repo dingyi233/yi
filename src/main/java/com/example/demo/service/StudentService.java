@@ -1,7 +1,7 @@
 package com.example.demo.service;
-
-import com.example.demo.dao.LoginMapper;
+import com.example.demo.dao.StudentMapper;
 import com.example.demo.vo.LoginVo;
+import com.example.demo.vo.UpdatePasswordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,19 @@ import org.springframework.stereotype.Service;
  * @date 2020/5/2 8:52
  */
 @Service
-public class LoginService {
+public class StudentService {
     @Autowired
-    private LoginMapper loginMapper;
+    private StudentMapper studentMapper;
     public boolean checkLogin(LoginVo loginVo){
-        String dbPassword =loginMapper.getPasswordByName(loginVo.getUserId());
+        String dbPassword =studentMapper.getPasswordByName(loginVo.getUserId());
         if (loginVo.getPassword().equals(dbPassword)){
             return true;
         }
         return false;
+    }
+    public int updatePassword(UpdatePasswordVo updatePasswordVo){
+        return studentMapper.updatePassword(updatePasswordVo);
+
     }
 
 }

@@ -1,10 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.Constants;
-import com.example.demo.service.LoginService;
+import com.example.demo.service.StudentService;
 import com.example.demo.vo.LoginVo;
 import com.example.demo.vo.Result;
 import com.example.demo.vo.ResultGenerator;
+import com.example.demo.vo.UpdatePasswordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     @Autowired
-    private LoginService loginService;
+    private StudentService studentService;
 
     /**
      * 跳转登陆页面
@@ -41,7 +42,7 @@ public class UserController {
     @ResponseBody
     public Result userLogin(LoginVo loginVo, HttpSession httpSession) {
         System.out.println(loginVo);
-        boolean checkLogin = loginService.checkLogin(loginVo);
+        boolean checkLogin = studentService.checkLogin(loginVo);
         if (checkLogin){
             //设置session
             httpSession.setAttribute(Constants.USER_SESSION_KEY,loginVo);
@@ -56,5 +57,20 @@ public class UserController {
         httpSession.removeAttribute(Constants.USER_SESSION_KEY);
         //返回登陆页面
         return "login";
+    }
+    @PostMapping("/updatePassword")
+    @ResponseBody
+    public Result updatePassword(UpdatePasswordVo updatePasswordVo){
+        //验证两次新密码是否一致
+        if (updatePasswordVo.getNewPassword()==updatePasswordVo.getNewPasswordReview()){
+            int result = studentService.updatePassword(updatePasswordVo);
+            if (result==1){
+                return ResultGenerator.genSuccessResult("密码更新成功");
+            }else{
+                return ResultGenerator.genFailResult("旧密码不正确");
+            }
+        }else{
+            return ResultGenerator.genFailResult("两次密码不一致");
+        }
     }
 }
