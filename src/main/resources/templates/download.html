@@ -84,10 +84,10 @@
                         <nav style="text-align: center">
                             <ul class="pagination">
                                 <li>
-                                    <a  th:href="@{${'/download'}(pageNum=1,pageSize=${pageSize})}">首页</a>
+                                    <a  th:href="@{${'/download'}(type=${type},pageNum=1,pageSize=${pageSize})}">首页</a>
                                 </li>
                                 <li>
-                                    <a th:if="${not isFirstPage}" th:href="@{${'/download'}(pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
+                                    <a th:if="${not isFirstPage}" th:href="@{${'/download'}(type=${type},pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
                                     <a th:if="${isFirstPage}" href="javascript:void(0);">上一页</a>
                                 </li>
 
@@ -98,17 +98,17 @@
                                     </a>
 
 
-                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/download'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/download'}(type=${type},pageNum=${pageNo},pageSize=${pageSize})}">
                                         <span th:text="${pageNo}"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a th:if="${not isLastPage}" th:href="@{${'/download'}(pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
+                                    <a th:if="${not isLastPage}" th:href="@{${'/download'}(type=${type},pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
                                     <a th:if="${isLastPage}" href="javascript:void(0);">下一页</a>
                                 </li>
 
                                 <li>
-                                    <a  th:href="@{${'/download'}(pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
+                                    <a  th:href="@{${'/download'}(type=${type},pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
                                 </li>
                             </ul><br>
                         </nav>
