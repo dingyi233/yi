@@ -66,52 +66,55 @@
         <div class="title-div">
             <div style="text-align: center" class="container col-md-3" >
                 <ul class=" title_duiqi nav nav-stacked nav-tabs ">
-                    <li><a data-toggle="tab" href="/download?type=奖助贷下载">奖助贷下载</a></li>
-                    <li><a data-toggle="tab" href="/download?type=培养下载">培养下载</a></li>
-                    <li><a data-toggle="tab" href="/download?type=常用下载">常用下载</a></li>
-                    <li><a data-toggle="tab" href="/download?type=其他下载">其他下载</a></li>
+                    <li><a href="/download?type=奖助贷下载">奖助贷下载</a></li>
+                    <li><a href="/download?type=培养下载">培养下载</a></li>
+                    <li><a href="/download?type=常用下载">常用下载</a></li>
+                    <li><a href="/download?type=其他下载">其他下载</a></li>
                 </ul>
             </div>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" >
-                    <h3 th:text="${type}"/>
-                    <th:block th:each="file:${downloadFiles}">
-                        <p>
-                            <a th:text="${file.fileName}" href="/downloadFile/1"/>
-                        </p>
-                    </th:block>
-                    <nav style="text-align: center">
-                        <ul class="pagination">
-                            <li>
-                                <a  th:href="@{${'/download'}(pageNum=1,pageSize=${pageSize})}">首页</a>
-                            </li>
-                            <li>
-                                <a th:if="${not isFirstPage}" th:href="@{${'/download'}(pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
-                                <a th:if="${isFirstPage}" href="javascript:void(0);">上一页</a>
-                            </li>
+            <div class="">
+<!--                <div class="tab-pane fade in active" >-->
+                    <div>
+                        <h3 th:text="${type}"/>
+                        <th:block th:each="file:${downloadFiles}">
+                            <p>
+                                <a th:text="${file.fileName}" href="/downloadFile/1"/>
+                            </p>
+                        </th:block>
+                        <nav style="text-align: center">
+                            <ul class="pagination">
+                                <li>
+                                    <a  th:href="@{${'/download'}(pageNum=1,pageSize=${pageSize})}">首页</a>
+                                </li>
+                                <li>
+                                    <a th:if="${not isFirstPage}" th:href="@{${'/download'}(pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
+                                    <a th:if="${isFirstPage}" href="javascript:void(0);">上一页</a>
+                                </li>
 
 
-                            <li th:each="pageNo : ${naviPageNums}">
-                                <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
-                                    <span th:text="${pageNo}"></span>
-                                </a>
+                                <li th:each="pageNo : ${naviPageNums}">
+                                    <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
 
 
-                                <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/download'}(pageNum=${pageNo},pageSize=${pageSize})}">
-                                    <span th:text="${pageNo}"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:if="${not isLastPage}" th:href="@{${'/download'}(pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
-                                <a th:if="${isLastPage}" href="javascript:void(0);">下一页</a>
-                            </li>
+                                    <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/download'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:if="${not isLastPage}" th:href="@{${'/download'}(pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
+                                    <a th:if="${isLastPage}" href="javascript:void(0);">下一页</a>
+                                </li>
 
-                            <li>
-                                <a  th:href="@{${'/download'}(pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
-                            </li>
-                        </ul><br>
-                    </nav>
-                </div>
+                                <li>
+                                    <a  th:href="@{${'/download'}(pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
+                                </li>
+                            </ul><br>
+                        </nav>
+                    </div>
+
+<!--                </div>-->
 
             </div>
         </div>
