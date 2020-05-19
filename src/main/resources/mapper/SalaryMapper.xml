@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.SalaryMapper">
+<select id="getSumSalary" resultType="java.lang.Double">
+        select SUM(salary_account) FROM salary
+        WHERE student_id=#{id} AND salary_date BETWEEN #{monthDate} AND #{currentDate}
+    </select>
+
+</mapper>

@@ -91,11 +91,9 @@
 							  </div>
 						  </div>
 						  <div class="container" style="text-align: center">
-							  <h2 >欢迎 XXX ！</h2>
+							  <h2>欢迎<span th:text="${session.User.getUserId()}"/> ！</h2>
 							  <br>
-
-								  <p class="text-primary">您的本月酬金为： xx元 。</p>
-
+								  <p class="text-primary">您的本月酬金为： <span th:text="${currentMonthSalary}"/> 元 。</p>
 							  <br>
 							  <br>
 							  <blockquote>
