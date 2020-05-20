@@ -21,7 +21,8 @@
 						var str='';
 						//遍历数据
 						for(var i=0;i<group.length;i++){
-							str+= '<th>'+group[i].salaryDes+'</th>'+
+							str+= '<tr>'+
+									'<th>'+group[i].salaryDes+'</th>'+
 									'<th>'+group[i].salaryAccount+'</th>'+
 									'<th>'+group[i].salaryType+'</th>'+
 									'<th>'+group[i].salaryTotal+'</th>'+
@@ -29,9 +30,10 @@
 									'<th>'+group[i].salaryAmount+'</th>'+
 									'<th>'+group[i].salaryDate+'</th>'+
 									'<th>'+group[i].salaryManager+'</th>'+
-									'<th>'+group[i].salaryDepart+'</th>'
+									'<th>'+group[i].salaryDepart+'</th>'+
+									'</tr>'
 						}
-						$("#test").html(str);
+						$("#salaryList").html(str);
 					}
 				},
 				error: function () {
@@ -175,9 +177,7 @@
 										  <th>发放部门</th>
 									  </tr>
 									  </thead>
-									  <tbody>
-									  <tr id="test">
-									  </tr>
+									  <tbody id="salaryList">
 									  </tbody>
 								  </table>
 
