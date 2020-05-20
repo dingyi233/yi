@@ -16,8 +16,7 @@ import java.util.List;
 public class AcademicReportService {
     @Autowired
     private AcademicReportMapper acdemicReportMapper;
-    public List<AcademicReport> getAcademicReportList(int pageSize){
-        PageHelper.startPage(1,pageSize);
+    public List<AcademicReport> getAcademicReportList(){
         return acdemicReportMapper.selectAcademicReportList();
     }
 }
