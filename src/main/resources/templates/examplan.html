@@ -82,14 +82,15 @@
                 </tr>
                 </thead>
                 <tbody>
+                <th:block th:each="exam:${examPlanList}">
                 <tr>
-                    <td>20164308</td>
-                    <td>张三</td>
-                    <td>[CST]1233人工智能</td>
-                    <th>李思</th>
-                    <th>A8304</th>
+                    <td th:text="${exam.studentId}"></td>
+                    <td th:text="${exam.studentName}"></td>
+                    <td th:text="${exam.courseName}"></td>
+                    <th th:text="${exam.teacherName}">李思</th>
+                    <th th:text="${exam.classroomAddr}"></th>
                     <th>23</th>
-                    <th>2020-01-09(第x周 星期x) 14:00-16:00</th>
+                    <th th:text="${#dates.format(exam.examDate,'yyyy-MM-dd HH:mm')}"></th>
                 </tr>
                 </tbody>
             </table>

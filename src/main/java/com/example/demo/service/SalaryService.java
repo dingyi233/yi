@@ -25,7 +25,10 @@ public class SalaryService {
         Date monthDate = new Date(getMonthFirstDay());
         String currentFormat = formatter.format(currentDate);
         String monthFormat = formatter.format(monthDate);
-        double sumSalary = salaryMapper.getSumSalary(studentId, currentFormat, monthFormat);
+        Double sumSalary = salaryMapper.getSumSalary(studentId, currentFormat, monthFormat);
+        if (sumSalary==null){
+            return 0;
+        }
         return sumSalary;
     }
 
