@@ -8,7 +8,39 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="" />
 	<script>
-		addEventListener("load", function () {
+		function querySalary() {
+		var data=$("#condition").serialize();
+		var url = '/user/salary';
+			$.ajax({
+				type: 'GET',//方法类型
+				url: url,
+				data: data,
+				success: function (result) {
+					if (result.resultCode == 200) {
+						var group=result.data;
+						var str='';
+						//遍历数据
+						for(var i=0;i<group.length;i++){
+							str+= '<th>'+group[i].salaryDes+'</th>'+
+									'<th>'+group[i].salaryAccount+'</th>'+
+									'<th>'+group[i].salaryType+'</th>'+
+									'<th>'+group[i].salaryTotal+'</th>'+
+									'<th>'+group[i].salaryDeduction+'</th>'+
+									'<th>'+group[i].salaryAmount+'</th>'+
+									'<th>'+group[i].salaryDate+'</th>'+
+									'<th>'+group[i].salaryManager+'</th>'+
+									'<th>'+group[i].salaryDepart+'</th>'
+						}
+						$("#test").html(str);
+					}
+				},
+				error: function () {
+					alert("操作失败")
+				}
+			});
+	}
+
+	addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
 
@@ -99,12 +131,12 @@
 							  <blockquote>
 							  <div class="container">
 								  <div class="row col-md-12">
-									  <form class="form-horizontal">
+									  <form class="form-horizontal" id="condition">
 										  <!-- 最小日期 -->
 										  <div class="form-group col-md-5" id="datetimepicker1">
 											  <label  class="col-sm-1 control-label">从</label>
 											  <div class="col-sm-11">
-												  <input type="text"  ng-model="data.minDate" class="form-control" my-datetime cur="data.minDate" dateformat="data.dateFormat" max="data.maxDate"  flag="data.minshow" text="data.minText" timetype="data.type1">
+												  <input type="text"  name="selectStartDate" ng-model="data.minDate" class="form-control" my-datetime cur="data.minDate" dateformat="data.dateFormat" max="data.maxDate"  flag="data.minshow" text="data.minText" timetype="data.type1">
 												  <p ng-show="data.minshow" ng-bind="data.minText" class="show"></p>
 											  </div>
 										  </div>
@@ -112,12 +144,12 @@
 										  <div class="form-group col-md-5">
 											  <label  class="col-sm-1 control-label">到</label>
 											  <div class="col-sm-11">
-												  <input type="text" class="form-control" ng-model="data.maxDate" my-datetime cur="data.maxDate" dateformat="data.dateFormat" min="data.minDate" flag="data.maxshow" text="data.maxText" timetype="data.type1">
+												  <input type="text"  class="form-control" name="selectEndDate" ng-model="data.maxDate" my-datetime cur="data.maxDate" dateformat="data.dateFormat" min="data.minDate" flag="data.maxshow" text="data.maxText" timetype="data.type1">
 												  <p ng-show="data.maxshow" ng-bind="data.maxText" class="show"></p>
 											  </div>
 										  </div>
 										  <button type="button" class="btn btn-primary col-md-2" data-toggle="collapse"
-												  data-target="#demo">
+												  data-target="#demo" onclick="querySalary()">
 											  查询明细
 
 										  </button>
@@ -144,28 +176,7 @@
 									  </tr>
 									  </thead>
 									  <tbody>
-									  <tr>
-										  <td>Sachin</td>
-										  <td>Mumbai</td>
-										  <td>400003</td>
-										  <td>Mumbai</td>
-										  <td>Mumbai</td>
-										  <td>Mumbai</td>
-										  <td>Mumbai</td>
-										  <td>Mumbai</td>
-										  <td>Mumbai</td>
-									  </tr>
-									  <tr>
-										  <td>Uma</td>
-										  <td>Pune</td>
-										  <td>411027</td>
-										  <td>Uma</td>
-										  <td>Pune</td>
-										  <td>411027</td>
-										  <td>Uma</td>
-										  <td>Pune</td>
-										  <td>411027</td>
-
+									  <tr id="test">
 									  </tr>
 									  </tbody>
 								  </table>
