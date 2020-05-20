@@ -41,7 +41,7 @@ public class ScholarshipController {
         request.setAttribute("totalPages", pageInfo.getPages());
         //是否是最后一页
         request.setAttribute("isLastPage", pageInfo.isIsLastPage());
-//所有导航页号
+        //所有导航页号
         request.setAttribute("naviPageNums", pageInfo.getNavigatepageNums());
         request.setAttribute("scholarships",scholarships);
         request.setAttribute("type",type);

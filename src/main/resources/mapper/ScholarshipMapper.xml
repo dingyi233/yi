@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ScholarshipMapper">
     <select id="selectFileListByType" resultType="com.example.demo.entity.Scholarship">
-        select * from file where file_type=#{fileType}
+        select * from scholarship where scholarship_type=#{fileType}
     </select>
 
 </mapper>
