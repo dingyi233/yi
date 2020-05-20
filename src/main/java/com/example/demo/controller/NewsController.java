@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.AcademicReport;
 import com.example.demo.entity.News;
-import com.example.demo.service.AcademicReportService;
+import com.example.demo.service.NewsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +14,19 @@ import java.util.List;
 
 /**
  * @author 曾伟 zengwei233@126.com
- * @date 2020/5/17 11:17
+ * @date 2020/5/20 22:51
  */
 @Controller
-public class AcademicReportController {
+public class NewsController {
     @Autowired
-    private AcademicReportService academicReportService;
-
-    @GetMapping("/academicReport")
+    private NewsService newsService;
+    @GetMapping("/news")
     public String gallery(HttpServletRequest request,
                           @RequestParam(defaultValue = "1") Integer pageNum,
-                          @RequestParam(defaultValue = "4") Integer pageSize){
+                          @RequestParam(defaultValue = "5") Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        List<AcademicReport> academicReportList = academicReportService.getAcademicReportList();
-        PageInfo<AcademicReport> pageInfo = new PageInfo<>(academicReportList);
+        List<News> newsList = newsService.getNewsList();
+        PageInfo<News> pageInfo = new PageInfo<>(newsList);
         //获得当前页
         request.setAttribute("pageNum", pageInfo.getPageNum());
         //获得一页显示的条数
@@ -41,7 +39,7 @@ public class AcademicReportController {
         request.setAttribute("isLastPage", pageInfo.isIsLastPage());
         //所有导航页号
         request.setAttribute("naviPageNums", pageInfo.getNavigatepageNums());
-        request.setAttribute("academicReportList",academicReportList);
-        return "academic";
+        request.setAttribute("newsList",newsList);
+        return "news";
     }
 }

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>学术报告</title>
+    <!-- meta-tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //meta-tags -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- font-awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+</head>
+
+<body>
+<!--引入header-->
+<div th:insert="header::header"/>
+<!-- banner -->
+<div class="inner_page_agile">
+
+</div>
+<!--//banner -->
+<!-- short -->
+<div class="services-breadcrumb">
+    <div class="inner_breadcrumb">
+        <ul class="breadcrumb "  style="background-color: #eeeeee;">
+            <li>
+                <a href="/index">首页</a>
+            </li>
+            <li><a href="/academicReport">学术报告</a></li>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+
+        </ul>
+
+    </div>
+</div>
+<!-- //short-->
+<!-- about -->
+<div class="about-sec" id="about">
+    <div class="container">
+        <div class="title-div">
+            <div id="myTabContent" class="tab-content col-md-9">
+                <div class="tab-pane fade in active" id="Annoucements">
+                    <!-- Academic_Message -->
+                    <div class="aitsresumethree ">
+                        <div class="container" style="width: 100%;">
+                            <div class="title-div col-md-12">
+                                <h3 class="tittle" style="margin-top: 16px;">
+                                    <span>学</span>术
+                                    <span>报</span>告
+                                </h3>
+                                <div class="tittle-style">
+
+                                </div>
+                            </div>
+                            <div class="effectd-caption team-row-agileinfo">
+                                <div class="yaallahaa-news-grids-agile">
+                                    <div class="yaallahaa-news-grid">
+                                        <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} lt 2" th:object="${AcademicReport}">
+                                            <div class="col-md-6 yaallahaa-news-left">
+                                            <div class="col-xs-6 news-left-img">
+                                                <div class="news-left-text color-event1 " >
+                                                    <h5>学术讲座</h5>
+                                                </div>
+                                                <p th:text="${AcademicReport.academicdtTitle}"/>
+                                            </div>
+                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                <div class="news-left-top-text text-color1">
+                                                    <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                </div>
+                                                <div class="date-grid">
+                                                    <div class="admin">
+                                                        <a href="#">
+                                                            <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                            <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                            <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                        </a>
+                                                    </div>
+                                                    <div class="time">
+                                                        <p th:text="${AcademicReport.reportAddr}">
+                                                            <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                    </div>
+                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                        <p th:text="${AcademicReport.reportDes}"/>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        </th:block>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="yaallahaa-news-grid">
+                                        <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} gt 1" th:object="${AcademicReport}">
+                                            <div class="col-md-6 yaallahaa-news-left">
+                                                <div class="col-xs-6 news-left-img">
+                                                    <div class="news-left-text color-event1 " >
+                                                        <h5>学术讲座</h5>
+                                                    </div>
+                                                    <p th:text="${AcademicReport.academicdtTitle}"/>
+                                                </div>
+                                                <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                    <div class="news-left-top-text text-color1">
+                                                        <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                    </div>
+                                                    <div class="date-grid">
+                                                        <div class="admin">
+                                                            <a href="#">
+                                                                <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                                <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                                <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                            </a>
+                                                        </div>
+                                                        <div class="time">
+                                                            <p th:text="${AcademicReport.reportAddr}">
+                                                                <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                        </div>
+                                                        <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                            <p th:text="${AcademicReport.reportDes}"/>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </th:block>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                        <div class="clearfix"/>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <nav style="text-align: center">
+                                <ul class="pagination">
+                                    <li>
+                                        <a  th:href="@{${'/academicReport'}(pageNum=1,pageSize=${pageSize})}">首页</a>
+                                    </li>
+                                    <li>
+                                        <a th:if="${not isFirstPage}" th:href="@{${'/academicReport'}(pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
+                                        <a th:if="${isFirstPage}" href="javascript:void(0);">上一页</a>
+                                    </li>
+
+                                    <li th:each="pageNo : ${naviPageNums}">
+                                        <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                            <span th:text="${pageNo}"></span>
+                                        </a>
+
+
+                                        <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/academicReport'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                            <span th:text="${pageNo}"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:if="${not isLastPage}" th:href="@{${'/academicReport'}(pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
+                                        <a th:if="${isLastPage}" href="javascript:void(0);">下一页</a>
+                                    </li>
+
+
+                                    <li>
+                                        <a  th:href="@{${'/academicReport'}(pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
+                                    </li>
+                                </ul><br>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- //Academic_Message -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+<!-- //about -->
+<!--	引入footer-->
+<div th:insert="footer::footer"/>
+<!-- js files -->
+<!-- js -->
+<script src="js/jquery-2.1.4.min.js"></script>
+<!-- bootstrap -->
+<!--<script src="js/bootstrap.js"></script>-->
+<!-- stats numscroller-js-file -->
+<script src="js/numscroller-1.0.js"></script>
+<!-- //stats numscroller-js-file -->
+<!-- smooth scrolling -->
+<script src="js/SmoothScroll.min.js"></script>
+<script src="js/move-top.js"></script>
+<script src="js/easing.js"></script>
+<!-- here stars scrolling icon -->
+<script>
+    $(document).ready(function () {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!-- smooth scrolling -->
+<!-- //js-files -->
+
+</body>
+
+</html>
