@@ -73,9 +73,9 @@
             <div class="">
                 <div>
                     <h3 th:text="${type}"/>
-                    <th:block th:each="file:${downloadFiles}">
+                    <th:block th:each="file:${scholarships}">
                         <p>
-                            <a th:text="${file.fileName}" href="/downloadFile/1"/>
+                            <a th:text="${file.scholarshipTitle}" href="/downloadFile/1"/>
                         </p>
                     </th:block>
                     <nav style="text-align: center">

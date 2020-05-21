@@ -82,17 +82,51 @@
                 </tr>
                 </thead>
                 <tbody>
+                <th:block th:each="exam:${examPlanList}">
                 <tr>
-                    <td>20164308</td>
-                    <td>张三</td>
-                    <td>[CST]1233人工智能</td>
-                    <th>李思</th>
-                    <th>A8304</th>
+                    <td th:text="${exam.studentId}"></td>
+                    <td th:text="${exam.studentName}"></td>
+                    <td th:text="${exam.courseName}"></td>
+                    <th th:text="${exam.teacherName}">李思</th>
+                    <th th:text="${exam.classroomAddr}"></th>
                     <th>23</th>
-                    <th>2020-01-09(第x周 星期x) 14:00-16:00</th>
+                    <th th:text="${#dates.format(exam.examDate,'yyyy-MM-dd HH:mm')}"></th>
                 </tr>
+                </th:block>
                 </tbody>
             </table>
+            <nav style="text-align: center">
+                <ul class="pagination">
+                    <li>
+                        <a  th:href="@{${'/examplan'}(pageNum=1,pageSize=${pageSize})}">首页</a>
+                    </li>
+                    <li>
+                        <a th:if="${not isFirstPage}" th:href="@{${'/examplan'}(pageNum=${pageNum-1},pageSize=${pageSize})}">上一页</a>
+                        <a th:if="${isFirstPage}" href="javascript:void(0);">上一页</a>
+                    </li>
+
+
+                    <li th:each="pageNo : ${naviPageNums}">
+                        <a th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+
+
+                        <a th:if="${not (pageNum eq pageNo)}" th:href="@{${'/examplan'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                            <span th:text="${pageNo}"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:if="${not isLastPage}" th:href="@{${'/examplan'}(pageNum=${pageNum+1},pageSize=${pageSize})}">下一页</a>
+                        <a th:if="${isLastPage}" href="javascript:void(0);">下一页</a>
+                    </li>
+
+
+                    <li>
+                        <a  th:href="@{${'/examplan'}(pageNum=${totalPages},pageSize=${pageSize})}">尾页</a>
+                    </li>
+                </ul><br>
+            </nav>
         </div>
     </div>
 </div>

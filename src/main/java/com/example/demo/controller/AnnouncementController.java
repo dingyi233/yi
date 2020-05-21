@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.PageUtils;
-import com.example.demo.entity.AcademicReport;
-import com.example.demo.entity.News;
-import com.example.demo.service.AcademicReportService;
+import com.example.demo.entity.Announcement;
+import com.example.demo.service.AnnouncementService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +13,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * @author 曾伟 zengwei233@126.com
- * @date 2020/5/17 11:17
+/**公告页控制器
+ * @author: yi
+ * @date: 2020/5/8
+ * description:
  */
-@Controller
-public class AcademicReportController {
-    @Autowired
-    private AcademicReportService academicReportService;
 
-    @GetMapping("/academicReport")
+@Controller
+public class AnnouncementController {
+    @Autowired
+    private AnnouncementService announcementService;
+
+    @GetMapping ("/announcement")
     public String gallery(HttpServletRequest request,
                           @RequestParam(defaultValue = "1") Integer pageNum,
-                          @RequestParam(defaultValue = "4") Integer pageSize){
+                          @RequestParam(defaultValue = "5") Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        List<AcademicReport> academicReportList = academicReportService.getAcademicReportList();
-        PageInfo<AcademicReport> pageInfo = new PageInfo<>(academicReportList);
-        //设置分页属性
+        List<Announcement> announcementList = announcementService.getAnnouncementList();
+        PageInfo<Announcement> pageInfo=new PageInfo<>(announcementList);
         PageUtils.setPageInfo(request,pageInfo);
-        request.setAttribute("academicReportList",academicReportList);
-        return "academic";
+        request.setAttribute("announcementList",announcementList);
+        return "announcement";
     }
+
 }

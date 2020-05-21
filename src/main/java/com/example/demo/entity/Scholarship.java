@@ -12,8 +12,14 @@ import java.util.Date;
 @Data
 public class Scholarship{
     private long scholarshipId;
+    private String scholarshipFile;
     private String scholarshipType;
+    private String scholarshipLevel;
+    private long announcementId;
+    private Date scholarshipReleaseDate;
     private String scholarshipTitle;
     private String scholarshipContent;
-    private String scholarshipReleaseDate;
+    private String scholoarshipFilename;
+
+
 }

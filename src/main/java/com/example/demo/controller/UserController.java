@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.Constants;
-import com.example.demo.service.StudentService;
+import com.example.demo.service.UserService;
 import com.example.demo.vo.LoginVo;
 import com.example.demo.vo.Result;
 import com.example.demo.vo.ResultGenerator;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     @Autowired
-    private StudentService studentService;
+    private UserService userService;
 
     /**
      * 跳转登陆页面
@@ -42,11 +42,11 @@ public class UserController {
     @ResponseBody
     public Result userLogin(LoginVo loginVo, HttpSession httpSession) {
         System.out.println(loginVo);
-        boolean checkLogin = studentService.checkLogin(loginVo);
+        boolean checkLogin = userService.checkLogin(loginVo);
         if (checkLogin){
             //设置session
             httpSession.setAttribute(Constants.USER_SESSION_KEY,loginVo);
-            return ResultGenerator.genSuccessResult();
+            return ResultGenerator.genSuccessResult(loginVo.getLoginType());
         }else {
             return ResultGenerator.genFailResult("账号密码有误");
         }
@@ -63,7 +63,7 @@ public class UserController {
     public Result updatePassword(UpdatePasswordVo updatePasswordVo){
         //验证两次新密码是否一致
         if (updatePasswordVo.getNewPassword()==updatePasswordVo.getNewPasswordReview()){
-            int result = studentService.updatePassword(updatePasswordVo);
+            int result = userService.updatePassword(updatePasswordVo);
             if (result==1){
                 return ResultGenerator.genSuccessResult("密码更新成功");
             }else{

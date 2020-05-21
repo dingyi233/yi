@@ -78,7 +78,7 @@
                         <h3 th:text="${type}"/>
                         <th:block th:each="file:${downloadFiles}">
                             <p>
-                                <a th:text="${file.fileName}" href="/downloadFile/1"/>
+                                <a th:text="${file.fileName}" th:href="@{${'/downloadFile'}(fileId=${file.fileId})}"/>
                             </p>
                         </th:block>
                         <nav style="text-align: center">

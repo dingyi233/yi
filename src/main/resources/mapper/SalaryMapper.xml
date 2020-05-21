@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.SalaryMapper">
-<select id="getSumSalary" resultType="java.lang.Double">
-        select SUM(salary_account) FROM salary
+    <select id="getSumSalary" resultType="java.lang.Double">
+        select SUM(salary_total) FROM salary
         WHERE student_id=#{id} AND salary_date BETWEEN #{monthDate} AND #{currentDate}
     </select>
 
+    <select id="selectSalaryList" resultType="com.example.demo.vo.SalaryVo">
+        SELECT
+            salary_des,
+            salary_account,
+            salary_type,
+            salary_total,
+            salary_deduction,
+            salary_amount,
+            salary_date,
+            salary_manager,
+            salary_depart
+        FROM
+            salary s
+        LEFT JOIN salary_details sd ON s.salary_id=sd.salary_id
+        where s.student_id=#{id} and salary_date BETWEEN #{startDate} and #{endDate}
+
+    </select>
 </mapper>

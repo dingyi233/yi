@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ExamplanMapper">
+<select id="selectExamList" resultType="com.example.demo.vo.ExamPlanVo">
+        SELECT
+s.student_id,
+student_name,
+course_name,
+teacher_name,
+classroom_addr,
+exam_date
+FROM
+exam_plan ep
+LEFT JOIN student_course sc ON sc.course_id=ep.course_id
+LEFT JOIN course c ON c.course_id=ep.course_id
+LEFT JOIN student s ON s.student_id=sc.student_id
+LEFT JOIN teacher t ON t.teacher_id=ep.teacher_id
+LEFT JOIN classroom cr on cr.classroom_id=ep.classroom_id
+WHERE s.student_id=#{id}
+    </select>
+
+</mapper>

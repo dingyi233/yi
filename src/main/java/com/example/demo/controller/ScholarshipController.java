@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.PageUtils;
 import com.example.demo.entity.Scholarship;
 import com.example.demo.service.ScholarshipService;
 import com.github.pagehelper.PageHelper;
@@ -31,18 +32,7 @@ public class ScholarshipController {
         PageHelper.startPage(pageNum, pageSize);
         List<Scholarship> scholarships = scholarshipService.getScholarshipListByType(type);
         PageInfo<Scholarship> pageInfo=new PageInfo<>(scholarships);
-        //获得当前页
-        request.setAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        request.setAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        request.setAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        request.setAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        request.setAttribute("isLastPage", pageInfo.isIsLastPage());
-//所有导航页号
-        request.setAttribute("naviPageNums", pageInfo.getNavigatepageNums());
+        PageUtils.setPageInfo(request,pageInfo);
         request.setAttribute("scholarships",scholarships);
         request.setAttribute("type",type);
         return "scholarship";

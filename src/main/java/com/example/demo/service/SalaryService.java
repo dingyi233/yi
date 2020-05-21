@@ -1,12 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.SalaryMapper;
+import com.example.demo.vo.SalaryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 曾伟 zengwei233@126.com
@@ -25,7 +27,10 @@ public class SalaryService {
         Date monthDate = new Date(getMonthFirstDay());
         String currentFormat = formatter.format(currentDate);
         String monthFormat = formatter.format(monthDate);
-        double sumSalary = salaryMapper.getSumSalary(studentId, currentFormat, monthFormat);
+        Double sumSalary = salaryMapper.getSumSalary(studentId, currentFormat, monthFormat);
+        if (sumSalary==null){
+            return 0;
+        }
         return sumSalary;
     }
 
@@ -38,4 +43,8 @@ public class SalaryService {
         calendar.set(Calendar.SECOND, 0);
         return calendar.getTimeInMillis();
     }
-}
+
+    public List<SalaryVo> getSalaryList(long id,String startDate,String endDate){
+        return salaryMapper.selectSalaryList(id,startDate,endDate);
+    }
+ }
