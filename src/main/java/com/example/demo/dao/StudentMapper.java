@@ -15,5 +15,5 @@ public interface StudentMapper {
      */
     String getPasswordByName(@Param("name") long name);
 
-    int updatePassword(UpdatePasswordVo updatePasswordVo);
+    int updatePassword(@Param("updatePasswordVo") UpdatePasswordVo updatePasswordVo);
 }

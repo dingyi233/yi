@@ -61,8 +61,9 @@ public class UserController {
     @PostMapping("/updatePassword")
     @ResponseBody
     public Result updatePassword(UpdatePasswordVo updatePasswordVo){
+        System.out.println(updatePasswordVo);
         //验证两次新密码是否一致
-        if (updatePasswordVo.getNewPassword()==updatePasswordVo.getNewPasswordReview()){
+        if (updatePasswordVo.getNewPassword().equals(updatePasswordVo.getNewPasswordReview())){
             int result = userService.updatePassword(updatePasswordVo);
             if (result==1){
                 return ResultGenerator.genSuccessResult("密码更新成功");

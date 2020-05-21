@@ -4,7 +4,7 @@
     <select id="getPasswordByName" resultType="java.lang.String">
     SELECT student_password from student where student_id=#{name}
 </select>
-    <update id="updatePassword">
+    <update id="updatePassword" parameterType="com.example.demo.vo.UpdatePasswordVo">
         update student set student_password=#{updatePasswordVo.newPassword}
         where student_id=#{updatePasswordVo.studentId} and student_password=#{updatePasswordVo.oldPassword}
     </update>
