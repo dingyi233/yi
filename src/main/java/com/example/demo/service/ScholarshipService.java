@@ -16,8 +16,8 @@ import java.util.List;
 public class ScholarshipService {
     @Autowired
     public ScholarshipMapper scholarshipMapper;
-    public List<Scholarship> getScholarshipListByType(String type){
-        return scholarshipMapper.selectFileListByType(type);
+    public List<Scholarship> getScholarshipListByType(String type,long userId){
+        return scholarshipMapper.selectFileListByType(type,userId);
     }
 
 }

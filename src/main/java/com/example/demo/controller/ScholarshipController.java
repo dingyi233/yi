@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.Constants;
 import com.example.demo.common.PageUtils;
 import com.example.demo.entity.Scholarship;
 import com.example.demo.service.ScholarshipService;
+import com.example.demo.vo.LoginVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,8 @@ public class ScholarshipController {
                            @RequestParam(defaultValue = "5") Integer pageSize,
                            @RequestParam(defaultValue = "奖学金")String type){
         PageHelper.startPage(pageNum, pageSize);
-        List<Scholarship> scholarships = scholarshipService.getScholarshipListByType(type);
+        LoginVo loginVo= (LoginVo) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
+        List<Scholarship> scholarships = scholarshipService.getScholarshipListByType(type,loginVo.getUserId());
         PageInfo<Scholarship> pageInfo=new PageInfo<>(scholarships);
         PageUtils.setPageInfo(request,pageInfo);
         request.setAttribute("scholarships",scholarships);

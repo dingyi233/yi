@@ -11,5 +11,5 @@ import java.util.List;
  * description:
  */
 public interface ScholarshipMapper {
-    List<Scholarship> selectFileListByType(@Param("fileType") String type);
+    List<Scholarship> selectFileListByType(@Param("fileType") String type,long userId);
 }
