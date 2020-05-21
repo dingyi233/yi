@@ -19,6 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
         //拦截所有排除静态资源和登录页面
         //还可以配置为拦截部分
         registry.addInterceptor(myInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/user/login","/login","/js/**","/css/**","/images/**","/fonts/**,/app/**,/font/**");
+                .excludePathPatterns("/user/login","/login","/js/**","/css/**","/images/**","/fonts/**","/app/**","/font/**");
     }
 }
