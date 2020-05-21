@@ -20,7 +20,12 @@
                 data: params,
                 success: function (result) {
                     if (result.resultCode == 200) {
-                        window.location.href = '/index';
+                        if (result.message=="学生"){
+                            window.location.href = '/index';
+                        } else if (result.message=="工作人员") {
+                            window.location.href = '/adminer';
+                        }
+
                     } else {
                        alert(result.message)
                     }
