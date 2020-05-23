@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping("/user/login")
     @ResponseBody
     public Result userLogin(LoginVo loginVo, HttpSession httpSession) {
-        System.out.println(loginVo);
+//        System.out.println(loginVo);
         boolean checkLogin = userService.checkLogin(loginVo);
         if (checkLogin){
             //设置session

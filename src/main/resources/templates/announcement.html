@@ -63,7 +63,7 @@
 <div class="about-sec" id="about">
 	<div class="container">
 		<div class="title-div">
-			<div id="myTabContent" class="tab-content col-md-9">
+			<div id="myTabContent" class="tab-content col-md-12">
 				<div class="tab-pane fade in active" id="Annoucements">
 					<!-- Academic_Message -->
 					<div class="aitsresumethree ">
@@ -82,10 +82,10 @@
 									<th:block th:each="announcement:${announcementList}">
 										<div class="item page-header">
 											<li >
-												<a class = "glyphicon glyphicon-record text-info" style="color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
+												<a class = "glyphicon glyphicon-record text-info" style="padding-left: 20px; padding-right: 20px; color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
 												   th:text="${announcement.announcementTitle}"/> &nbsp;
 												<span >&nbsp;
-										<div class="glyphicon glyphicon-time pull-right" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
+										<div class="glyphicon glyphicon-time pull-right" style="padding-left: 20px; padding-right: 20px;" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>
                                 				</span>
 											</li>
 										</div>
