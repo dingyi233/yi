@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.AdminerMapper;
 import com.example.demo.dao.AnnouncementMapper;
 import com.example.demo.entity.Announcement;
 import com.github.pagehelper.PageHelper;
@@ -18,5 +19,8 @@ public class AnnouncementService {
     private AnnouncementMapper announcementMapper;
     public List<Announcement> getAnnouncementList(){
         return announcementMapper.selectAnnouncementList();
+    }
+    public int insertAnnoucement(Announcement announcement){
+        return announcementMapper.insertAnnoucement(announcement);
     }
 }

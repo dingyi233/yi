@@ -25,7 +25,4 @@ public class SalaryVo {
     private Date salaryDate;
     private String salaryManager;
     private String salaryDepart;
-
-
-
 }

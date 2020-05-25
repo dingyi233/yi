@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface AnnouncementMapper {
     List<Announcement> selectAnnouncementList();
+    Integer insertAnnoucement(Announcement announcement);
 }

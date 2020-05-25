@@ -4,5 +4,9 @@
     <select id="selectNewsList" resultType="com.example.demo.entity.News">
         select * from news
     </select>
-
+    <insert id="insertNews" parameterType="com.example.demo.entity.News"
+            useGeneratedKeys="true" keyProperty="newsId" keyColumn="newsId">
+        insert into news(news_id,news_title,news_content)
+            values (#{newsId},#{newsTitle},#{newsContent})
+</insert>
 </mapper>

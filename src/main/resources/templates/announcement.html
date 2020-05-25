@@ -73,7 +73,7 @@
 									<span>通</span>知
 									<span>公</span>告
 								</h3>
-								<div class="tittle-style">
+								<div class="tittle-style" >
 
 								</div>
 							</div>
@@ -82,7 +82,7 @@
 									<th:block th:each="announcement:${announcementList}">
 										<div class="item page-header">
 											<li >
-												<a class = "glyphicon glyphicon-record text-info" style="padding-left: 20px; padding-right: 20px; color: rgb(58, 116, 136);" th:href="${announcement.announcementContent}"
+												<a class = "glyphicon glyphicon-record text-info" style="padding-left: 20px; padding-right: 20px; color: rgb(58, 116, 136);" th:href="${announcement.announcementId}"
 												   th:text="${announcement.announcementTitle}"/> &nbsp;
 												<span >&nbsp;
 										<div class="glyphicon glyphicon-time pull-right" style="padding-left: 20px; padding-right: 20px;" th:text="${#dates.format(announcement.announcementReleaseDate,'yyyy-MM-dd')}"/>

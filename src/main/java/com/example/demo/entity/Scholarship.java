@@ -21,5 +21,4 @@ public class Scholarship{
     private String scholarshipContent;
     private String scholoarshipFilename;
 
-
 }

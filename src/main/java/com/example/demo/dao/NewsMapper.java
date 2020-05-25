@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface NewsMapper {
     List<News> selectNewsList();
+    Integer insertNews(News news);
 }

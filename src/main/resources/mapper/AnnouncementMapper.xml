@@ -3,6 +3,10 @@
 <mapper namespace="com.example.demo.dao.AnnouncementMapper">
 <select id="selectAnnouncementList" resultType="com.example.demo.entity.Announcement">
         select * from announcement
-    </select>
-
+</select>
+    <insert id="insertAnnoucement" parameterType="com.example.demo.entity.Announcement"
+            useGeneratedKeys="true" keyProperty="announcementId" keyColumn="announcementId">
+        insert into announcement(manager_account,announcement_title,announcement_content)
+            values (#{managerAccount},#{announcementTitle},#{announcementContent})
+</insert>
 </mapper>

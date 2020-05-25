@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.NewsMapper;
+import com.example.demo.entity.Announcement;
 import com.example.demo.entity.News;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,8 @@ public class NewsService {
     private NewsMapper newsMapper;
     public List<News> getNewsList(){
         return newsMapper.selectNewsList();
+    }
+    public int insertNews(News news){
+        return newsMapper.insertNews(news);
     }
 }

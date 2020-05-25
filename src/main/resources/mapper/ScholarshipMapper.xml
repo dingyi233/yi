@@ -6,5 +6,19 @@
         left join scholarship_detail sd on sd.scholarship_student_id=scholarship_id
         where scholarship_type=#{fileType} AND sd.student_id=#{userId}
     </select>
+    <select id="selectScholarshipList" resultType="com.example.demo.vo.ScholarshipDetailVo">
+        SELECT
+            student_name,
+            student_id,
+            total_score,
+            aver_grade,
+            academic_achievements,
+            social_practice_times,
+            manager_account
+        FROM
+            scholarship_detail s
+        LEFT JOIN student st ON s.tudent_id=st.student_id
+        where s.student=#{id}
 
+    </select>
 </mapper>

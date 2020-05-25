@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 public class Announcement {
     private long announcementId;
+    private long managerAccount;
     private String announcementType;
     private String announcementTitle;
     private String announcementContent;

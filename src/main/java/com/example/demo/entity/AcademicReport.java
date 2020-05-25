@@ -20,4 +20,5 @@ public class AcademicReport {
     private String reportAddr;
     private String reportDes;
     private Date reportDate;
+    private long managerAccount;
 }
