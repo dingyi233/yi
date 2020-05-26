@@ -2,8 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AcademicReportMapper;
 import com.example.demo.entity.AcademicReport;
-import com.example.demo.entity.News;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,7 @@ public class AcademicReportService {
     public List<AcademicReport> getAcademicReportList(){
         return acdemicReportMapper.selectAcademicReportList();
     }
-    public int insertAcademic(AcademicReport academicReport){
+    public Integer insertAcademic(AcademicReport academicReport){
         return acdemicReportMapper.insertAcademic(academicReport);
     }
 }

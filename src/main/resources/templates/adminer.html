@@ -411,42 +411,56 @@
                     </div><!-- /.main-content -->
                 </div>
                 <div id="Academic" class="tab-pane fade">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" id="AcademicForm" action="##" onsubmit="return false;" method="post" role="form">
                         <div class="form-group">
-                            <label for="datepicker" class="col-sm-2 control-label">日期：</label>
+                            <label for="datepicker" class="col-sm-2 control-label">日&emsp;&emsp;期：</label>
                             <div class="styled-input ">
-                                <input class="col-sm-4 " id="datepicker" placeholder="Date" name="Text" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
+                                <input class="col-sm-4 " id="datepicker" placeholder="Date" name="reportDate" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
                                        required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Timeinterval" class="col-sm-2 control-label">区间：</label>
+                            <label for="Timebegin" class="col-sm-2 control-label">开始时间：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Timeinterval" placeholder="请输入时间区间">
+                                <input th:class="col-sm-4" name="reportDateStart" type="text" class="form-control" id="Timebegin" placeholder="请输入时间区间">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Address" class="col-sm-2 control-label">地址：</label>
+                            <label for="TimeOver" class="col-sm-2 control-label">结束时间：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Address" placeholder="请输入举办地址">
+                                <input th:class="col-sm-4" name="reportDateEnd" type="text" class="form-control" id="TimeOver" placeholder="请输入时间区间">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Presenter" class="col-sm-2 control-label">主讲人：</label>
+                            <label for="Address" class="col-sm-2 control-label">地&emsp;&emsp;址：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Presenter" placeholder="请输入主讲人信息">
+                                <input th:class="col-sm-4" name="reportAddr" type="text" class="form-control" id="Address" placeholder="请输入举办地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Presenter" class="col-sm-2 control-label">主&ensp;讲&ensp;人：</label>
+                            <div class="styled-input ">
+                                <input th:class="col-sm-4" name="academicdtProfessor" type="text" class="form-control" id="Presenter" placeholder="请输入主讲人信息">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Titile" class="col-sm-2 control-label">标&emsp;&emsp;题：</label>
+                            <div class="styled-input ">
+                                <input th:class="col-sm-4" name="academicdtTitle" type="text" class="form-control" id="Titile" placeholder="讲座描述">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Description" class="col-sm-2 control-label">讲座描述：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Description" placeholder="讲座描述">
+                                <input th:class="col-sm-4" name="reportDes" type="text" class="form-control" id="Description" placeholder="讲座描述">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">提交</button>
-                            </div>
+                            <input name="managerAccount" type="hidden" th:value="${session.User.getUserId()}">
+                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submitAcademic()" />
+<!--                            <div class="col-sm-offset-2 col-sm-10">-->
+<!--                                <button type="submit" class="btn btn-default">提&emsp;&emsp;交</button>-->
+<!--                            </div>-->
                         </div>
                     </form>
                 </div>
@@ -460,8 +474,87 @@
                                 <div class="row">
                                     <div class="col-xs-12 m">
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <h3>菜单 3</h3>
-                                        <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+                                        <div class="effectd-caption team-row-agileinfo">
+                                            <div class="yaallahaa-news-grids-agile">
+                                                <div class="yaallahaa-news-grid">
+                                                    <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} lt 2" th:object="${AcademicReport}">
+                                                        <div class="col-md-6 yaallahaa-news-left">
+                                                            <div class="col-xs-6 news-left-img">
+                                                                <div class="news-left-text color-event1 " >
+                                                                    <h5>学术讲座</h5>
+                                                                </div>
+                                                                <p th:text="${AcademicReport.academicdtTitle}"/>
+                                                            </div>
+                                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                                <div class="news-left-top-text text-color1">
+                                                                    <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                                </div>
+                                                                <div class="date-grid">
+                                                                    <div class="admin">
+                                                                        <a href="#">
+                                                                            <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <p th:text="${AcademicReport.reportAddr}">
+                                                                            <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                                    </div>
+                                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                                        <p th:text="${AcademicReport.reportDes}"/>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </th:block>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="yaallahaa-news-grid">
+                                                    <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} gt 1" th:object="${AcademicReport}">
+                                                        <div class="col-md-6 yaallahaa-news-left">
+                                                            <div class="col-xs-6 news-left-img">
+                                                                <div class="news-left-text color-event1 " >
+                                                                    <h5>学术讲座</h5>
+                                                                </div>
+                                                                <p th:text="${AcademicReport.academicdtTitle}"/>
+                                                            </div>
+                                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                                <div class="news-left-top-text text-color1">
+                                                                    <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                                </div>
+                                                                <div class="date-grid">
+                                                                    <div class="admin">
+                                                                        <a href="#">
+                                                                            <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <p th:text="${AcademicReport.reportAddr}">
+                                                                            <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                                    </div>
+                                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                                        <p th:text="${AcademicReport.reportDes}"/>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </th:block>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="clearfix"/>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                         <!-- PAGE CONTENT ENDS -->
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
@@ -1874,6 +1967,28 @@
     });
 </script>
 <script type="text/javascript">
+    function  submitAcademic() {
+        var params=$("#AcademicForm").serialize();
+        var url="/adminer/academicSubmit";
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    alert(result.message)
+                    // $("input[name='announcementContent']").val($('.summernote').summernote('code'));
+                    window.location.href = '/adminer';
+                } else {
+                    alert(result.message)
+
+                }
+            },
+            error: function () {
+                alert("操作失败")
+            }
+        });
+    }
     function submitAnnoucement(){
         var params=$("#AnnoucementForm").serialize();
         var markstr=$('#summernote').summernote('code')

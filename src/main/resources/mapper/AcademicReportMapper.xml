@@ -6,7 +6,7 @@
     </select>
     <insert id="insertAcademic" parameterType="com.example.demo.entity.AcademicReport"
             useGeneratedKeys="true" keyProperty="academicdtId" keyColumn="academicdtId">
-        insert into academic_report(academicdt_id,academicdt_title,academicdt_professor,report_addr)
-            values (#{managerAccount},#{announcementTitle},#{announcementContent})
+        insert into academic_report(manager_account,report_date,report_des,report_date_start,report_date_end,academicdt_title,academicdt_professor,report_addr)
+            values (#{managerAccount},#{reportDate},#{reportDes},#{reportDateStart},#{reportDateEnd},#{academicdtTitle},#{academicdtProfessor},#{reportAddr})
 </insert>
 </mapper>
