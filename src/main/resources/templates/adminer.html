@@ -335,6 +335,15 @@
                 </ul>
             </li>
 
+            <li class="">
+                <a data-toggle="tab" href="#Register">
+                    <i class="menu-icon fa fa-picture-o"></i>
+                    <span class="menu-text"> 管理员注册 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -462,6 +471,7 @@
 <!--                                <button type="submit" class="btn btn-default">提&emsp;&emsp;交</button>-->
 <!--                            </div>-->
                         </div>
+
                     </form>
                 </div>
                 <div id="NoticeSearch" class="tab-pane fade">
@@ -572,19 +582,26 @@
                                 </div><!-- /.page-header -->
                                 <div class="col-xs-12 m">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <form enctype="multipart/form-data" role="form" action="#" method="post">
-                                        <hr>
-                                        <div class="form-group">
-                                            <label for="name">选择上传文件类型：</label>
-                                            <select class="form-control" id="name">
-                                                <option>奖助贷</option>
-                                                <option>培养相关</option>
-                                                <option>常用文件</option>
-                                                <option>其他文件</option>
-                                            </select>
-                                            <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#FileUpload">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#menu1">奖助贷</a></li>
+                                        <li><a data-toggle="tab" href="#menu2">培养相关</a></li>
+                                        <li><a data-toggle="tab" href="#menu3">常用文件</a></li>
+                                        <li><a data-toggle="tab" href="#menu4">其他文件</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="menu1" class="tab-pane fade in active">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/奖助贷">
                                         </div>
-                                    </form>
+                                        <div id="menu2" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/培养相关">
+                                        </div>
+                                        <div id="menu3" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/常用文件">
+                                        </div>
+                                        <div id="menu4" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/其他文件">
+                                        </div>
+                                    </div>
                                     <br>
                                     <!-- PAGE CONTENT ENDS -->
                                 </div><!-- /.col -->
@@ -1820,6 +1837,7 @@
                         </div>
                     </div><!-- /.main-content -->
                 </div>
+                <!-- 管理员注册 -->
             </div>
 
         </div>
