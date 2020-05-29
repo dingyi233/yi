@@ -38,7 +38,7 @@ public class SalaryController {
     @GetMapping("/user/salary")
     @ResponseBody
     public Result getSalary(HttpServletRequest request,@RequestParam("selectStartDate")String startDate,
-                                     @RequestParam("selectEndDate")String endDate){
+                            @RequestParam("selectEndDate")String endDate){
         LoginVo loginVo= (LoginVo) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
         List<SalaryVo> salaryList = salaryService.getSalaryList(loginVo.getUserId(),startDate,endDate);
         Result<List> result=new Result<>();

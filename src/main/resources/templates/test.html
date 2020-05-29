@@ -2,17 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>排课系统</title>
-    <!-- vue -->
-<!--&lt;!&ndash;    <script src="js/vue.js"></script>&ndash;&gt;-->
-<!--    &lt;!&ndash; 引入样式 &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-<!--    &lt;!&ndash; 引入组件库 &ndash;&gt;-->
-<!--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-<!--    <script src="https://unpkg.com/vue/dist/vue.js"></script>-->
-    <!-- 引入样式 -->
+    <title>test</title>
+    <script src="./js/axios.min.js"></script>
     <script src="./js/vue.js"></script>
-<!--        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+    <!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <!--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
     <link rel="stylesheet" href="./css/element.css">
     <!-- 引入组件库 -->
     <script src="./js/element.js"></script>
@@ -22,7 +16,7 @@
     <el-row v-if="this.selectedData.length === 0">
         <el-col :span="6"><br/></el-col>
         <el-col :span="12" class="card">
-            <h1>选择课程</h1>
+            <h1>选择课程-专硕</h1>
             <el-table
                     :data="tableData"
                     style="width: 100%">
@@ -31,15 +25,15 @@
                         label="课程代号">
                 </el-table-column>
                 <el-table-column
-                        prop="name"
+                        prop="courseName"
                         label="课程名称">
                 </el-table-column>
                 <el-table-column
-                        prop="type"
+                        prop="courseType"
                         label="课程类型">
                 </el-table-column>
                 <el-table-column
-                        prop="studyTime"
+                        prop="courseTimes"
                         label="课程学时">
                 </el-table-column>
                 <el-table-column
@@ -54,9 +48,40 @@
                 </el-table-column>
             </el-table>
             <br/>
-            <div style="float: right">
+            <div style="float: right; background-color: white;">
+                选&ensp;择&emsp;学&ensp;年：
+                <el-select v-model="year" style="width: 24%;  padding-bottom: 5px;"
+                           placeholder="请选择">
+                    <template slot="prepend">设置学年数</template>
+                    <el-option
+                            v-for="item in years"
+                            :key="item"
+                            :label="item"
+                            :value="item">
+                    </el-option>
+                    <template slot="append">&ensp;年</template>
+                </el-select>
+                年
+                <br/>
+                选&ensp;择&emsp;学&ensp;期：
+                <el-select v-model="semester"
+                           style="width: 24%; padding-bottom: 5px; readonly: false;"
+                           placeholder="请选择">
+                    <template slot="prepend">设置学期数</template>
+                    <el-option
+                            v-for="item in semesters"
+                            :key="item"
+                            :label="item"
+                            :value="item">
+                    </el-option>
+                    <template slot="append">&ensp;季</template>
+                </el-select>
+                季
+                <br/>
                 本学期总周数：
-                <el-select v-model="term" style="width: 20%;" placeholder="请选择">
+                <el-select v-model="term"
+                           style="width: 24%; padding-bottom: 5px; background-color: white!important;"
+                           placeholder="请选择">
                     <template slot="prepend">设置学期周数</template>
                     <el-option
                             v-for="item in terms"
@@ -64,7 +89,7 @@
                             :label="item"
                             :value="item">
                     </el-option>
-                    <template slot="append">周</template>
+                    <template slot="append">&ensp;周</template>
                 </el-select>
                 周
                 <br/>
@@ -72,7 +97,9 @@
             <br/>
             <br/>
             <br/>
-            <el-button type="primary" style="width: 100%" round v-on:click="selectCourse">开始排课</el-button>
+            <el-button type="primary" style="width: 100%" round
+                       v-on:click="selectCourse">开始排课
+            </el-button>
         </el-col>
         <el-col :span="6"></el-col>
     </el-row>
@@ -94,187 +121,271 @@
             <el-row>
                 <el-col :span="3" class="block">第一大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c1.courseId}}<br/>{{this.schedulingData.d1.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c1.courseId}}<br/>{{this.schedulingData.d1.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c1.courseId}}<br/>{{this.schedulingData.d2.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c1.courseId}}<br/>{{this.schedulingData.d2.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c1.courseId}}<br/>{{this.schedulingData.d3.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c1.courseId}}<br/>{{this.schedulingData.d3.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c1.courseId}}<br/>{{this.schedulingData.d4.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c1.courseId}}<br/>{{this.schedulingData.d4.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c1.courseId}}<br/>{{this.schedulingData.d5.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c1.courseId}}<br/>{{this.schedulingData.d5.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c1.courseId}}<br/>{{this.schedulingData.d6.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c1.courseId}}<br/>{{this.schedulingData.d6.c1.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,1)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c1.courseId}}<br/>{{this.schedulingData.d7.c1.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,1)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c1.courseId}}<br/>{{this.schedulingData.d7.c1.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="3" class="block">第二大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c2.courseId}}<br/>{{this.schedulingData.d1.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c2.courseId}}<br/>{{this.schedulingData.d1.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c2.courseId}}<br/>{{this.schedulingData.d2.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c2.courseId}}<br/>{{this.schedulingData.d2.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c2.courseId}}<br/>{{this.schedulingData.d3.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c2.courseId}}<br/>{{this.schedulingData.d3.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c2.courseId}}<br/>{{this.schedulingData.d4.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c2.courseId}}<br/>{{this.schedulingData.d4.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c2.courseId}}<br/>{{this.schedulingData.d5.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c2.courseId}}<br/>{{this.schedulingData.d5.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c2.courseId}}<br/>{{this.schedulingData.d6.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c2.courseId}}<br/>{{this.schedulingData.d6.c2.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,2)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c2.courseId}}<br/>{{this.schedulingData.d7.c2.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,2)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c2.courseId}}<br/>{{this.schedulingData.d7.c2.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="3" class="block">第三大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c3.courseId}}<br/>{{this.schedulingData.d1.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c3.courseId}}<br/>{{this.schedulingData.d1.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c3.courseId}}<br/>{{this.schedulingData.d2.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c3.courseId}}<br/>{{this.schedulingData.d2.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c3.courseId}}<br/>{{this.schedulingData.d3.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c3.courseId}}<br/>{{this.schedulingData.d3.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c3.courseId}}<br/>{{this.schedulingData.d4.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c3.courseId}}<br/>{{this.schedulingData.d4.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c3.courseId}}<br/>{{this.schedulingData.d5.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c3.courseId}}<br/>{{this.schedulingData.d5.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c3.courseId}}<br/>{{this.schedulingData.d6.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c3.courseId}}<br/>{{this.schedulingData.d6.c3.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,3)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c3.courseId}}<br/>{{this.schedulingData.d7.c3.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,3)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c3.courseId}}<br/>{{this.schedulingData.d7.c3.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="3" class="block">第四大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c4.courseId}}<br/>{{this.schedulingData.d1.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c4.courseId}}<br/>{{this.schedulingData.d1.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c4.courseId}}<br/>{{this.schedulingData.d2.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c4.courseId}}<br/>{{this.schedulingData.d2.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c4.courseId}}<br/>{{this.schedulingData.d3.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c4.courseId}}<br/>{{this.schedulingData.d3.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c4.courseId}}<br/>{{this.schedulingData.d4.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c4.courseId}}<br/>{{this.schedulingData.d4.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c4.courseId}}<br/>{{this.schedulingData.d5.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c4.courseId}}<br/>{{this.schedulingData.d5.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c4.courseId}}<br/>{{this.schedulingData.d6.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c4.courseId}}<br/>{{this.schedulingData.d6.c4.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,4)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c4.courseId}}<br/>{{this.schedulingData.d7.c4.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,4)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c4.courseId}}<br/>{{this.schedulingData.d7.c4.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="3" class="block">第五大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c5.courseId}}<br/>{{this.schedulingData.d1.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c5.courseId}}<br/>{{this.schedulingData.d1.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c5.courseId}}<br/>{{this.schedulingData.d2.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c5.courseId}}<br/>{{this.schedulingData.d2.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c5.courseId}}<br/>{{this.schedulingData.d3.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c5.courseId}}<br/>{{this.schedulingData.d3.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c5.courseId}}<br/>{{this.schedulingData.d4.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c5.courseId}}<br/>{{this.schedulingData.d4.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c5.courseId}}<br/>{{this.schedulingData.d5.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c5.courseId}}<br/>{{this.schedulingData.d5.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c5.courseId}}<br/>{{this.schedulingData.d6.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c5.courseId}}<br/>{{this.schedulingData.d6.c5.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,5)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c5.courseId}}<br/>{{this.schedulingData.d7.c5.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,5)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c5.courseId}}<br/>{{this.schedulingData.d7.c5.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="3" class="block">第六大节</el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(1,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d1.c6.courseId}}<br/>{{this.schedulingData.d1.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(1,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d1.c6.courseId}}<br/>{{this.schedulingData.d1.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(2,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d2.c6.courseId}}<br/>{{this.schedulingData.d2.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(2,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d2.c6.courseId}}<br/>{{this.schedulingData.d2.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(3,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d3.c6.courseId}}<br/>{{this.schedulingData.d3.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(3,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d3.c6.courseId}}<br/>{{this.schedulingData.d3.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(4,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d4.c6.courseId}}<br/>{{this.schedulingData.d4.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(4,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d4.c6.courseId}}<br/>{{this.schedulingData.d4.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(5,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d5.c6.courseId}}<br/>{{this.schedulingData.d5.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(5,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d5.c6.courseId}}<br/>{{this.schedulingData.d5.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(6,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d6.c6.courseId}}<br/>{{this.schedulingData.d6.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(6,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d6.c6.courseId}}<br/>{{this.schedulingData.d6.c6.courseName}}
+                    </div>
                 </el-col>
                 <el-col :span="3" class="block">
-                    <el-button type="text" v-on:click="openDrawer(7,6)">选择课程</el-button>
-                    <div>{{this.schedulingData.d7.c6.courseId}}<br/>{{this.schedulingData.d7.c6.name}}</div>
+                    <el-button type="text" v-on:click="openDrawer(7,6)">选择课程
+                    </el-button>
+                    <div>{{this.schedulingData.d7.c6.courseId}}<br/>{{this.schedulingData.d7.c6.courseName}}
+                    </div>
                 </el-col>
             </el-row>
             <br/>
@@ -291,7 +402,8 @@
             <el-col :span="1"><br/></el-col>
             <el-col :span="22">
                 <h1>选择课程</h1>
-                <h3>星期{{this.currD === 7 ? "日":this.currD}} - 第{{this.currC}}大节课</h3>
+                <h3>星期{{this.currD === 7 ? "日":this.currD}} -
+                    第{{this.currC}}大节课</h3>
                 <el-table
                         :data="selectedData"
                         style="width: 100%;">
@@ -300,15 +412,15 @@
                             label="课程代号">
                     </el-table-column>
                     <el-table-column
-                            prop="name"
+                            prop="courseName"
                             label="课程名称">
                     </el-table-column>
                     <el-table-column
-                            prop="type"
+                            prop="courseType"
                             label="课程类型">
                     </el-table-column>
                     <el-table-column
-                            prop="studyTime"
+                            prop="courseTimes"
                             label="课程学时">
                     </el-table-column>
                     <el-table-column
@@ -322,12 +434,16 @@
                     <el-table-column
                             label="选择">
                         <template slot-scope="scope">
-                            <el-button type="success" round v-on:click="choice(scope.row)">选择该课程</el-button>
+                            <el-button type="success" round
+                                       v-on:click="choice(scope.row)">选择该课程
+                            </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
                 <br/>
-                <el-button type="warning" style="width: 100%" round v-on:click="remove">清除该位置课程</el-button>
+                <el-button type="warning" style="width: 100%" round
+                           v-on:click="remove">清除该位置课程
+                </el-button>
             </el-col>
             <el-col :span="1"><br/></el-col>
         </el-row>
@@ -345,9 +461,13 @@
             currD: 0,
             currC: 0,
             terms: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030],
+            semesters: ['春', '秋'],
             term: 16,
+            year: 2020,
+            semester: '春',
         },
-        created() {
+        async created() {
             var schedulingData = {}
             for (var d = 1; d <= 7; d++) {
                 schedulingData["d" + d] = {};
@@ -355,52 +475,9 @@
                     schedulingData["d" + d]["c" + c] = {}
                 }
             }
-            console.log(schedulingData)
             this.schedulingData = schedulingData
-            this.tableData = [
-                {
-                    "courseId": "CST1",
-                    "name": "课程 1",
-                    "type": "垃圾课程",
-                    "studyTime": 24,
-                    "credit": 24,
-                },
-                {
-                    "courseId": "CST2",
-                    "name": "课程 2",
-                    "type": "狗屎课程",
-                    "studyTime": 48,
-                    "credit": 12,
-                },
-                {
-                    "courseId": "CST3",
-                    "name": "课程 3",
-                    "type": "垃圾课程",
-                    "studyTime": 24,
-                    "credit": 24,
-                },
-                {
-                    "courseId": "CST4",
-                    "name": "课程 4",
-                    "type": "狗屎课程",
-                    "studyTime": 48,
-                    "credit": 12,
-                },
-                {
-                    "courseId": "CST5",
-                    "name": "课程 5",
-                    "type": "垃圾课程",
-                    "studyTime": 72,
-                    "credit": 24,
-                },
-                {
-                    "courseId": "CST6",
-                    "name": "课程 6",
-                    "type": "狗屎课程",
-                    "studyTime": 148,
-                    "credit": 12,
-                }
-            ]
+            var res = await axios.get("/add/getZsCourses");
+            this.tableData = res.data;
         },
         methods: {
             selectCourse() {
@@ -422,7 +499,7 @@
                 var totalCell = 0;
                 for (var i in select) {
                     // 一周需要上几次
-                    select[i]["lessWeek"] = Math.ceil(Math.ceil(select[i]["studyTime"] / 2) / term)
+                    select[i]["lessWeek"] = Math.ceil(Math.ceil(select[i]["courseTimes"] / 2) / term)
                     totalCell += select[i]["lessWeek"];
                 }
                 if (totalCell > 42) {
@@ -475,8 +552,514 @@
                 this.drawer = false;
             },
 
-            submit() {
+            async submit() {
+                for (var i in this.selectedData) {
+                    if (this.selectedData[i].lessWeek > 0) {
+                        this.$alert('所有课程剩余可选必须为0', '注意', {
+                            confirmButtonText: '确定',
+                        });
+                        return
+                    }
+                }
+                var schedulingData = this.schedulingData;
+                var arrangement = [];
+                for (var week = 0; week < this.term; week++) {
+                    var thisWeekStartDay = week * 7;
+                    var d1c1 = schedulingData.d1.c1;
+                    if (d1c1.courseId !== undefined) {
+                        if (d1c1.courseTimes > 0) {
+                            d1c1.courseTimes = d1c1.courseTimes - 2;
+                        } else {
+                            d1c1 = {}
+                        }
+                    }
+                    var d1c2 = schedulingData.d1.c2;
+                    if (d1c2.courseId !== undefined) {
+                        if (d1c2.courseTimes > 0) {
+                            d1c2.courseTimes = d1c2.courseTimes - 2;
+                        } else {
+                            d1c2 = {}
+                        }
+                    }
+                    var d1c3 = schedulingData.d1.c3;
+                    if (d1c3.courseId !== undefined) {
+                        if (d1c3.courseTimes > 0) {
+                            d1c3.courseTimes = d1c3.courseTimes - 2;
+                        } else {
+                            d1c3 = {}
+                        }
+                    }
+                    var d1c4 = schedulingData.d1.c4;
+                    if (d1c4.courseId !== undefined) {
+                        if (d1c4.courseTimes > 0) {
+                            d1c4.courseTimes = d1c4.courseTimes - 2;
+                        } else {
+                            d1c4 = {}
+                        }
+                    }
+                    var d1c5 = schedulingData.d1.c5;
+                    if (d1c5.courseId !== undefined) {
+                        if (d1c5.courseTimes > 0) {
+                            d1c5.courseTimes = d1c5.courseTimes - 2;
+                        } else {
+                            d1c5 = {}
+                        }
+                    }
+                    var d1c6 = schedulingData.d1.c6;
+                    if (d1c6.courseId !== undefined) {
+                        if (d1c6.courseTimes > 0) {
+                            d1c6.courseTimes = d1c6.courseTimes - 2;
+                        } else {
+                            d1c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 0,
+                        "c1Id": d1c1.courseId,
+                        "c2Id": d1c2.courseId,
+                        "c3Id": d1c3.courseId,
+                        "c4Id": d1c4.courseId,
+                        "c5Id": d1c5.courseId,
+                        "c6Id": d1c6.courseId,
+                    }
 
+
+                    var d1c1 = schedulingData.d1.c1;
+                    if (d1c1.courseId !== undefined) {
+                        if (d1c1.courseTimes > 0) {
+                            d1c1.courseTimes = d1c1.courseTimes - 2;
+                        } else {
+                            d1c1 = {}
+                        }
+                    }
+                    var d1c2 = schedulingData.d1.c2;
+                    if (d1c2.courseId !== undefined) {
+                        if (d1c2.courseTimes > 0) {
+                            d1c2.courseTimes = d1c2.courseTimes - 2;
+                        } else {
+                            d1c2 = {}
+                        }
+                    }
+                    var d1c3 = schedulingData.d1.c3;
+                    if (d1c3.courseId !== undefined) {
+                        if (d1c3.courseTimes > 0) {
+                            d1c3.courseTimes = d1c3.courseTimes - 2;
+                        } else {
+                            d1c3 = {}
+                        }
+                    }
+                    var d1c4 = schedulingData.d1.c4;
+                    if (d1c4.courseId !== undefined) {
+                        if (d1c4.courseTimes > 0) {
+                            d1c4.courseTimes = d1c4.courseTimes - 2;
+                        } else {
+                            d1c4 = {}
+                        }
+                    }
+                    var d1c5 = schedulingData.d1.c5;
+                    if (d1c5.courseId !== undefined) {
+                        if (d1c5.courseTimes > 0) {
+                            d1c5.courseTimes = d1c5.courseTimes - 2;
+                        } else {
+                            d1c5 = {}
+                        }
+                    }
+                    var d1c6 = schedulingData.d1.c6;
+                    if (d1c6.courseId !== undefined) {
+                        if (d1c6.courseTimes > 0) {
+                            d1c6.courseTimes = d1c6.courseTimes - 2;
+                        } else {
+                            d1c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 1,
+                        "c1Id": d1c1.courseId,
+                        "c2Id": d1c2.courseId,
+                        "c3Id": d1c3.courseId,
+                        "c4Id": d1c4.courseId,
+                        "c5Id": d1c5.courseId,
+                        "c6Id": d1c6.courseId,
+                    }
+
+                    var d2c1 = schedulingData.d2.c1;
+                    if (d2c1.courseId !== undefined) {
+                        if (d2c1.courseTimes > 0) {
+                            d2c1.courseTimes = d2c1.courseTimes - 2;
+                        } else {
+                            d2c1 = {}
+                        }
+                    }
+                    var d2c2 = schedulingData.d2.c2;
+                    if (d2c2.courseId !== undefined) {
+                        if (d2c2.courseTimes > 0) {
+                            d2c2.courseTimes = d2c2.courseTimes - 2;
+                        } else {
+                            d2c2 = {}
+                        }
+                    }
+                    var d2c3 = schedulingData.d2.c3;
+                    if (d2c3.courseId !== undefined) {
+                        if (d2c3.courseTimes > 0) {
+                            d2c3.courseTimes = d2c3.courseTimes - 2;
+                        } else {
+                            d2c3 = {}
+                        }
+                    }
+                    var d2c4 = schedulingData.d2.c4;
+                    if (d2c4.courseId !== undefined) {
+                        if (d2c4.courseTimes > 0) {
+                            d2c4.courseTimes = d2c4.courseTimes - 2;
+                        } else {
+                            d2c4 = {}
+                        }
+                    }
+                    var d2c5 = schedulingData.d2.c5;
+                    if (d2c5.courseId !== undefined) {
+                        if (d2c5.courseTimes > 0) {
+                            d2c5.courseTimes = d2c5.courseTimes - 2;
+                        } else {
+                            d2c5 = {}
+                        }
+                    }
+                    var d2c6 = schedulingData.d2.c6;
+                    if (d2c6.courseId !== undefined) {
+                        if (d2c6.courseTimes > 0) {
+                            d2c6.courseTimes = d2c6.courseTimes - 2;
+                        } else {
+                            d2c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 1] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 2,
+                        "c1Id": d2c1.courseId,
+                        "c2Id": d2c2.courseId,
+                        "c3Id": d2c3.courseId,
+                        "c4Id": d2c4.courseId,
+                        "c5Id": d2c5.courseId,
+                        "c6Id": d2c6.courseId,
+                    }
+
+
+                    var d3c1 = schedulingData.d3.c1;
+                    if (d3c1.courseId !== undefined) {
+                        if (d3c1.courseTimes > 0) {
+                            d3c1.courseTimes = d3c1.courseTimes - 2;
+                        } else {
+                            d3c1 = {}
+                        }
+                    }
+                    var d3c2 = schedulingData.d3.c2;
+                    if (d3c2.courseId !== undefined) {
+                        if (d3c2.courseTimes > 0) {
+                            d3c2.courseTimes = d3c2.courseTimes - 2;
+                        } else {
+                            d3c2 = {}
+                        }
+                    }
+                    var d3c3 = schedulingData.d3.c3;
+                    if (d3c3.courseId !== undefined) {
+                        if (d3c3.courseTimes > 0) {
+                            d3c3.courseTimes = d3c3.courseTimes - 2;
+                        } else {
+                            d3c3 = {}
+                        }
+                    }
+                    var d3c4 = schedulingData.d3.c4;
+                    if (d3c4.courseId !== undefined) {
+                        if (d3c4.courseTimes > 0) {
+                            d3c4.courseTimes = d3c4.courseTimes - 2;
+                        } else {
+                            d3c4 = {}
+                        }
+                    }
+                    var d3c5 = schedulingData.d3.c5;
+                    if (d3c5.courseId !== undefined) {
+                        if (d3c5.courseTimes > 0) {
+                            d3c5.courseTimes = d3c5.courseTimes - 2;
+                        } else {
+                            d3c5 = {}
+                        }
+                    }
+                    var d3c6 = schedulingData.d3.c6;
+                    if (d3c6.courseId !== undefined) {
+                        if (d3c6.courseTimes > 0) {
+                            d3c6.courseTimes = d3c6.courseTimes - 2;
+                        } else {
+                            d3c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 2] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 3,
+                        "c1Id": d3c1.courseId,
+                        "c2Id": d3c2.courseId,
+                        "c3Id": d3c3.courseId,
+                        "c4Id": d3c4.courseId,
+                        "c5Id": d3c5.courseId,
+                        "c6Id": d3c6.courseId,
+                    }
+
+                    var d4c1 = schedulingData.d4.c1;
+                    if (d4c1.courseId !== undefined) {
+                        if (d4c1.courseTimes > 0) {
+                            d4c1.courseTimes = d4c1.courseTimes - 2;
+                        } else {
+                            d4c1 = {}
+                        }
+                    }
+                    var d4c2 = schedulingData.d4.c2;
+                    if (d4c2.courseId !== undefined) {
+                        if (d4c2.courseTimes > 0) {
+                            d4c2.courseTimes = d4c2.courseTimes - 2;
+                        } else {
+                            d4c2 = {}
+                        }
+                    }
+                    var d4c3 = schedulingData.d4.c3;
+                    if (d4c3.courseId !== undefined) {
+                        if (d4c3.courseTimes > 0) {
+                            d4c3.courseTimes = d4c3.courseTimes - 2;
+                        } else {
+                            d4c3 = {}
+                        }
+                    }
+                    var d4c4 = schedulingData.d4.c4;
+                    if (d4c4.courseId !== undefined) {
+                        if (d4c4.courseTimes > 0) {
+                            d4c4.courseTimes = d4c4.courseTimes - 2;
+                        } else {
+                            d4c4 = {}
+                        }
+                    }
+                    var d4c5 = schedulingData.d4.c5;
+                    if (d4c5.courseId !== undefined) {
+                        if (d4c5.courseTimes > 0) {
+                            d4c5.courseTimes = d4c5.courseTimes - 2;
+                        } else {
+                            d4c5 = {}
+                        }
+                    }
+                    var d4c6 = schedulingData.d4.c6;
+                    if (d4c6.courseId !== undefined) {
+                        if (d4c6.courseTimes > 0) {
+                            d4c6.courseTimes = d4c6.courseTimes - 2;
+                        } else {
+                            d4c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 3] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 4,
+                        "c1Id": d4c1.courseId,
+                        "c2Id": d4c2.courseId,
+                        "c3Id": d4c3.courseId,
+                        "c4Id": d4c4.courseId,
+                        "c5Id": d4c5.courseId,
+                        "c6Id": d4c6.courseId,
+                    }
+
+                    var d5c1 = schedulingData.d5.c1;
+                    if (d5c1.courseId !== undefined) {
+                        if (d5c1.courseTimes > 0) {
+                            d5c1.courseTimes = d5c1.courseTimes - 2;
+                        } else {
+                            d5c1 = {}
+                        }
+                    }
+                    var d5c2 = schedulingData.d5.c2;
+                    if (d5c2.courseId !== undefined) {
+                        if (d5c2.courseTimes > 0) {
+                            d5c2.courseTimes = d5c2.courseTimes - 2;
+                        } else {
+                            d5c2 = {}
+                        }
+                    }
+                    var d5c3 = schedulingData.d5.c3;
+                    if (d5c3.courseId !== undefined) {
+                        if (d5c3.courseTimes > 0) {
+                            d5c3.courseTimes = d5c3.courseTimes - 2;
+                        } else {
+                            d5c3 = {}
+                        }
+                    }
+                    var d5c4 = schedulingData.d5.c4;
+                    if (d5c4.courseId !== undefined) {
+                        if (d5c4.courseTimes > 0) {
+                            d5c4.courseTimes = d5c4.courseTimes - 2;
+                        } else {
+                            d5c4 = {}
+                        }
+                    }
+                    var d5c5 = schedulingData.d5.c5;
+                    if (d5c5.courseId !== undefined) {
+                        if (d5c5.courseTimes > 0) {
+                            d5c5.courseTimes = d5c5.courseTimes - 2;
+                        } else {
+                            d5c5 = {}
+                        }
+                    }
+                    var d5c6 = schedulingData.d5.c6;
+                    if (d5c6.courseId !== undefined) {
+                        if (d5c6.courseTimes > 0) {
+                            d5c6.courseTimes = d5c6.courseTimes - 2;
+                        } else {
+                            d5c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 4] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 5,
+                        "c1Id": d5c1.courseId,
+                        "c2Id": d5c2.courseId,
+                        "c3Id": d5c3.courseId,
+                        "c4Id": d5c4.courseId,
+                        "c5Id": d5c5.courseId,
+                        "c6Id": d5c6.courseId,
+                    }
+
+                    var d6c1 = schedulingData.d6.c1;
+                    if (d6c1.courseId !== undefined) {
+                        if (d6c1.courseTimes > 0) {
+                            d6c1.courseTimes = d6c1.courseTimes - 2;
+                        } else {
+                            d6c1 = {}
+                        }
+                    }
+                    var d6c2 = schedulingData.d6.c2;
+                    if (d6c2.courseId !== undefined) {
+                        if (d6c2.courseTimes > 0) {
+                            d6c2.courseTimes = d6c2.courseTimes - 2;
+                        } else {
+                            d6c2 = {}
+                        }
+                    }
+                    var d6c3 = schedulingData.d6.c3;
+                    if (d6c3.courseId !== undefined) {
+                        if (d6c3.courseTimes > 0) {
+                            d6c3.courseTimes = d6c3.courseTimes - 2;
+                        } else {
+                            d6c3 = {}
+                        }
+                    }
+                    var d6c4 = schedulingData.d6.c4;
+                    if (d6c4.courseId !== undefined) {
+                        if (d6c4.courseTimes > 0) {
+                            d6c4.courseTimes = d6c4.courseTimes - 2;
+                        } else {
+                            d6c4 = {}
+                        }
+                    }
+                    var d6c5 = schedulingData.d6.c5;
+                    if (d6c5.courseId !== undefined) {
+                        if (d6c5.courseTimes > 0) {
+                            d6c5.courseTimes = d6c5.courseTimes - 2;
+                        } else {
+                            d6c5 = {}
+                        }
+                    }
+                    var d6c6 = schedulingData.d6.c6;
+                    if (d6c6.courseId !== undefined) {
+                        if (d6c6.courseTimes > 0) {
+                            d6c6.courseTimes = d6c6.courseTimes - 2;
+                        } else {
+                            d6c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 5] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 6,
+                        "c1Id": d6c1.courseId,
+                        "c2Id": d6c2.courseId,
+                        "c3Id": d6c3.courseId,
+                        "c4Id": d6c4.courseId,
+                        "c5Id": d6c5.courseId,
+                        "c6Id": d6c6.courseId,
+                    }
+
+                    var d7c1 = schedulingData.d7.c1;
+                    if (d7c1.courseId !== undefined) {
+                        if (d7c1.courseTimes > 0) {
+                            d7c1.courseTimes = d7c1.courseTimes - 2;
+                        } else {
+                            d7c1 = {}
+                        }
+                    }
+                    var d7c2 = schedulingData.d7.c2;
+                    if (d7c2.courseId !== undefined) {
+                        if (d7c2.courseTimes > 0) {
+                            d7c2.courseTimes = d7c2.courseTimes - 2;
+                        } else {
+                            d7c2 = {}
+                        }
+                    }
+                    var d7c3 = schedulingData.d7.c3;
+                    if (d7c3.courseId !== undefined) {
+                        if (d7c3.courseTimes > 0) {
+                            d7c3.courseTimes = d7c3.courseTimes - 2;
+                        } else {
+                            d7c3 = {}
+                        }
+                    }
+                    var d7c4 = schedulingData.d7.c4;
+                    if (d7c4.courseId !== undefined) {
+                        if (d7c4.courseTimes > 0) {
+                            d7c4.courseTimes = d7c4.courseTimes - 2;
+                        } else {
+                            d7c4 = {}
+                        }
+                    }
+                    var d7c5 = schedulingData.d7.c5;
+                    if (d7c5.courseId !== undefined) {
+                        if (d7c5.courseTimes > 0) {
+                            d7c5.courseTimes = d7c5.courseTimes - 2;
+                        } else {
+                            d7c5 = {}
+                        }
+                    }
+                    var d7c6 = schedulingData.d7.c6;
+                    if (d7c6.courseId !== undefined) {
+                        if (d7c6.courseTimes > 0) {
+                            d7c6.courseTimes = d7c6.courseTimes - 2;
+                        } else {
+                            d7c6 = {}
+                        }
+                    }
+                    arrangement[thisWeekStartDay + 6] = {
+                        "year": this.year,
+                        "semester": this.semester,
+                        "week": week,
+                        "dayOfWeek": 0,
+                        "c1Id": d7c1.courseId,
+                        "c2Id": d7c2.courseId,
+                        "c3Id": d7c3.courseId,
+                        "c4Id": d7c4.courseId,
+                        "c5Id": d7c5.courseId,
+                        "c6Id": d7c6.courseId,
+                    }
+                }
+                await axios.post("/add/arrangementZsCourses", arrangement)
+                this.$alert('提交成功！', '注意', {
+                    confirmButtonText: '确定',
+                });
+                // console.log(arrangement)
             },
         }
     })
@@ -505,6 +1088,5 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     }
 </style>
-
 </body>
 </html>

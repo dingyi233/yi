@@ -66,7 +66,7 @@ public class UserController {
         if (updatePasswordVo.getNewPassword().equals(updatePasswordVo.getNewPasswordReview())){
             int result = userService.updatePassword(updatePasswordVo);
             if (result==1){
-                return ResultGenerator.genSuccessResult("密码更新成功");
+                return ResultGenerator.genSuccessResult("密码更新成功，请重新登陆");
             }else{
                 return ResultGenerator.genFailResult("旧密码不正确");
             }

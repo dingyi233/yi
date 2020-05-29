@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ import java.util.List;
 public class ScholarshipController {
     @Autowired
     private ScholarshipService scholarshipService;
+
     @GetMapping("/scholarship")
     public String scholarship(HttpServletRequest request,
                            HttpServletResponse response,
@@ -41,6 +43,8 @@ public class ScholarshipController {
         PageInfo<Scholarship> pageInfo=new PageInfo<>(scholarships);
         PageUtils.setPageInfo(request,pageInfo);
         request.setAttribute("scholarships",scholarships);
+        System.out.println("----------------");
+        System.out.println(scholarships);
         request.setAttribute("type",type);
         return "scholarship";
     }
