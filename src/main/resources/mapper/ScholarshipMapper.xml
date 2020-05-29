@@ -20,4 +20,9 @@
         where s.student=#{id}
 
     </select>
+    <select id="selectScholarshipDetailListByType" resultType="com.example.demo.vo.ScholarshipDetailVo">
+        SELECT s.student_id,s.student_name, s.college_id ,(10+aver_grade/4+academic_achievements*4.5+social_practice_times*2) as total_score from scholarship_detail sd
+        LEFT JOIN student s ON s.student_id=sd.student_id
+        WHERE s.student_type=#{type} ORDER BY total_score desc
+    </select>
 </mapper>

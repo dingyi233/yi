@@ -2,12 +2,10 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Scholarship;
 import com.example.demo.dao.ScholarshipMapper;
-import com.example.demo.vo.SalaryVo;
 import com.example.demo.vo.ScholarshipDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.cert.TrustAnchor;
 import java.util.List;
 
 /**
@@ -24,5 +22,9 @@ public class ScholarshipService {
     }
     public List<ScholarshipDetailVo> getScholarshipList(long id){
         return scholarshipMapper.selectScholarshipList(id);
+    }
+
+    public List<ScholarshipDetailVo> getScholarshipDetailListByType(String type) {
+        return scholarshipMapper.selectScholarshipDetailListByType(type);
     }
 }

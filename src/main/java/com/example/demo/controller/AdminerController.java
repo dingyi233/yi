@@ -8,11 +8,9 @@ import com.example.demo.entity.Contact;
 import com.example.demo.entity.News;
 import com.example.demo.service.AdminerService;
 import com.example.demo.service.ContactService;
-import com.example.demo.vo.LoginVo;
-import com.example.demo.vo.Result;
-import com.example.demo.vo.ResultGenerator;
+import com.example.demo.service.ScholarshipService;
+import com.example.demo.vo.*;
 //import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.example.demo.vo.SalaryVo;
 import org.apache.catalina.LifecycleState;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,8 @@ public class AdminerController {
     private SalaryMapper salaryMapper;
     @Autowired
     private ContactService contactService;
+    @Autowired
+    private ScholarshipService scholarshipService;
     @GetMapping ("/adminer")
     public String adminer(HttpServletRequest httpServletRequest) {
 
@@ -111,6 +111,16 @@ public class AdminerController {
         }
         return ResultGenerator.genFailResult("插入失败");
     }
+    @GetMapping("/adminer/categoryTypeSubmit")
+    @ResponseBody
+    Result categoryTypeSubmit(@RequestParam("type") String type){
+        List<ScholarshipDetailVo> list=scholarshipService.getScholarshipDetailListByType(type);
+        Result<List> result=new Result<>();
+        result.setData(list);
+        result.setMessage("成功");
+        result.setResultCode(200);
+        return result;
+    }
 
     @PostMapping("adminer/uploadFile/{fileType}")
     @ResponseBody
@@ -125,4 +135,6 @@ public class AdminerController {
             return ResultGenerator.genFailResult("上传失败");
         }
     }
+
+
 }

@@ -8,8 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
-    <script>
-        addEventListener("load", function () {
+    <script>function categoryTypeSubmit() {
+        var data =document.getElementById("CategoryType").value;
+        console.log(data);
+        var url = '/adminer/categoryTypeSubmit?type='+data;
+        $.ajax({
+            type: 'GET',//方法类型
+            url: url,
+            success: function (result) {
+                var group=result.data;
+                var str='';
+                for(var i=0;i<group.length;i++){
+                    str+='<tr>'+
+                            '<th>'+group[i].studentName+'</th>'+
+                            '<th>'+group[i].collegeId+'</th>'+
+                            '<th>'+group[i].studentId+'</th>'+
+                            '<th>'+group[i].totalScore+'</th>'+
+                            '</tr>'
+                }
+                $("#categoryList").html(str);
+            },
+            error: function () {
+                alert("操作失败")
+            }
+        });
+    }
+
+    addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
 
@@ -704,7 +729,7 @@
                                 <form role="form">
                                     <div class="form-group">
                                         <label for="name">选择学生类型：</label>
-                                        <select class="form-control">
+                                        <select id="CategoryType" class="form-control">
                                             <option>专硕</option>
                                             <option>学硕</option>
                                             <option>博士</option>
@@ -713,7 +738,7 @@
                                 </form>
                                 <button type="button" class="btn btn-primary col-md-3" style="margin-bottom: 21px;"
                                         data-toggle="collapse"
-                                        data-target="#demo">
+                                        data-target="#demo" onclick="categoryTypeSubmit()">
                                     生成奖学金排名表
                                 </button>
                                 <br>
@@ -723,19 +748,12 @@
                                         <thead>
                                         <tr>
                                             <th>学生姓名</th>
-                                            <th>性别</th>
+                                            <th>学院</th>
                                             <th>学号</th>
                                             <th>分数</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>dy</td>
-                                            <td>男</td>
-                                            <td>20164307</td>
-                                            <td>86.2</td>
-                                        </tr>
-                                        </tbody>
+                                        <tbody id="categoryList"/>
                                     </table>
 
                                 </div>
