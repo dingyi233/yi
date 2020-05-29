@@ -9,18 +9,19 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * @author yi
- * @date 2020/5/2 12:09
+ * @author 曾伟 zengwei233@126.com
+ * @date 2020/5/18 10:19
  */
 @Data
 @Entity
-public class Announcement {
+public class Resource {
     @Id
     @KeySql(useGeneratedKeys = true, dialect = IdentityDialect.MYSQL)
-    private Long announcementId;
-    private String announcementTitle;
-    private String announcementContent;
-    private Date announcementReleaseDate;
-    private String announcementImg;
+    private Long fileId;
+    private String fileName;
+    private String fileType;
     private Long managerAccount;
+    private Date fileReleaseDate;
 }
+
+

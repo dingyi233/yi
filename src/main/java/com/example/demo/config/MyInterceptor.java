@@ -32,7 +32,7 @@ public class MyInterceptor implements HandlerInterceptor {
             if (("工作人员".equals(loginVo.getLoginType())&&!path.contains("adminer"))){
                 //管理员访问其他
                 response.sendRedirect(request.getContextPath() + "/adminer");
-                return false;
+                return true;
             }
             return true;
         }

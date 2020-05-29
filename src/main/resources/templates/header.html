@@ -12,16 +12,11 @@
             </div>
             <div class="bottom_header_right">
                 <div class="header-top-righ"style="width: 85px;">
-
                     <th:block th:unless="${session.User==null}">
                         <!--                        可以设置为个人中心的入口-->
                         <a th:text="${session.User.getUserId()}"></a>
                         <a href="/logout">
                             <span class="fa fa-sign-out" aria-hidden="true"></span>注销</a>
-                    </th:block>
-                    <th:block th:if="${session.User==null}">
-                        <a href="/user/login">
-                            <span class="fa fa-sign-out" aria-hidden="true"></span>登录</a>
                     </th:block>
                 </div>
                 <div class="clearfix"></div>

@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.AcademicReport;
+import com.example.demo.entity.News;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ import java.util.List;
  */
 public interface AcademicReportMapper {
     List<AcademicReport> selectAcademicReportList();
+    Integer insertAcademic(AcademicReport academicReport);
 }

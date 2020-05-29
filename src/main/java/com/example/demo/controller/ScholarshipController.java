@@ -5,12 +5,16 @@ import com.example.demo.common.PageUtils;
 import com.example.demo.entity.Scholarship;
 import com.example.demo.service.ScholarshipService;
 import com.example.demo.vo.LoginVo;
+import com.example.demo.vo.Result;
+import com.example.demo.vo.SalaryVo;
+import com.example.demo.vo.ScholarshipDetailVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,5 +43,15 @@ public class ScholarshipController {
         request.setAttribute("scholarships",scholarships);
         request.setAttribute("type",type);
         return "scholarship";
+    }
+    @GetMapping("/user/scholarship")
+    @ResponseBody
+    public Result getScholarshipList(HttpServletRequest request){
+        LoginVo loginVo= (LoginVo) request.getSession().getAttribute(Constants.USER_SESSION_KEY);
+        List<ScholarshipDetailVo> scholarshipDetailVoList = scholarshipService.getScholarshipList(loginVo.getUserId());
+        Result<List> result=new Result<>();
+        result.setResultCode(200);
+        result.setMessage("查询成功");
+        return result;
     }
 }

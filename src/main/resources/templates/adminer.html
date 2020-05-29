@@ -63,6 +63,12 @@
     <!--[if lte IE 8]>
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
+     引入样式 -->
+    <script src="./js/vue.js"></script>
+    <!--        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+    <link rel="stylesheet" href="./css/element.css">
+    <!-- 引入组件库 -->
+    <script src="./js/element.js"></script>
     <style>
         .m{ width: 800px; margin-left: auto; margin-right: auto; }
     </style>
@@ -90,6 +96,21 @@
                     System Admin
                 </small>
             </a>
+        </div>
+        <div class="bottom_header_right">
+            <div class="header-top-righ"style="width: 85px; float: right; ">
+                <th:block th:unless="${session.User==null}">
+                    <!--      可以设置为个人中心的入口-->
+                    <a style="color: #c7ddef; font-size: 20px;" th:text="${session.User.getUserId()}"></a>
+                    <a href="/logout" style="color: #c7ddef; font-size: 20px;" >
+                        <span class="fa fa-sign-out" aria-hidden="true"></span>注销</a>
+                </th:block>
+                <th:block th:if="${session.User==null}">
+                    <a href="/user/login">
+                        <span class="fa fa-sign-out" aria-hidden="true"></span>登录</a>
+                </th:block>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div><!-- /.navbar-container -->
 </div>
@@ -295,10 +316,11 @@
                     <li class="">
                         <a data-toggle="tab" href="#Paike">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            排课管理
+                            课表安排
                         </a>
 
                         <b class="arrow"></b>
+
                     </li>
 
                     <li class="">
@@ -311,6 +333,15 @@
                     </li>
 
                 </ul>
+            </li>
+
+            <li class="">
+                <a data-toggle="tab" href="#Register">
+                    <i class="menu-icon fa fa-picture-o"></i>
+                    <span class="menu-text"> 管理员注册 </span>
+                </a>
+
+                <b class="arrow"></b>
             </li>
 
         </ul><!-- /.nav-list -->
@@ -336,19 +367,19 @@
                                 <div class="row">
                                     <div class="col-xs-12 m">
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <form role="form">
+                                        <form id="AnnoucementForm" action="##" onsubmit="return false;" method="post" role="form">
                                             <div class="form-group">
-                                                <label for="name">标题：</label>
-                                                <input type="text" class="form-control" id="name"
-                                                       placeholder="请输入名称">
+                                                <label for="namet">标题：</label>
+                                                <input type="text" name="announcementTitle" class="form-control" id="namet"
+                                                       placeholder="请输入名称" required="">
                                             </div>
                                             <div class="form-group">
-                                                <div class="summernote form-control" id = "summernote">编辑文本</div>
+                                                <div class="summernote form-control" id="summernote" name="">编辑文本</div>
+                                                <input type="hidden" name="announcementContent">
                                             </div>
-                                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submit()" />
+                                            <input name="managerAccount" type="hidden" th:value="${session.User.getUserId()}">
+                                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submitAnnoucement()" />
                                         </form>
-
-
                                         <!-- PAGE CONTENT ENDS -->
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
@@ -366,16 +397,18 @@
                                 <div class="row">
                                     <div class="col-xs-12 m">
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <form role="form">
+                                        <form id="NewsForm" action="##" onsubmit="return false;" method="post" role="form">
                                             <div class="form-group">
-                                                <label for="name">标题：</label>
-                                                <input type="text" class="form-control" id="name"
+                                                <label for="namen">标题：</label>
+                                                <input type="text" name="newsTitle" class="form-control" id="namen"
                                                        placeholder="请输入名称">
                                             </div>
                                             <div class="form-group">
-                                                <div class="summernote form-control" id = "summernote">编辑文本</div>
+                                                <div class="summernote form-control" id = "summernote2">编辑文本</div>
                                             </div>
-                                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submit()" />
+                                            <input name="newsContent" type="hidden">
+                                            <input name="newsCreater" type="hidden" th:value="${session.User.getUserId()}">
+                                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submitNews()" />
                                         </form>
 
 
@@ -387,43 +420,58 @@
                     </div><!-- /.main-content -->
                 </div>
                 <div id="Academic" class="tab-pane fade">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" id="AcademicForm" action="##" onsubmit="return false;" method="post" role="form">
                         <div class="form-group">
-                            <label for="datepicker" class="col-sm-2 control-label">日期：</label>
+                            <label for="datepicker" class="col-sm-2 control-label">日&emsp;&emsp;期：</label>
                             <div class="styled-input ">
-                                <input class="col-sm-4 " id="datepicker" placeholder="Date" name="Text" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
+                                <input class="col-sm-4 " id="datepicker" placeholder="Date" name="reportDate" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
                                        required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Timeinterval" class="col-sm-2 control-label">区间：</label>
+                            <label for="Timebegin" class="col-sm-2 control-label">开始时间：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Timeinterval" placeholder="请输入时间区间">
+                                <input th:class="col-sm-4" name="reportDateStart" type="text" class="form-control" id="Timebegin" placeholder="请输入时间区间">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Address" class="col-sm-2 control-label">地址：</label>
+                            <label for="TimeOver" class="col-sm-2 control-label">结束时间：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Address" placeholder="请输入举办地址">
+                                <input th:class="col-sm-4" name="reportDateEnd" type="text" class="form-control" id="TimeOver" placeholder="请输入时间区间">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Presenter" class="col-sm-2 control-label">主讲人：</label>
+                            <label for="Address" class="col-sm-2 control-label">地&emsp;&emsp;址：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Presenter" placeholder="请输入主讲人信息">
+                                <input th:class="col-sm-4" name="reportAddr" type="text" class="form-control" id="Address" placeholder="请输入举办地址">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Presenter" class="col-sm-2 control-label">主&ensp;讲&ensp;人：</label>
+                            <div class="styled-input ">
+                                <input th:class="col-sm-4" name="academicdtProfessor" type="text" class="form-control" id="Presenter" placeholder="请输入主讲人信息">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Titile" class="col-sm-2 control-label">标&emsp;&emsp;题：</label>
+                            <div class="styled-input ">
+                                <input th:class="col-sm-4" name="academicdtTitle" type="text" class="form-control" id="Titile" placeholder="讲座描述">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Description" class="col-sm-2 control-label">讲座描述：</label>
                             <div class="styled-input ">
-                                <input th:class="col-sm-4" type="text" class="form-control" id="Description" placeholder="讲座描述">
+                                <input th:class="col-sm-4" name="reportDes" type="text" class="form-control" id="Description" placeholder="讲座描述">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">提交</button>
-                            </div>
+                            <input name="managerAccount" type="hidden" th:value="${session.User.getUserId()}">
+                            <input type="button" value="提交" class="btn btn-default pull-right" onclick="submitAcademic()" />
+<!--                            <div class="col-sm-offset-2 col-sm-10">-->
+<!--                                <button type="submit" class="btn btn-default">提&emsp;&emsp;交</button>-->
+<!--                            </div>-->
                         </div>
+
                     </form>
                 </div>
                 <div id="NoticeSearch" class="tab-pane fade">
@@ -436,8 +484,87 @@
                                 <div class="row">
                                     <div class="col-xs-12 m">
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <h3>菜单 3</h3>
-                                        <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+                                        <div class="effectd-caption team-row-agileinfo">
+                                            <div class="yaallahaa-news-grids-agile">
+                                                <div class="yaallahaa-news-grid">
+                                                    <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} lt 2" th:object="${AcademicReport}">
+                                                        <div class="col-md-6 yaallahaa-news-left">
+                                                            <div class="col-xs-6 news-left-img">
+                                                                <div class="news-left-text color-event1 " >
+                                                                    <h5>学术讲座</h5>
+                                                                </div>
+                                                                <p th:text="${AcademicReport.academicdtTitle}"/>
+                                                            </div>
+                                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                                <div class="news-left-top-text text-color1">
+                                                                    <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                                </div>
+                                                                <div class="date-grid">
+                                                                    <div class="admin">
+                                                                        <a href="#">
+                                                                            <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <p th:text="${AcademicReport.reportAddr}">
+                                                                            <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                                    </div>
+                                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                                        <p th:text="${AcademicReport.reportDes}"/>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </th:block>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="yaallahaa-news-grid">
+                                                    <th:block th:each="AcademicReport,userStat:${academicReportList}" th:if="${userStat.index} gt 1" th:object="${AcademicReport}">
+                                                        <div class="col-md-6 yaallahaa-news-left">
+                                                            <div class="col-xs-6 news-left-img">
+                                                                <div class="news-left-text color-event1 " >
+                                                                    <h5>学术讲座</h5>
+                                                                </div>
+                                                                <p th:text="${AcademicReport.academicdtTitle}"/>
+                                                            </div>
+                                                            <div class="col-xs-6 news-grid-info-bottom-w3ls">
+                                                                <div class="news-left-top-text text-color1">
+                                                                    <a href="#" data-toggle="modal" data-target="#myModal" th:text="${AcademicReport.reportDes}"/>
+                                                                </div>
+                                                                <div class="date-grid">
+                                                                    <div class="admin">
+                                                                        <a href="#">
+                                                                            <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateStart,'HH:mm')}+' ---'"/>
+                                                                            <span th:text="${#dates.format(AcademicReport.reportDateEnd,'HH:mm')}"/>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <p th:text="${AcademicReport.reportAddr}">
+                                                                            <span class="fa fa-map-marker" aria-hidden="true"></span></p>
+                                                                    </div>
+                                                                    <div class="news-grid-info-bottom-w3ls-text text-justify">
+                                                                        <p th:text="${AcademicReport.reportDes}"/>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </th:block>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="clearfix"/>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                         <!-- PAGE CONTENT ENDS -->
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
@@ -446,7 +573,6 @@
                     </div><!-- /.main-content -->
 
                 </div>
-
                 <div id="FileUpload" class="tab-pane fade">
                     <div class="main-content">
                         <div class="main-content-inner">
@@ -456,19 +582,26 @@
                                 </div><!-- /.page-header -->
                                 <div class="col-xs-12 m">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <form enctype="multipart/form-data" role="form" action="#" method="post">
-                                        <hr>
-                                        <div class="form-group">
-                                            <label for="name">选择上传文件类型：</label>
-                                            <select class="form-control" id="name">
-                                                <option>奖助贷</option>
-                                                <option>培养相关</option>
-                                                <option>常用文件</option>
-                                                <option>其他文件</option>
-                                            </select>
-                                            <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#FileUpload">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#menu1">奖助贷</a></li>
+                                        <li><a data-toggle="tab" href="#menu2">培养相关</a></li>
+                                        <li><a data-toggle="tab" href="#menu3">常用文件</a></li>
+                                        <li><a data-toggle="tab" href="#menu4">其他文件</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="menu1" class="tab-pane fade in active">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/奖助贷">
                                         </div>
-                                    </form>
+                                        <div id="menu2" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/培养相关">
+                                        </div>
+                                        <div id="menu3" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/常用文件">
+                                        </div>
+                                        <div id="menu4" class="tab-pane fade">
+                                            <input class="file" type="file" name="file" multiple data-preview-file-type="any" data-upload-url="/adminer/uploadFile/其他文件">
+                                        </div>
+                                    </div>
                                     <br>
                                     <!-- PAGE CONTENT ENDS -->
                                 </div><!-- /.col -->
@@ -583,7 +716,6 @@
                         </div>
                     </div><!-- /.main-content -->
                 </div>
-
                 <div id="Salary" class="tab-pane fade">
                     <div class="main-content">
                         <div class="main-content-inner">
@@ -594,6 +726,12 @@
                                 <div class="col-xs-12 m">
                                     <!-- PAGE CONTENT BEGINS -->
                                     <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-sm-2 control-label">学生&emsp;ID</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="firstname" placeholder="请输入学生ID">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="firstname" class="col-sm-2 control-label">摘&emsp;&emsp;要</label>
                                             <div class="col-sm-10">
@@ -656,7 +794,6 @@
                         </div>
                     </div><!-- /.main-content -->
                 </div>
-
                 <div id="Backfeed" class="tab-pane fade">
                     <div class="main-content">
                         <div class="main-content-inner">
@@ -686,7 +823,6 @@
                         </div>
                     </div><!-- /.main-content -->
                 </div>
-
                 <div id="Paike" class="tab-pane fade">
                     <div class="main-content">
                         <div class="main-content-inner">
@@ -694,16 +830,521 @@
                                 <div class="page-header">
                                     <h1> <strong>排课安排</strong> </h1>
                                 </div><!-- /.page-header -->
-                                <div class="col-xs-12 m">
+                                <div class="col-xs-12 ">
                                     <!-- PAGE CONTENT BEGINS -->
+                                    <form class="form-inline" role="form">
+                                        <div class="form-group">
+                                            <label for="name">选择学期</label>
+                                            <select class="form-control">
+                                                <option>春季</option>
+                                                <option>秋季</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">选择学生类型</label>
+                                            <select class="form-control">
+                                                <option>学硕</option>
+                                                <option>专硕</option>
+                                                <option>博士</option>
+                                            </select>
+                                        </div>
+<!--                                        <button type="submit" class="btn btn-default pull-right">一键排课</button>-->
+<!--                                        <a href="/test">hhh</a>-->
+                                        <div id="app">
+                                            <el-row v-if="this.selectedData.length === 0">
+                                                <el-col :span="6"><br/></el-col>
+                                                <el-col :span="12" class="card">
+                                                    <h1>选择课程</h1>
+                                                    <el-table
+                                                            :data="tableData"
+                                                            style="width: 100%">
+                                                        <el-table-column
+                                                                prop="courseId"
+                                                                label="课程代号">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="name"
+                                                                label="课程名称">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="type"
+                                                                label="课程类型">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="studyTime"
+                                                                label="课程学时">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="credit"
+                                                                label="课程学分">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                label="选择">
+                                                            <template slot-scope="scope">
+                                                                <el-checkbox v-model="scope.row.checked">选择该课程</el-checkbox>
+                                                            </template>
+                                                        </el-table-column>
+                                                    </el-table>
+                                                    <br/>
+                                                    <div style="float: right">
+                                                        本学期总周数：
+                                                        <el-select v-model="term" style="width: 20%;" placeholder="请选择">
+                                                            <template slot="prepend">设置学期周数</template>
+                                                            <el-option
+                                                                    v-for="item in terms"
+                                                                    :key="item"
+                                                                    :label="item"
+                                                                    :value="item">
+                                                            </el-option>
+                                                            <template slot="append">周</template>
+                                                        </el-select>
+                                                        周
+                                                        <br/>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <el-button type="primary" style="width: 100%" round v-on:click="selectCourse">开始排课</el-button>
+                                                </el-col>
+                                                <el-col :span="6"></el-col>
+                                            </el-row>
 
+                                            <el-row v-if="this.selectedData.length !== 0">
+                                                <el-col :span="3"><br/></el-col>
+                                                <el-col :span="18" class="card">
+                                                    <h1>选择上课时间</h1>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block"><br/></el-col>
+                                                        <el-col :span="3" class="block">星期一</el-col>
+                                                        <el-col :span="3" class="block">星期二</el-col>
+                                                        <el-col :span="3" class="block">星期三</el-col>
+                                                        <el-col :span="3" class="block">星期四</el-col>
+                                                        <el-col :span="3" class="block">星期五</el-col>
+                                                        <el-col :span="3" class="block">星期六</el-col>
+                                                        <el-col :span="3" class="block">星期日</el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第一大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c1.courseId}}<br/>{{this.schedulingData.d1.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c1.courseId}}<br/>{{this.schedulingData.d2.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c1.courseId}}<br/>{{this.schedulingData.d3.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c1.courseId}}<br/>{{this.schedulingData.d4.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c1.courseId}}<br/>{{this.schedulingData.d5.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c1.courseId}}<br/>{{this.schedulingData.d6.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c1.courseId}}<br/>{{this.schedulingData.d7.c1.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第二大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c2.courseId}}<br/>{{this.schedulingData.d1.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c2.courseId}}<br/>{{this.schedulingData.d2.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c2.courseId}}<br/>{{this.schedulingData.d3.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c2.courseId}}<br/>{{this.schedulingData.d4.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c2.courseId}}<br/>{{this.schedulingData.d5.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c2.courseId}}<br/>{{this.schedulingData.d6.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c2.courseId}}<br/>{{this.schedulingData.d7.c2.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第三大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c3.courseId}}<br/>{{this.schedulingData.d1.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c3.courseId}}<br/>{{this.schedulingData.d2.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c3.courseId}}<br/>{{this.schedulingData.d3.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c3.courseId}}<br/>{{this.schedulingData.d4.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c3.courseId}}<br/>{{this.schedulingData.d5.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c3.courseId}}<br/>{{this.schedulingData.d6.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c3.courseId}}<br/>{{this.schedulingData.d7.c3.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第四大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c4.courseId}}<br/>{{this.schedulingData.d1.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c4.courseId}}<br/>{{this.schedulingData.d2.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c4.courseId}}<br/>{{this.schedulingData.d3.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c4.courseId}}<br/>{{this.schedulingData.d4.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c4.courseId}}<br/>{{this.schedulingData.d5.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c4.courseId}}<br/>{{this.schedulingData.d6.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c4.courseId}}<br/>{{this.schedulingData.d7.c4.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第五大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c5.courseId}}<br/>{{this.schedulingData.d1.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c5.courseId}}<br/>{{this.schedulingData.d2.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c5.courseId}}<br/>{{this.schedulingData.d3.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c5.courseId}}<br/>{{this.schedulingData.d4.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c5.courseId}}<br/>{{this.schedulingData.d5.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c5.courseId}}<br/>{{this.schedulingData.d6.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c5.courseId}}<br/>{{this.schedulingData.d7.c5.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第六大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c6.courseId}}<br/>{{this.schedulingData.d1.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c6.courseId}}<br/>{{this.schedulingData.d2.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c6.courseId}}<br/>{{this.schedulingData.d3.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c6.courseId}}<br/>{{this.schedulingData.d4.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c6.courseId}}<br/>{{this.schedulingData.d5.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c6.courseId}}<br/>{{this.schedulingData.d6.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c6.courseId}}<br/>{{this.schedulingData.d7.c6.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <br/>
+                                                    <el-button type="primary" style="width: 100%" round v-on:click="submit">提交</el-button>
+                                                </el-col>
+                                                <el-col :span="3"></el-col>
+                                            </el-row>
+                                            <el-drawer
+                                                    :visible.sync="drawer"
+                                                    :with-header="false"
+                                                    direction="rtl"
+                                                    size="60%">
+                                                <el-row>
+                                                    <el-col :span="1"><br/></el-col>
+                                                    <el-col :span="22">
+                                                        <h1>选择课程</h1>
+                                                        <h3>星期{{this.currD === 7 ? "日":this.currD}} - 第{{this.currC}}大节课</h3>
+                                                        <el-table
+                                                                :data="selectedData"
+                                                                style="width: 100%;">
+                                                            <el-table-column
+                                                                    prop="courseId"
+                                                                    label="课程代号">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="name"
+                                                                    label="课程名称">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="type"
+                                                                    label="课程类型">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="studyTime"
+                                                                    label="课程学时">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="credit"
+                                                                    label="课程学分">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="lessWeek"
+                                                                    label="剩余可选">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="选择">
+                                                                <template slot-scope="scope">
+                                                                    <el-button type="success" round v-on:click="choice(scope.row)">选择该课程</el-button>
+                                                                </template>
+                                                            </el-table-column>
+                                                        </el-table>
+                                                        <br/>
+                                                        <el-button type="warning" style="width: 100%" round v-on:click="remove">清除该位置课程</el-button>
+                                                    </el-col>
+                                                    <el-col :span="1"><br/></el-col>
+                                                </el-row>
+                                            </el-drawer>
+                                        </div>
+
+                                        <script>
+                                            new Vue({
+                                                el: '#app',
+                                                data: {
+                                                    tableData: [],
+                                                    selectedData: [],
+                                                    drawer: false,
+                                                    schedulingData: {},
+                                                    currD: 0,
+                                                    currC: 0,
+                                                    terms: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                                                    term: 16,
+                                                },
+                                                created() {
+                                                    var schedulingData = {}
+                                                    for (var d = 1; d <= 7; d++) {
+                                                        schedulingData["d" + d] = {};
+                                                        for (var c = 1; c <= 6; c++) {
+                                                            schedulingData["d" + d]["c" + c] = {}
+                                                        }
+                                                    }
+                                                    console.log(schedulingData)
+                                                    this.schedulingData = schedulingData
+                                                    this.tableData = [
+                                                        {
+                                                            "courseId": "CST1",
+                                                            "name": "课程 1",
+                                                            "type": "公共课程",
+                                                            "studyTime": 24,
+                                                            "credit": 24,
+                                                        },
+                                                        {
+                                                            "courseId": "CST2",
+                                                            "name": "课程 2",
+                                                            "type": "专业课程",
+                                                            "studyTime": 48,
+                                                            "credit": 12,
+                                                        },
+                                                        {
+                                                            "courseId": "CST3",
+                                                            "name": "课程 3",
+                                                            "type": "公共课程",
+                                                            "studyTime": 24,
+                                                            "credit": 24,
+                                                        },
+                                                        {
+                                                            "courseId": "CST4",
+                                                            "name": "课程 4",
+                                                            "type": "专业课程",
+                                                            "studyTime": 48,
+                                                            "credit": 12,
+                                                        },
+                                                        {
+                                                            "courseId": "CST5",
+                                                            "name": "课程 5",
+                                                            "type": "公共课程",
+                                                            "studyTime": 72,
+                                                            "credit": 24,
+                                                        },
+                                                        {
+                                                            "courseId": "CST6",
+                                                            "name": "课程 6",
+                                                            "type": "专业课程",
+                                                            "studyTime": 148,
+                                                            "credit": 12,
+                                                        }
+                                                    ]
+                                                },
+                                                methods: {
+                                                    selectCourse() {
+                                                        var select = []
+                                                        for (var i in this.tableData) {
+                                                            if (this.tableData[i].checked === true) {
+                                                                select.push(this.tableData[i])
+                                                            }
+                                                        }
+                                                        // 是否选了
+                                                        if (select.length === 0) {
+                                                            this.$alert('请至少选择一门课程', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 判断时间是否够
+                                                        var term = this.term;
+                                                        var totalCell = 0;
+                                                        for (var i in select) {
+                                                            // 一周需要上几次
+                                                            select[i]["lessWeek"] = Math.ceil(Math.ceil(select[i]["studyTime"] / 2) / term)
+                                                            totalCell += select[i]["lessWeek"];
+                                                        }
+                                                        if (totalCell > 42) {
+                                                            this.$alert('课程总时长过长', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        this.selectedData = select;
+                                                    },
+
+                                                    openDrawer(d, c) {
+                                                        this.currD = d;
+                                                        this.currC = c;
+                                                        this.drawer = true;
+                                                    },
+
+                                                    choice(row) {
+                                                        var schedulingData = this.schedulingData
+                                                        // 剩余周数是否足够
+                                                        if (row.lessWeek <= 0) {
+                                                            this.$alert('该课程时间已被安排完毕', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 是否为当前课
+                                                        if (schedulingData["d" + this.currD]["c" + this.currC] === row) {
+                                                            this.$alert('该位置已经选择了该课程', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 将原来的课的周数增加
+                                                        if (schedulingData["d" + this.currD]["c" + this.currC].lessWeek !== null) {
+                                                            schedulingData["d" + this.currD]["c" + this.currC].lessWeek++
+                                                        }
+                                                        // 减学时
+                                                        row.lessWeek--
+                                                        // 设置
+                                                        schedulingData["d" + this.currD]["c" + this.currC] = row
+                                                        this.schedulingData = schedulingData
+                                                        this.drawer = false;
+                                                    },
+                                                    remove() {
+                                                        var schedulingData = this.schedulingData
+                                                        schedulingData["d" + this.currD]["c" + this.currC].lessWeek++
+                                                        schedulingData["d" + this.currD]["c" + this.currC] = {}
+                                                        this.schedulingData = schedulingData
+                                                        this.drawer = false;
+                                                    },
+
+                                                    submit() {
+
+                                                    },
+                                                }
+                                            })
+                                        </script>
+
+                                        <style scoped>
+                                            .block {
+                                                border: 1px solid #c7c7c7;
+                                                height: 85px;
+                                                text-align: center;
+                                                text-overflow: ellipsis;
+                                                overflow: hidden;
+                                                word-wrap: break-word;
+                                            }
+
+                                            .el-drawer__body {
+                                                overflow: auto;
+                                                /* overflow-x: auto; */
+                                            }
+
+                                            .card {
+                                                margin: 10px;
+                                                background-color: white;
+                                                border-radius: 30px;
+                                                padding: 16px;
+                                                box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+                                            }
+                                        </style>
+
+                                    </form>
                                     <!-- PAGE CONTENT ENDS -->
                                 </div><!-- /.col -->
                             </div><!-- /.page-content -->
                         </div>
                     </div><!-- /.main-content -->
                 </div>
-
                 <div id="KaoShi" class="tab-pane fade">
                     <div class="main-content">
                         <div class="main-content-inner">
@@ -711,15 +1352,492 @@
                                 <div class="page-header">
                                     <h1> <strong>考试安排</strong> </h1>
                                 </div><!-- /.page-header -->
-                                <div class="col-xs-12 m">
+                                <div class="col-xs-12 ">
                                     <!-- PAGE CONTENT BEGINS -->
+                                    <form class="form-inline" role="form">
+<!--                                        <a href="/test">hhh</a>&ndash;&gt;-->
+                                        <div id="app1">
+                                            <el-row v-if="this.selectedData.length === 0">
+                                                <el-col :span="6"><br/></el-col>
+                                                <el-col :span="12" class="card">
+                                                    <h1>选择课程</h1>
+                                                    <el-table
+                                                            :data="tableData"
+                                                            style="width: 100%">
+                                                        <el-table-column
+                                                                prop="courseId"
+                                                                label="课程代号">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="name"
+                                                                label="课程名称">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="type"
+                                                                label="课程类型">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="studyTime"
+                                                                label="课程学时">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="credit"
+                                                                label="课程学分">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                label="选择">
+                                                            <template slot-scope="scope">
+                                                                <el-checkbox v-model="scope.row.checked">选择该课程</el-checkbox>
+                                                            </template>
+                                                        </el-table-column>
+                                                    </el-table>
+                                                    <br/>
+                                                    <div style="float: right">
+                                                        考试周数：
+                                                        <el-select v-model="term" style="width: 20%;" placeholder="请选择">
+                                                            <template slot="prepend">设置考试周数</template>
+                                                            <el-option
+                                                                    v-for="item in terms"
+                                                                    :key="item"
+                                                                    :label="item"
+                                                                    :value="item">
+                                                            </el-option>
+                                                            <template slot="append">周</template>
+                                                        </el-select>
+                                                        周
+                                                        <br/>
+                                                    </div>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <el-button type="primary" style="width: 100%" round v-on:click="selectCourse">开始安排</el-button>
+                                                </el-col>
+                                                <el-col :span="6"></el-col>
+                                            </el-row>
 
+                                            <el-row v-if="this.selectedData.length !== 0">
+                                                <el-col :span="3"><br/></el-col>
+                                                <el-col :span="18" class="card">
+                                                    <h1>选择考试时间：</h1>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block"><br/></el-col>
+                                                        <el-col :span="3" class="block">星期一</el-col>
+                                                        <el-col :span="3" class="block">星期二</el-col>
+                                                        <el-col :span="3" class="block">星期三</el-col>
+                                                        <el-col :span="3" class="block">星期四</el-col>
+                                                        <el-col :span="3" class="block">星期五</el-col>
+                                                        <el-col :span="3" class="block">星期六</el-col>
+                                                        <el-col :span="3" class="block">星期日</el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第一大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c1.courseId}}<br/>{{this.schedulingData.d1.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c1.courseId}}<br/>{{this.schedulingData.d2.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c1.courseId}}<br/>{{this.schedulingData.d3.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c1.courseId}}<br/>{{this.schedulingData.d4.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c1.courseId}}<br/>{{this.schedulingData.d5.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c1.courseId}}<br/>{{this.schedulingData.d6.c1.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,1)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c1.courseId}}<br/>{{this.schedulingData.d7.c1.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第二大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c2.courseId}}<br/>{{this.schedulingData.d1.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c2.courseId}}<br/>{{this.schedulingData.d2.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c2.courseId}}<br/>{{this.schedulingData.d3.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c2.courseId}}<br/>{{this.schedulingData.d4.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c2.courseId}}<br/>{{this.schedulingData.d5.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c2.courseId}}<br/>{{this.schedulingData.d6.c2.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,2)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c2.courseId}}<br/>{{this.schedulingData.d7.c2.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第三大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c3.courseId}}<br/>{{this.schedulingData.d1.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c3.courseId}}<br/>{{this.schedulingData.d2.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c3.courseId}}<br/>{{this.schedulingData.d3.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c3.courseId}}<br/>{{this.schedulingData.d4.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c3.courseId}}<br/>{{this.schedulingData.d5.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c3.courseId}}<br/>{{this.schedulingData.d6.c3.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,3)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c3.courseId}}<br/>{{this.schedulingData.d7.c3.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第四大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c4.courseId}}<br/>{{this.schedulingData.d1.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c4.courseId}}<br/>{{this.schedulingData.d2.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c4.courseId}}<br/>{{this.schedulingData.d3.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c4.courseId}}<br/>{{this.schedulingData.d4.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c4.courseId}}<br/>{{this.schedulingData.d5.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c4.courseId}}<br/>{{this.schedulingData.d6.c4.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,4)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c4.courseId}}<br/>{{this.schedulingData.d7.c4.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第五大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c5.courseId}}<br/>{{this.schedulingData.d1.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c5.courseId}}<br/>{{this.schedulingData.d2.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c5.courseId}}<br/>{{this.schedulingData.d3.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c5.courseId}}<br/>{{this.schedulingData.d4.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c5.courseId}}<br/>{{this.schedulingData.d5.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c5.courseId}}<br/>{{this.schedulingData.d6.c5.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,5)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c5.courseId}}<br/>{{this.schedulingData.d7.c5.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row>
+                                                        <el-col :span="3" class="block">第六大节</el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(1,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d1.c6.courseId}}<br/>{{this.schedulingData.d1.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(2,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d2.c6.courseId}}<br/>{{this.schedulingData.d2.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(3,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d3.c6.courseId}}<br/>{{this.schedulingData.d3.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(4,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d4.c6.courseId}}<br/>{{this.schedulingData.d4.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(5,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d5.c6.courseId}}<br/>{{this.schedulingData.d5.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(6,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d6.c6.courseId}}<br/>{{this.schedulingData.d6.c6.name}}</div>
+                                                        </el-col>
+                                                        <el-col :span="3" class="block">
+                                                            <el-button type="text" v-on:click="openDrawer(7,6)">选择课程</el-button>
+                                                            <div>{{this.schedulingData.d7.c6.courseId}}<br/>{{this.schedulingData.d7.c6.name}}</div>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <br/>
+                                                    <el-button type="primary" style="width: 100%" round v-on:click="submit">提交</el-button>
+                                                </el-col>
+                                                <el-col :span="3"></el-col>
+                                            </el-row>
+                                            <el-drawer
+                                                    :visible.sync="drawer"
+                                                    :with-header="false"
+                                                    direction="rtl"
+                                                    size="60%">
+                                                <el-row>
+                                                    <el-col :span="1"><br/></el-col>
+                                                    <el-col :span="22">
+                                                        <h1>选择课程</h1>
+                                                        <h3>星期{{this.currD === 7 ? "日":this.currD}} - 第{{this.currC}}大节课</h3>
+                                                        <el-table
+                                                                :data="selectedData"
+                                                                style="width: 100%;">
+                                                            <el-table-column
+                                                                    prop="courseId"
+                                                                    label="课程代号">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="name"
+                                                                    label="课程名称">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="type"
+                                                                    label="课程类型">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="studyTime"
+                                                                    label="课程学时">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="credit"
+                                                                    label="课程学分">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    prop="lessWeek"
+                                                                    label="剩余可选">
+                                                            </el-table-column>
+                                                            <el-table-column
+                                                                    label="选择">
+                                                                <template slot-scope="scope">
+                                                                    <el-button type="success" round v-on:click="choice(scope.row)">选择该课程</el-button>
+                                                                </template>
+                                                            </el-table-column>
+                                                        </el-table>
+                                                        <br/>
+                                                        <el-button type="warning" style="width: 100%" round v-on:click="remove">清除该位置课程</el-button>
+                                                    </el-col>
+                                                    <el-col :span="1"><br/></el-col>
+                                                </el-row>
+                                            </el-drawer>
+                                        </div>
+
+                                        <script>
+                                            new Vue({
+                                                el: '#app1',
+                                                data: {
+                                                    tableData: [],
+                                                    selectedData: [],
+                                                    drawer: false,
+                                                    schedulingData: {},
+                                                    currD: 0,
+                                                    currC: 0,
+                                                    terms: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+                                                    term: 16,
+                                                },
+                                                created() {
+                                                    var schedulingData = {}
+                                                    for (var d = 1; d <= 7; d++) {
+                                                        schedulingData["d" + d] = {};
+                                                        for (var c = 1; c <= 6; c++) {
+                                                            schedulingData["d" + d]["c" + c] = {}
+                                                        }
+                                                    }
+                                                    console.log(schedulingData)
+                                                    this.schedulingData = schedulingData
+                                                    this.tableData = [
+                                                        {
+                                                            "courseId": "CST1",
+                                                            "name": "课程 1",
+                                                            "type": "公共课程",
+                                                            "studyTime": 24,
+                                                            "credit": 24,
+                                                        },
+                                                        {
+                                                            "courseId": "CST2",
+                                                            "name": "课程 2",
+                                                            "type": "专业课程",
+                                                            "studyTime": 48,
+                                                            "credit": 12,
+                                                        },
+                                                        {
+                                                            "courseId": "CST3",
+                                                            "name": "课程 3",
+                                                            "type": "公共课程",
+                                                            "studyTime": 24,
+                                                            "credit": 24,
+                                                        },
+                                                        {
+                                                            "courseId": "CST4",
+                                                            "name": "课程 4",
+                                                            "type": "专业课程",
+                                                            "studyTime": 48,
+                                                            "credit": 12,
+                                                        }
+                                                    ]
+                                                },
+                                                methods: {
+                                                    selectCourse() {
+                                                        var select = []
+                                                        for (var i in this.tableData) {
+                                                            if (this.tableData[i].checked === true) {
+                                                                select.push(this.tableData[i])
+                                                            }
+                                                        }
+                                                        // 是否选了
+                                                        if (select.length === 0) {
+                                                            this.$alert('请至少选择一门课程', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 判断时间是否够
+                                                        var term = this.term;
+                                                        var totalCell = 0;
+                                                        for (var i in select) {
+                                                            // 一周需要上几次
+                                                            select[i]["lessWeek"] = Math.ceil(Math.ceil(select[i]["studyTime"] / 2) / term)
+                                                            totalCell += select[i]["lessWeek"];
+                                                        }
+                                                        if (totalCell > 42) {
+                                                            this.$alert('课程总时长过长', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        this.selectedData = select;
+                                                    },
+
+                                                    openDrawer(d, c) {
+                                                        this.currD = d;
+                                                        this.currC = c;
+                                                        this.drawer = true;
+                                                    },
+
+                                                    choice(row) {
+                                                        var schedulingData = this.schedulingData
+                                                        // 剩余周数是否足够
+                                                        if (row.lessWeek <= 0) {
+                                                            this.$alert('该课程时间已被安排完毕', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 是否为当前课
+                                                        if (schedulingData["d" + this.currD]["c" + this.currC] === row) {
+                                                            this.$alert('该位置已经选择了该课程', '注意', {
+                                                                confirmButtonText: '确定',
+                                                            });
+                                                            return;
+                                                        }
+                                                        // 将原来的课的周数增加
+                                                        if (schedulingData["d" + this.currD]["c" + this.currC].lessWeek !== null) {
+                                                            schedulingData["d" + this.currD]["c" + this.currC].lessWeek++
+                                                        }
+                                                        // 减学时
+                                                        row.lessWeek--
+                                                        // 设置
+                                                        schedulingData["d" + this.currD]["c" + this.currC] = row
+                                                        this.schedulingData = schedulingData
+                                                        this.drawer = false;
+                                                    },
+                                                    remove() {
+                                                        var schedulingData = this.schedulingData
+                                                        schedulingData["d" + this.currD]["c" + this.currC].lessWeek++
+                                                        schedulingData["d" + this.currD]["c" + this.currC] = {}
+                                                        this.schedulingData = schedulingData
+                                                        this.drawer = false;
+                                                    },
+
+                                                    submit() {
+
+                                                    },
+                                                }
+                                            })
+                                        </script>
+
+                                        <style scoped>
+                                            .block {
+                                                border: 1px solid #c7c7c7;
+                                                height: 85px;
+                                                text-align: center;
+                                                text-overflow: ellipsis;
+                                                overflow: hidden;
+                                                word-wrap: break-word;
+                                            }
+
+                                            .el-drawer__body {
+                                                overflow: auto;
+                                                /* overflow-x: auto; */
+                                            }
+
+                                            .card {
+                                                margin: 10px;
+                                                background-color: white;
+                                                border-radius: 30px;
+                                                padding: 16px;
+                                                box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+                                            }
+                                        </style>
+
+                                    </form>
                                     <!-- PAGE CONTENT ENDS -->
                                 </div><!-- /.col -->
                             </div><!-- /.page-content -->
                         </div>
                     </div><!-- /.main-content -->
                 </div>
+                <!-- 管理员注册 -->
             </div>
 
         </div>
@@ -761,6 +1879,7 @@
         $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
     });
 </script>
+
 <script>
     $('#file-fr').fileinput({
         language: 'fr',
@@ -814,6 +1933,77 @@
     });
 </script>
 <script type="text/javascript">
+    function  submitAcademic() {
+        var params=$("#AcademicForm").serialize();
+        var url="/adminer/academicSubmit";
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    alert(result.message)
+                    // $("input[name='announcementContent']").val($('.summernote').summernote('code'));
+                    window.location.href = '/adminer';
+                } else {
+                    alert(result.message)
+
+                }
+            },
+            error: function () {
+                alert("操作失败")
+            }
+        });
+    }
+    function submitAnnoucement(){
+        var params=$("#AnnoucementForm").serialize();
+        var markstr=$('#summernote').summernote('code')
+        var url="/adminer/annoucementSubmit";
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,markstr,
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    alert(result.message)
+                    $("input[name='announcementContent']").val($('.summernote').summernote('code'));
+                    // console.log(markstr)
+                    window.location.href = '/adminer';
+                } else {
+                    alert(result.message)
+
+                }
+            },
+            error: function () {
+                alert("操作失败")
+            }
+        });
+
+    }
+    function submitNews() {
+        var params=$("#NewsForm").serialize();
+        var markstr=$("#summernote2").val($('.summernote').summernote('code'))
+        var url="/adminer/newsSubmit";
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,markstr,
+            success: function (result) {
+                if (result.resultCode == 200) {
+                    alert(result.message)
+                    $("input[name='newsContent']").markstr;
+                    // console.log(markstr)
+                    window.location.href = '/adminer';
+                } else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert("操作失败")
+            }
+        });
+
+    }
     $(function(){
         $('.summernote').summernote({
             // font-style: normal,
@@ -822,10 +2012,6 @@
             lang: 'zh-CN'
         });
     });
-    function submit() {
-        var markstr = $('#summernote').summernote('code');
-        console.log(markstr)
-    }
     jQuery(function($){
         $(document).ready(function(){$("div img").addClass('img-responsive');});
         $(window).resize(function () {
