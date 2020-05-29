@@ -47,4 +47,8 @@ public class SalaryService {
     public List<SalaryVo> getSalaryList(long id,String startDate,String endDate){
         return salaryMapper.selectSalaryList(id,startDate,endDate);
     }
+
+    public Integer insertSalary(SalaryVo salaryVo){
+        return salaryMapper.insertSalary(salaryVo);
+    }
  }

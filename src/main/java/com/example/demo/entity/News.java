@@ -16,4 +16,5 @@ public class News {
     private Date newsDate;
     private String newsImg;
     private String newsCreater;
+    private Long managerAccount;
 }

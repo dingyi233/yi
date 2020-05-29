@@ -23,4 +23,9 @@
         where s.student_id=#{id} and salary_date BETWEEN #{startDate} and #{endDate}
 
     </select>
+    <insert id="insertSalary" parameterType="com.example.demo.vo.SalaryVo"
+            useGeneratedKeys="true" keyProperty="salaryAccount" keyColumn="salaryAccount">
+        insert into salary(manager_account,student_id,salary_id,salary_total,salary_deduction,salary_date,salary_depart,salary_manager)
+            values (#{managerAccount},#{studentId},#{salaryId},#{salaryTotal},#{salaryDeduction},#{salaryDate},#{salaryDepart},#{salaryManager})
+</insert>
 </mapper>

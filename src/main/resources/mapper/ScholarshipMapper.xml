@@ -3,8 +3,7 @@
 <mapper namespace="com.example.demo.dao.ScholarshipMapper">
     <select id="selectFileListByType" resultType="com.example.demo.entity.Scholarship">
         select * from scholarship
-        left join scholarship_detail sd on sd.scholarship_student_id=scholarship_id
-        where scholarship_type=#{fileType} AND sd.student_id=#{userId}
+        where scholarship_type=#{fileType}
     </select>
     <select id="selectScholarshipList" resultType="com.example.demo.vo.ScholarshipDetailVo">
         SELECT

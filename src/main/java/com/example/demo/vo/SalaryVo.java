@@ -3,7 +3,11 @@ package com.example.demo.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import tk.mybatis.mapper.annotation.KeySql;
+import tk.mybatis.mapper.code.IdentityDialect;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -11,8 +15,13 @@ import java.util.Date;
  * @date 2020/5/20 15:52
  */
 @Data
+@Entity
 public class SalaryVo {
+    @Id
+    @KeySql(useGeneratedKeys = true, dialect = IdentityDialect.MYSQL)
+    private Long studentId;
     private String salaryDes;
+    private String salaryId;
     private String salaryAccount;
     private String salaryType;
     //总额
@@ -25,4 +34,5 @@ public class SalaryVo {
     private Date salaryDate;
     private String salaryManager;
     private String salaryDepart;
+    private Long managerAccount;
 }

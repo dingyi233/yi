@@ -13,7 +13,7 @@ import java.util.List;
  * description:
  */
 public interface ScholarshipMapper {
-    List<Scholarship> selectFileListByType(@Param("fileType") String type,long userId);
+    List<Scholarship> selectFileListByType(@Param("fileType") String type, long userId);
     List<ScholarshipDetailVo> selectScholarshipList(long id);
 }
 
